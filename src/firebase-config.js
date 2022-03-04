@@ -1,9 +1,5 @@
 import { initializeApp } from "firebase/app";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-} from "firebase/auth";
+
 import { getAuth } from "firebase/auth";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -19,34 +15,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
+const auth = getAuth(app); // mantener referencia a la instancia de autenticación
 
-const firebaseRegister = async (registerEmail, registerPassword) => {
-  try {
-    const user = await createUserWithEmailAndPassword(
-      auth,
-      registerEmail,
-      registerPassword
-    );
-    console.log(user);
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-const firebaseLogin = async (registerEmail, registerPassword) => {
-  try {
-    const user = await signInWithEmailAndPassword(
-      auth,
-      registerEmail,
-      registerPassword
-    );
-    console.log(user);
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-const firebaseLogout = async () => {
-  await signOut(auth);
-};
-
-export { auth, firebaseLogin, firebaseRegister, firebaseLogout };
+export { auth };

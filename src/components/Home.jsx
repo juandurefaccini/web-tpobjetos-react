@@ -1,4 +1,5 @@
 import React from "react";
+import { useAuth } from "../context/authContext";
 import ElementList from "./ElementList";
 import ElementPreview from "./ElementPreview";
 import Header from "./Header";
