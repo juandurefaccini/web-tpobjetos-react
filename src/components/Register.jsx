@@ -23,6 +23,7 @@ export default function Register() {
 
   const handleGoogleSignIn = async () => {
     await signInWithGoogle();
+    console.log("google");
     navigate("/home"); // Redireccionar a la pagina home
   };
 

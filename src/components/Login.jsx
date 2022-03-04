@@ -41,7 +41,7 @@ export default function Login() {
     <div className="bg-slate-300 h-full flex flex-col justify-center">
       <div className="container bg-white mx-auto w-auto space-y-2 p-6 rounded">
         {error && <Alert message={error} />}
-        <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
+        {/* <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
           <label htmlFor="email" className="block">
             Email
           </label>
@@ -66,16 +66,16 @@ export default function Login() {
           <button disabled className="bg-gray-400 rounded p-2">
             Iniciar sesion
           </button>
-        </form>
+        </form> */}
         <button
           className="border-gray-400 rounded border p-2 w-full"
           onClick={handleGoogleSignIn}
         >
           Iniciar sesion con Google
         </button>
-        <Link to="/register">
+        {/* <Link to="/register">
           <span className="text-blue-600">Registrate!</span>
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

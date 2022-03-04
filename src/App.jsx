@@ -9,14 +9,12 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 const App = () => {
   return (
     // Estilado que ya venia en el template
-    <div className=" font-sans  h-screen flex flex-col">
+    <div className=" font-sans h-screen flex flex-col">
       <AuthProvider>
-        <Routes className="">
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="*" element={<Navigate to="/login" replace />} />
-        </Routes>
         <Routes>
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          {/* <Route path="*" element={<Navigate to="/login" replace />} /> */}
           <Route
             path="/home"
             element={
