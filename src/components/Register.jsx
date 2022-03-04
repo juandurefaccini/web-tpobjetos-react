@@ -8,11 +8,12 @@ export default function Register() {
   const [user, setUser] = useState({
     email: "",
     password: "",
+    nombre: "",
   });
 
   const [error, setError] = useState("");
 
-  const { signup } = useAuth();
+  const { signup, signInWithGoogle } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = ({ target: { name, value } }) => {
@@ -20,11 +21,16 @@ export default function Register() {
     setUser({ ...user, [name]: value }); // Esto es para copiar los datos que tiene y despues actualizarlos
   };
 
+  const handleGoogleSignIn = async () => {
+    await signInWithGoogle();
+    navigate("/home"); // Redireccionar a la pagina home
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
-      await signup(user.email, user.password);
+      await signup(user.email, user.password, user.nombre);
       navigate("/home"); // Redireccionar a la pagina home
     } catch (e) {
       setError(e.message);
@@ -32,30 +38,48 @@ export default function Register() {
   };
 
   return (
-    <div>
-      {error && <Alert message={error} />}
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email
+    <div className="bg-slate-300 h-full flex flex-col justify-center">
+      <div className="container bg-white mx-auto w-auto space-y-2 p-6 rounded">
+        {error && <Alert message={error} />}
+        <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
+          <label htmlFor="email">Email</label>
           <input
+            disabled
+            className="rounded border border-gray-400 p-2 w-full"
             type="email"
             name="email"
             placeholder="tumail@compañia.com"
             onChange={handleChange}
           />
-        </label>
-        <label>
-          Password
+          <label htmlFor="nombre">Nombre</label>
           <input
+            disabled
+            className="rounded border border-gray-400 p-2 w-full"
+            type="text"
+            name="nombre"
+            placeholder="Nombre | Apellido"
+            onChange={handleChange}
+          />
+          <label htmlFor="password">Password</label>
+          <input
+            className="rounded border border-gray-400 p-2 w-full"
             type="password"
             name="password"
             id="password"
             placeholder="******"
             onChange={handleChange}
           />
-        </label>
-        <button>Registrar</button>
-      </form>
+          <button disabled className="bg-gray-400 rounded p-2">
+            Registrar
+          </button>
+        </form>
+        <button
+          className="border-gray-400 rounded border p-2 w-full"
+          onClick={handleGoogleSignIn}
+        >
+          Registrarse con Google
+        </button>
+      </div>
     </div>
   );
 }

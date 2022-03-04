@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useAuth } from "../context/authContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Alert from "./Alert";
 
 export default function Login() {
@@ -38,32 +38,45 @@ export default function Login() {
   };
 
   return (
-    <div>
-      {error && <Alert message={error} />}
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email
+    <div className="bg-slate-300 h-full flex flex-col justify-center">
+      <div className="container bg-white mx-auto w-auto space-y-2 p-6 rounded">
+        {error && <Alert message={error} />}
+        <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
+          <label htmlFor="email" className="block">
+            Email
+          </label>
           <input
+            disabled
+            className="rounded border border-gray-400 p-2 w-full"
             type="email"
             name="email"
             placeholder="tumail@compañia.com"
             onChange={handleChange}
           />
-        </label>
-        <label>
-          Password
+          <label htmlFor="password">Password</label>
           <input
+            disabled
+            className="rounded border border-gray-400 p-2 w-full"
             type="password"
             name="password"
             id="password"
             placeholder="******"
             onChange={handleChange}
           />
-        </label>
-        <button>Log In</button>
-      </form>
-
-      <button onClick={handleGoogleSignIn}>Login with Google</button>
+          <button disabled className="bg-gray-400 rounded p-2">
+            Iniciar sesion
+          </button>
+        </form>
+        <button
+          className="border-gray-400 rounded border p-2 w-full"
+          onClick={handleGoogleSignIn}
+        >
+          Iniciar sesion con Google
+        </button>
+        <Link to="/register">
+          <span className="text-blue-600">Registrate!</span>
+        </Link>
+      </div>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Home from "./components/Home";
 import React from "react";
 import Register from "./components/Register";
@@ -11,9 +11,12 @@ const App = () => {
     // Estilado que ya venia en el template
     <div className=" font-sans  h-screen flex flex-col">
       <AuthProvider>
-        <Routes>
+        <Routes className="">
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="*" element={<Navigate to="/login" replace />} />
+        </Routes>
+        <Routes>
           <Route
             path="/home"
             element={

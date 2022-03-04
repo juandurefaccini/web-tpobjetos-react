@@ -8,7 +8,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
 } from "firebase/auth";
-import { auth } from "../firebase-config";
+import { auth, db } from "../firebase-config";
 
 export const authContext = createContext(); // Contiene la informacion
 
@@ -16,8 +16,14 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null); // Cuando iniciamos la aplicacion nadie esta logueado
   const [loading, setLoading] = useState(true); // Cuando iniciamos la aplicacion esta cargando
 
-  const signup = (email, password) =>
-    createUserWithEmailAndPassword(auth, email, password);
+  const signup = (email, password, nombre) => {
+    createUserWithEmailAndPassword(auth, email, password).then(() => {
+      console.log(db);
+      db.collection("users").document(user.uid).setData({
+        nombre: nombre,
+      });
+    });
+  };
 
   const login = (email, password) =>
     signInWithEmailAndPassword(auth, email, password);
