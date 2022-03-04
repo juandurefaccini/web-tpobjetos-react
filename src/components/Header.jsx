@@ -6,11 +6,15 @@ import SearchBar from "./SearchBar";
 export default function Header() {
   const navigate = useNavigate();
 
-  const { user, logout, loading } = useAuth();
+  const { user, logout } = useAuth();
 
   const handleLogout = async () => {
-    await logout();
-    navigate("/login");
+    try {
+      await logout();
+      navigate("/login");
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (

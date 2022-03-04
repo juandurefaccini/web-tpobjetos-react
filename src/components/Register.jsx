@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useAuth } from "../context/authContext";
 import { useNavigate } from "react-router-dom";
+import Alert from "./Alert";
 
 export default function Register() {
   const [user, setUser] = useState({
@@ -32,7 +33,7 @@ export default function Register() {
 
   return (
     <div>
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <Alert message={error} />}
       <form onSubmit={handleSubmit}>
         <label>
           Email

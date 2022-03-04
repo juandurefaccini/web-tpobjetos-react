@@ -5,6 +5,8 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
+  signInWithPopup,
+  GoogleAuthProvider,
 } from "firebase/auth";
 import { auth } from "../firebase-config";
 
@@ -22,6 +24,11 @@ export function AuthProvider({ children }) {
 
   const logout = () => signOut(auth);
 
+  const signInWithGoogle = () => {
+    const googleProvider = new GoogleAuthProvider();
+    signInWithPopup(auth, googleProvider);
+  };
+
   useEffect(() => {
     // Ejecuta algo ni bien carga el componente
     onAuthStateChanged(auth, (user) => {
@@ -31,7 +38,9 @@ export function AuthProvider({ children }) {
   }, []); // No es sensible a nada por lo tanto esto va cacio
 
   return (
-    <authContext.Provider value={{ signup, login, user, logout, loading }}>
+    <authContext.Provider
+      value={{ signup, login, user, logout, loading, signInWithGoogle }}
+    >
       {children}
     </authContext.Provider>
   );

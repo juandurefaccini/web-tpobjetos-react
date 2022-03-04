@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useAuth } from "../context/authContext";
 import { useNavigate } from "react-router-dom";
+import Alert from "./Alert";
 
 export default function Login() {
   // Manejar el estado del formulario
@@ -12,8 +13,13 @@ export default function Login() {
 
   const [error, setError] = useState("");
 
-  const { login } = useAuth();
+  const { login, signInWithGoogle } = useAuth();
   const navigate = useNavigate();
+
+  const handleGoogleSignIn = async () => {
+    await signInWithGoogle();
+    navigate("/home"); // Redireccionar a la pagina home
+  };
 
   const handleChange = ({ target: { name, value } }) => {
     // La notacion del parametro significa que yo ya extraigo el propiedad target y de su valor la propiedad name y value
@@ -33,7 +39,7 @@ export default function Login() {
 
   return (
     <div>
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <Alert message={error} />}
       <form onSubmit={handleSubmit}>
         <label>
           Email
@@ -56,6 +62,8 @@ export default function Login() {
         </label>
         <button>Log In</button>
       </form>
+
+      <button onClick={handleGoogleSignIn}>Login with Google</button>
     </div>
   );
 }
