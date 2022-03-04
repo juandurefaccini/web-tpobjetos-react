@@ -1,6 +1,7 @@
 import React from "react";
 import ElementList from "./ElementList";
 import ElementPreview from "./ElementPreview";
+import Header from "./Header";
 
 const element = {
   nombre: "archivo 1",
@@ -14,14 +15,17 @@ const element = {
 
 export default function Home() {
   return (
-    <div className="h-full flex">
-      <div className="p-10">
-        <ElementList />
-      </div>
+    <>
+      <Header />
+      <div className="h-full flex">
+        <div className="p-10">
+          <ElementList />
+        </div>
 
-      <div className="border-l-2  p-10 border-slate-600 w-1/4 flex-grow-0 ">
-        <ElementPreview element={element} />
+        <div className="border-l-2  p-10 border-slate-600 w-1/4 flex-grow-0 ">
+          <ElementPreview element={element} />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
