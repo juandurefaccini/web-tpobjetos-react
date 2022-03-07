@@ -33,15 +33,16 @@ export default function ElementPreview(props) {
             element.fechaModificacion.month +
             element.fechaModificacion.day}
         </p>
-        <p className="mb-4 mt-10 underline">Tags</p>
-        <div className="my-6 flex flex-row flex-wrap">
-          {element.palabrasClaves.map((tag, index) => {
-            return <Tag key={index} tag={tag} />;
-          })}
-        </div>
-        {/* fechaCreacion: {year: 2020, month: 1, day: 2}
-fechaModificacion: {year: 2020, month: 1, day: 2}
-*/}
+        {element.palabrasClaves.length > 0 && (
+          <>
+            <p className="mb-4 mt-10 underline">Tags</p>
+            <div className="my-6 flex flex-row flex-wrap">
+              {element.palabrasClaves.map((tag, index) => {
+                return <Tag key={index} tag={tag} />;
+              })}
+            </div>
+          </>
+        )}
       </div>
       <p className="mt-10 mb-6 underline">Acciones</p>
       <PanelAcciones />
