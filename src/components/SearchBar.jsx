@@ -41,7 +41,7 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="mx-6 flex w-full ">
+    <div className="mx-6 flex w-1/2 flex-shrink-0 h-full ">
       <div className="input-group relative flex flex-nowrap w-full ">
         <input
           type="search"

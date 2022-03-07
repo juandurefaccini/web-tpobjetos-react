@@ -1,103 +1,53 @@
-import { result } from "lodash";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import FolderList from "./FolderList";
 import FileList from "./FileList";
-
-const elements = [
-  {
-    nombre: "archivo 1",
-    fechaModificacion: "fechaModificacion1",
-    fechaCreacion: "fechaCreacion1",
-    peso: "peso1",
-    autor: "autor1",
-    tags: ["tag1", "tag2"],
-    tipo: "archivo",
-  },
-  {
-    nombre: "carpeta 1",
-    fechaModificacion: "fechaModificacion1",
-    fechaCreacion: "fechaCreacion1",
-    peso: "peso1",
-    autor: "autor1",
-    tags: ["tag1", "tag2"],
-    tipo: "carpeta",
-  },
-  {
-    nombre: "carpeta 2",
-    fechaModificacion: "fechaModificacion1",
-    fechaCreacion: "fechaCreacion1",
-    peso: "peso1",
-    autor: "autor1",
-    tags: ["tag1", "tag2"],
-    tipo: "carpeta",
-  },
-  {
-    nombre: "carpeta 3",
-    fechaModificacion: "fechaModificacion1",
-    fechaCreacion: "fechaCreacion1",
-    peso: "peso1",
-    autor: "autor1",
-    tags: ["tag1", "tag2"],
-    tipo: "carpeta",
-  },
-  {
-    nombre: "carpeta 4",
-    fechaModificacion: "fechaModificacion1",
-    fechaCreacion: "fechaCreacion1",
-    peso: "peso1",
-    autor: "autor1",
-    tags: ["tag1", "tag2"],
-    tipo: "carpeta",
-  },
-  {
-    nombre: "carpeta 5",
-    fechaModificacion: "fechaModificacion1",
-    fechaCreacion: "fechaCreacion1",
-    peso: "peso1",
-    autor: "autor1",
-    tags: ["tag1", "tag2"],
-    tipo: "carpeta",
-  },
-  {
-    nombre: "carpeta 6",
-    fechaModificacion: "fechaModificacion1",
-    fechaCreacion: "fechaCreacion1",
-    peso: "peso1",
-    autor: "autor1",
-    tags: ["tag1", "tag2"],
-    tipo: "carpeta",
-  },
-  {
-    nombre: "archivo 2",
-    fechaModificacion: "fechaModificacion2",
-    fechaCreacion: "fechaCreacion2",
-    peso: "peso2",
-    autor: "autor2",
-    tags: ["tag1", "tag2"],
-    tipo: "archivo",
-  },
-];
+import { axiosClient } from "../services/services";
 
 function elementosClasificados(elements) {
-  const [archivos, carpetas] = elements.reduce(
+  const [carpetas, archivos] = elements.reduce(
     (result, e) => {
-      result[e.tipo === "archivo" ? 0 : 1].push(e); // 0: archivos, 1: carpetas - Si el tipo es carpeta lo agrega a la lista de carpetas, sino a la lista de archivos
+      result[e.tipo === "carpeta" ? 0 : 1].push(e); // 0: archivos, 1: carpetas - Si el tipo es carpeta lo agrega a la lista de carpetas, sino a la lista de archivos
       return result;
     },
     [[], []] // Inicializamos el resultado
   );
   return [archivos, carpetas];
 }
-export default class ElementList extends React.Component {
-  render() {
-    const [archivos, carpetas] = elementosClasificados(elements);
-    return (
-      <>
-        <FolderList folders={carpetas} />
-        <div className="mt-6">
-          <FileList files={archivos} />
-        </div>
-      </>
-    );
-  }
+export default function ElementList() {
+  const [elementList, setElementList] = useState(null);
+  const [error, setError] = useState(false);
+
+  const loadElements = (folder) => {
+    return axiosClient
+      .get(`http://localhost:3500/directorio?nombre=${folder}`)
+      .then((response) => {
+        const elem = response.data[0];
+        setElementList(elem.listaElementos);
+      })
+      .catch((err) => {
+        console.log(err.message);
+        setError(true);
+      });
+  };
+
+  useEffect(() => {
+    loadElements("root");
+  }, []);
+
+  if (!elementList && !error) return <h1>Loading</h1>;
+  if (error) return <h1>Error</h1>;
+
+  const [files, folders] = elementosClasificados(elementList);
+
+  return (
+    <>
+      <FolderList
+        folders={folders}
+        handleClick={(folder) => loadElements(folder)}
+      />
+      <div className="mt-6">
+        <FileList files={files} />
+      </div>
+    </>
+  );
 }

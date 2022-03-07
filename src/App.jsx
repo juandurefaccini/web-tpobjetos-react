@@ -3,6 +3,7 @@ import Home from "./components/Home";
 import React from "react";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import DashBoard from "./components/Admin/DashBoard";
 import { AuthProvider } from "./context/authContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
@@ -14,12 +15,20 @@ const App = () => {
         <Routes>
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          {/* <Route path="*" element={<Navigate to="/login" replace />} /> */}
+          <Route path="*" element={<Navigate to="/login" replace />} />
           <Route
             path="/home"
             element={
               <ProtectedRoute>
                 <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <DashBoard />
               </ProtectedRoute>
             }
           />
