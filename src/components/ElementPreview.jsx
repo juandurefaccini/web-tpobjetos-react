@@ -6,31 +6,43 @@ import Tag from "./Tag";
 
 export default function ElementPreview(props) {
   const { element } = props;
+
+  console.log(element);
   return (
-    <div>
+    <div className="border-l-2 p-10 border-slate-600">
       <div className="flex justify-center mb-10">
         {element.tipo === "archivo" ? <FileIcon /> : <FolderIcon />}
       </div>
       <p className="mb-6 underline"> Descripcion </p>
-      {Object.keys(element).map((prop, index) => {
-        if (prop !== "tags")
-          return (
-            <p className="my-2" key={index}>
-              {prop} : {element[prop]}
-            </p>
-          );
-        else
-          return (
-            <div key={index}>
-              <p className="mb-4 mt-10 underline">Tags</p>
-              <div className="my-6 flex flex-row flex-wrap">
-                {element.tags.map((tag, index) => {
-                  return <Tag key={index} tag={tag} />;
-                })}
-              </div>
-            </div>
-          );
-      })}
+      <div className="space-y-2">
+        <p>Nombre : {element.nombre}</p>
+        <p>Propietario : {element.propietario.nombre}</p>
+        <p>Ruta : {element.padre}</p>
+        <p>Tipo : {element.tipo}</p>
+        <p>Tamaño : {element.tamanio}</p>
+        <p>Nombre : {element.nombre}</p>
+        <p>
+          Fecha de creacion :{" "}
+          {element.fechaCreacion.year +
+            element.fechaCreacion.month +
+            element.fechaCreacion.day}
+        </p>
+        <p>
+          Fecha de modificacion :{" "}
+          {element.fechaModificacion.year +
+            element.fechaModificacion.month +
+            element.fechaModificacion.day}
+        </p>
+        <p className="mb-4 mt-10 underline">Tags</p>
+        <div className="my-6 flex flex-row flex-wrap">
+          {element.palabrasClaves.map((tag, index) => {
+            return <Tag key={index} tag={tag} />;
+          })}
+        </div>
+        {/* fechaCreacion: {year: 2020, month: 1, day: 2}
+fechaModificacion: {year: 2020, month: 1, day: 2}
+*/}
+      </div>
       <p className="mt-10 mb-6 underline">Acciones</p>
       <PanelAcciones />
     </div>

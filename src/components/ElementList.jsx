@@ -13,7 +13,9 @@ function elementosClasificados(elements) {
   );
   return [archivos, carpetas];
 }
-export default function ElementList() {
+export default function ElementList(props) {
+  const { setElementPreview } = props;
+
   const [elementList, setElementList] = useState(null);
   const [error, setError] = useState(false);
 
@@ -40,14 +42,14 @@ export default function ElementList() {
   const [files, folders] = elementosClasificados(elementList);
 
   return (
-    <>
+    <div className="p-10 flex-shrink-0 w-3/4">
       <FolderList
         folders={folders}
         handleClick={(folder) => loadElements(folder)}
       />
       <div className="mt-6">
-        <FileList files={files} />
+        <FileList files={files} setElementPreview={setElementPreview} />
       </div>
-    </>
+    </div>
   );
 }

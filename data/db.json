@@ -132,7 +132,7 @@
         },
         {
           "tamanio": 9,
-          "palabrasClaves": [],
+          "palabrasClaves": ["pc1", "pc2", "industria", "farmacia"],
           "padre": " ",
           "nombre": "readme.md",
           "tipo": "archivo",

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAuth } from "../context/authContext";
 import ElementList from "./ElementList";
 import ElementPreview from "./ElementPreview";
@@ -15,17 +15,15 @@ const element = {
 };
 
 export default function Home() {
+  const [elementPreview, setElementPreview] = useState(null);
+
   return (
     <>
       <Header />
       <div className="h-full flex">
-        <div className="p-10">
-          <ElementList />
-        </div>
+        <ElementList setElementPreview={(file) => setElementPreview(file)} />
 
-        <div className="border-l-2  p-10 border-slate-600 w-1/4 flex-grow-0 ">
-          <ElementPreview element={element} />
-        </div>
+        {elementPreview && <ElementPreview element={elementPreview} />}
       </div>
     </>
   );
