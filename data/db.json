@@ -1,4 +1,33 @@
 {
+  "archiuvo": [
+    {
+      "nombre": "parcial2020",
+      "res": [
+        {
+          "tamanio": 9,
+          "palabrasClaves": [],
+          "padre": "root:objetos:parciales objetos:parcial2020",
+          "nombre": "parcial2020",
+          "tipo": "pdf",
+          "fechaModificacion": {
+            "year": 2020,
+            "month": 1,
+            "day": 2
+          },
+          "fechaCreacion": {
+            "year": 2020,
+            "month": 1,
+            "day": 2
+          },
+          "propietario": {
+            "mail": "juan@gmail.com",
+            "nombre": "Juan Dure",
+            "puntaje": 9
+          }q
+        }
+      ]
+    }
+  ],
   "directorio": [
     {
       "padre": "root:objetos:parciales objetos",

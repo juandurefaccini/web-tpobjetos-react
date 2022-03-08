@@ -1,25 +1,17 @@
 import React, { useState } from "react";
-import { useAuth } from "../context/authContext";
 import ElementList from "./ElementList";
 import ElementPreview from "./ElementPreview";
 import Header from "./Header";
 
-const element = {
-  nombre: "archivo 1",
-  fechaModificacion: "fechaModificacion1",
-  fechaCreacion: "fechaCreacion1",
-  peso: "peso1",
-  autor: "autor1",
-  tipo: "archivo",
-  tags: ["agropecuaria", "fabrica de objetos", "dificil"],
-};
-
 export default function Home() {
   const [elementPreview, setElementPreview] = useState(null);
+  const [search, setSearch] = useState(null);
 
   return (
     <>
-      <Header />
+      <Header
+        setSearch={(criteria, search) => setSearch({ criteria, search })}
+      />
       <div className="h-full flex">
         <ElementList setElementPreview={(file) => setElementPreview(file)} />
 

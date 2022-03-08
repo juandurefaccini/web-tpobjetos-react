@@ -2,9 +2,11 @@ import React from "react";
 // import icons
 import SearchIcon from "../icons/SearchIcon";
 
-const reservedWords = ["type", "date", "author"];
+const reservedWords = ["autor", "tipo"];
 
-export default function SearchBar() {
+export default function SearchBar(props) {
+  const { setSearch } = props;
+
   const [searchInput, setSearchInput] = React.useState("");
   const [searchCriteria, setSearchCriteria] = React.useState("");
 
@@ -22,7 +24,7 @@ export default function SearchBar() {
       )
         return result;
 
-      result.push({ type: criteriaType, value: criteriaValue }); // Agrega el criterio a la lista
+      result.push({ [criteriaType]: criteriaValue }); // Agrega el criterio a la lista
       return result;
     }, []);
 
@@ -33,11 +35,9 @@ export default function SearchBar() {
     const criterios = getCriterios(searchInput);
     const busqueda = searchInput;
 
-    const body = {
-      criterios: criterios,
-      busqueda: busqueda,
-    };
-    console.log("body", body);
+    console.log({ criterios, busqueda });
+
+    setSearch({ criterios, busqueda });
   };
 
   return (

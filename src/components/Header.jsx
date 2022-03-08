@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import SearchBar from "./SearchBar";
 
-export default function Header() {
+export default function Header(props) {
   const navigate = useNavigate();
 
   const { user, logout } = useAuth();
+
+  const { setSearch } = props;
 
   const handleLogout = async () => {
     try {
@@ -24,22 +26,23 @@ export default function Header() {
           <p className="flex-shrink-0 h-full  flex items-center justify-center">
             Gil Drive
           </p>
-          <SearchBar />
+          <SearchBar setSearch={setSearch} />
           <span className="inline mx-6 px-2 border border-gray-400 rounded h-full flex items-center justify-center">
             {user.displayName}
           </span>
-          <button
-            className="bg-gray-500 text-white inline rounded h-full px-6 mx-1 btn font-medium "
-            onClick={handleLogout}
-          >
-            Sign Out
-          </button>
 
           <button
             className="bg-gray-500 text-white inline rounded h-full px-6 mx-1 btn font-medium "
             onClick={() => navigate("/dashboard")}
           >
             Dashboard
+          </button>
+
+          <button
+            className="bg-gray-500 text-white inline rounded h-full px-6 mx-1 btn font-medium "
+            onClick={handleLogout}
+          >
+            Sign Out
           </button>
         </div>
       </nav>

@@ -3,6 +3,7 @@ import Folder from "./Folder";
 
 export default function FolderList(props) {
   const { folders, handleClick } = props;
+
   return (
     <div>
       <h1 className="py-6">Carpetas</h1>
