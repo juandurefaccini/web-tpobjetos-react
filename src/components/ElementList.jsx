@@ -13,18 +13,19 @@ function elementosClasificados(elements) {
   );
   return [archivos, carpetas];
 }
+
 export default function ElementList(props) {
   const { setElementPreview } = props;
 
-  const [elementList, setElementList] = useState(null);
+  const [element, setElement] = useState(null);
   const [error, setError] = useState(false);
 
   const loadElements = (folder) => {
     return axiosClient
-      .get(`http://localhost:3500/directorio?nombre=${folder}`)
+      .get(`/directorio?nombre=${folder}`)
       .then((response) => {
         const elem = response.data[0];
-        setElementList(elem.listaElementos);
+        setElement(elem);
       })
       .catch((err) => {
         console.log(err.message);
@@ -32,17 +33,33 @@ export default function ElementList(props) {
       });
   };
 
+  const handleGoParentDirectory = () => {
+    const padre = element.padre.split(":").slice(-2)[0];
+    loadElements(padre);
+  };
+
   useEffect(() => {
     loadElements("root");
   }, []);
 
-  if (!elementList && !error) return <h1>Loading</h1>;
+  if (!element && !error) return <h1>Loading</h1>;
   if (error) return <h1>Error</h1>;
 
-  const [files, folders] = elementosClasificados(elementList);
+  const [files, folders] = elementosClasificados(element.listaElementos);
+
+  console.log("Informacion del elemento: ", element);
 
   return (
     <div className="p-10 flex-shrink-0 w-3/4">
+      <p>Ruta actual: {element.padre.trim() || "base"}</p>
+      {element.padre.trim() /* Flaso si es vacio */ && (
+        <button
+          className="border border-gray-400 px-6 py-1 rounded bg-gray-400 text-white"
+          onClick={handleGoParentDirectory}
+        >
+          Volver
+        </button>
+      )}
       <FolderList
         folders={folders}
         handleClick={(folder) => loadElements(folder)}

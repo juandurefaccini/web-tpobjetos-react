@@ -1,5 +1,5 @@
 {
-  "archiuvo": [
+  "archivo": [
     {
       "nombre": "parcial2020",
       "res": [
@@ -23,7 +23,7 @@
             "mail": "juan@gmail.com",
             "nombre": "Juan Dure",
             "puntaje": 9
-          }q
+          }
         }
       ]
     }
@@ -74,7 +74,7 @@
       ]
     },
     {
-      "padre": " ",
+      "padre": "root:objetos",
       "nombre": "objetos",
       "tipo": "carpeta",
       "fechaModificacion": {
@@ -140,7 +140,7 @@
         {
           "tamanio": 9,
           "palabrasClaves": [],
-          "padre": " ",
+          "padre": "root:objetos",
           "nombre": "objetos",
           "tipo": "carpeta",
           "fechaModificacion": {
@@ -162,7 +162,7 @@
         {
           "tamanio": 9,
           "palabrasClaves": ["pc1", "pc2", "industria", "farmacia"],
-          "padre": " ",
+          "padre": "root:archivo",
           "nombre": "readme.md",
           "tipo": "archivo",
           "fechaModificacion": {
@@ -184,7 +184,7 @@
         {
           "tamanio": 9,
           "palabrasClaves": [],
-          "padre": " ",
+          "padre": "root:metodologias",
           "nombre": "metodologias",
           "tipo": "carpeta",
           "fechaModificacion": {

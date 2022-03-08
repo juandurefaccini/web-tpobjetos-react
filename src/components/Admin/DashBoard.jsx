@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { axiosClient, getUsuarios } from "../../services/services.js";
 import Loading from "../Loading.jsx";
@@ -23,8 +22,8 @@ export default function DashBoard() {
     setCatedras(null);
     setComentarios(null);
     setLoading(true);
-    axios
-      .get("http://localhost:3500/usuarios")
+    axiosClient
+      .get("/usuarios")
       .then((response) => {
         setUsers(response.data);
         setLoading(false);
@@ -36,8 +35,8 @@ export default function DashBoard() {
     setUsers(null);
     setComentarios(null);
     setLoading(true);
-    axios
-      .get("http://localhost:3500/catedras")
+    axiosClient
+      .get("/catedras")
       .then((response) => {
         setCatedras(response.data);
         setLoading(false);
@@ -49,8 +48,8 @@ export default function DashBoard() {
     setUsers(null);
     setCatedras(null);
     setLoading(true);
-    axios
-      .get("http://localhost:3500/comentarios")
+    axiosClient
+      .get("/comentarios")
       .then((response) => {
         setComentarios(response.data);
         setLoading(false);
