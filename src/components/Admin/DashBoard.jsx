@@ -1,91 +1,42 @@
-import React, { useEffect, useState } from "react";
-import { axiosClient, getUsuarios } from "../../services/services.js";
-import Loading from "../Loading.jsx";
-import Alert from "../Alert";
+import React, { useState } from "react";
 import Users from "./Users.jsx";
 import Catedras from "./Catedras.jsx";
 import Comentarios from "./Comentarios.jsx";
 
 export default function DashBoard() {
-  const [error, setError] = useState(null);
-
-  // Datos
-  const [users, setUsers] = useState(null);
-  const [catedras, setCatedras] = useState(null);
-  const [comentarios, setComentarios] = useState(null);
-
   // Opcion de panel
-  const [usersOption, setUsersOption] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  const loadUsers = () => {
-    setCatedras(null);
-    setComentarios(null);
-    setLoading(true);
-    axiosClient
-      .get("/usuarios")
-      .then((response) => {
-        setUsers(response.data);
-        setLoading(false);
-      })
-      .catch((err) => setError(err));
-  };
-
-  const loadCatedras = () => {
-    setUsers(null);
-    setComentarios(null);
-    setLoading(true);
-    axiosClient
-      .get("/catedras")
-      .then((response) => {
-        setCatedras(response.data);
-        setLoading(false);
-      })
-      .catch((err) => setError(err));
-  };
-
-  const loadComentarios = () => {
-    setUsers(null);
-    setCatedras(null);
-    setLoading(true);
-    axiosClient
-      .get("/comentarios")
-      .then((response) => {
-        setComentarios(response.data);
-        setLoading(false);
-      })
-      .catch((err) => setError(err));
-  };
-
-  if (loading && error) return <Alert message={error} />;
-  if (loading && !users) return <Loading />;
+  const [option, setOption] = useState(null);
 
   return (
-    <div className="container mx-auto flex justify-center">
+    <div className="container mx-auto flex justify-center self-center">
       <div className="flex flex-col space-y-6">
+        <button className="px-4 py-1 border rounderd broder-gray-400 bg-gray-400 text-white">
+          Volver al home
+        </button>
         <div className="space-x-4 mx-auto">
           <button
             className="px-6 py-2 shadow-sm border border-gray-400"
-            onClick={() => loadUsers()}
+            onClick={() => setOption("usuarios")}
           >
             Usuarios
           </button>
           <button
             className="px-6 py-2 shadow-sm border border-gray-400"
-            onClick={() => loadCatedras()}
+            onClick={() => setOption("catedras")}
           >
             Catedras
           </button>
           <button
             className="px-6 py-2 shadow-sm border border-gray-400"
-            onClick={() => loadComentarios()}
+            onClick={() => setOption("comentarios")}
           >
             Comentarios
           </button>
         </div>
-        {users && <Users users={users} />}
-        {catedras && <Catedras catedras={catedras} />}
-        {comentarios && <Comentarios comentarios={comentarios} />}
+
+        {option === "usuarios" && <Users />}
+        {option === "catedras" && <Catedras />}
+        {option === "comentarios" && <Comentarios />}
       </div>
     </div>
   );

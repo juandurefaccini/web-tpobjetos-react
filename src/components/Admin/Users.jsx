@@ -1,7 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { axiosClient } from "../../services/services";
+import Alert from "../Alert";
+import Loading from "../Loading";
 
-export default function Users(props) {
-  const { users } = props;
+export default function Users() {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axiosClient.get("/usuarios");
+        console.log(response.data);
+        setUsers(response.data);
+      } catch (err) {
+        if (err.response) {
+          // No esta en el rango 200, respondio algo
+          setError(
+            err.response.data + err.response.status + err.response.headers
+          );
+        } else {
+          setError(err.message);
+        }
+      }
+    };
+
+    fetchUsers();
+    setLoading(false);
+  }, []);
+
+  if (loading && users.length == 0) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Alert message={error} />;
+  }
 
   return (
     <div>

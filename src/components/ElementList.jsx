@@ -22,9 +22,9 @@ export default function ElementList(props) {
 
   const loadElements = (folder) => {
     return axiosClient
-      .get(`/directorio?nombre=${folder}`)
+      .get(`/directorio?carpetaBase=${folder}`)
       .then((response) => {
-        const elem = response.data[0];
+        const elem = response.data;
         setElement(elem);
       })
       .catch((err) => {
@@ -42,12 +42,12 @@ export default function ElementList(props) {
     loadElements("root");
   }, []);
 
+  console.log("element: ", element);
+
   if (!element && !error) return <h1>Loading</h1>;
   if (error) return <h1>Error</h1>;
 
   const [files, folders] = elementosClasificados(element.listaElementos);
-
-  console.log("Informacion del elemento: ", element);
 
   return (
     <div className="p-10 flex-shrink-0 w-3/4">
@@ -60,13 +60,17 @@ export default function ElementList(props) {
           Volver
         </button>
       )}
-      <FolderList
-        folders={folders}
-        handleClick={(folder) => loadElements(folder)}
-      />
-      <div className="mt-6">
-        <FileList files={files} setElementPreview={setElementPreview} />
-      </div>
+      {element.listaElementos.length > 0 && (
+        <>
+          <FolderList
+            folders={folders}
+            handleClick={(folder) => loadElements(folder)}
+          />
+          <div className="mt-6">
+            <FileList files={files} setElementPreview={setElementPreview} />
+          </div>
+        </>
+      )}
     </div>
   );
 }
