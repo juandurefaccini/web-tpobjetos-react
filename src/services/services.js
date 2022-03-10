@@ -9,7 +9,7 @@ const axiosClient = axios.create({
   },
 });
 
-axiosClient.defaults.timeout = 6000;
+axiosClient.defaults.timeout = 10000;
 
 const getUsuarios = async () => await axios.get("/usuarios");
 

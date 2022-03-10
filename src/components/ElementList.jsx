@@ -14,9 +14,7 @@ function elementosClasificados(elements) {
   return [archivos, carpetas];
 }
 
-export default function ElementList(props) {
-  const { setElementPreview } = props;
-
+export default function ElementList() {
   const [element, setElement] = useState(null);
   const [error, setError] = useState(false);
 
@@ -42,17 +40,17 @@ export default function ElementList(props) {
     loadElements("root");
   }, []);
 
-  console.log("element: ", element);
+  // console.log("element: ", element);
 
   if (!element && !error) return <h1>Loading</h1>;
-  if (error) return <h1>Error</h1>;
+  if (error) return <h1>{error}</h1>;
 
   const [files, folders] = elementosClasificados(element.listaElementos);
 
   return (
     <div className="p-10 flex-shrink-0 w-3/4">
       <p>Ruta actual: {element.padre.trim() || "base"}</p>
-      {element.padre.trim() /* Flaso si es vacio */ && (
+      {element.padre !== "root" /* Flaso si es vacio */ && (
         <button
           className="border border-gray-400 px-6 py-1 rounded bg-gray-400 text-white"
           onClick={handleGoParentDirectory}
@@ -67,7 +65,7 @@ export default function ElementList(props) {
             handleClick={(folder) => loadElements(folder)}
           />
           <div className="mt-6">
-            <FileList files={files} setElementPreview={setElementPreview} />
+            <FileList files={files} />
           </div>
         </>
       )}

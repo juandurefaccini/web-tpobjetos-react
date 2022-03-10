@@ -2,42 +2,44 @@ import React from "react";
 import FileIcon from "../icons/FileIcon";
 import FolderIcon from "../icons/FolderIcon";
 import PanelAcciones from "./PanelAcciones";
+import { useFileExplorer } from "../context/fileExplorerContext";
 import Tag from "./Tag";
 
-export default function ElementPreview(props) {
-  const { element } = props;
+export default function ElementPreview() {
+  const { selectedElement } = useFileExplorer();
 
-  console.log(element);
+  if (!selectedElement) return <></>;
+
   return (
     <div className="border-l-2 p-10 border-slate-600">
       <div className="flex justify-center mb-10">
-        {element.tipo === "archivo" ? <FileIcon /> : <FolderIcon />}
+        {selectedElement.tipo === "archivo" ? <FileIcon /> : <FolderIcon />}
       </div>
       <p className="mb-6 underline"> Descripcion </p>
       <div className="space-y-2">
-        <p>Nombre : {element.nombre}</p>
-        <p>Propietario : {element.propietario.nombre}</p>
-        <p>Ruta : {element.padre}</p>
-        <p>Tipo : {element.tipo}</p>
-        <p>Tamaño : {element.tamanio}</p>
-        <p>Nombre : {element.nombre}</p>
+        <p>Nombre : {selectedElement.nombre}</p>
+        <p>Propietario : {selectedElement.propietario.nombre}</p>
+        <p>Ruta : {selectedElement.padre}</p>
+        <p>Tipo : {selectedElement.tipo}</p>
+        <p>Tamaño : {selectedElement.tamanio}</p>
+        <p>Nombre : {selectedElement.nombre}</p>
         <p>
           Fecha de creacion :{" "}
-          {element.fechaCreacion.year +
-            element.fechaCreacion.month +
-            element.fechaCreacion.day}
+          {selectedElement.fechaCreacion.year +
+            selectedElement.fechaCreacion.month +
+            selectedElement.fechaCreacion.day}
         </p>
         <p>
           Fecha de modificacion :{" "}
-          {element.fechaModificacion.year +
-            element.fechaModificacion.month +
-            element.fechaModificacion.day}
+          {selectedElement.fechaModificacion.year +
+            selectedElement.fechaModificacion.month +
+            selectedElement.fechaModificacion.day}
         </p>
-        {element.palabrasClaves.length > 0 && (
+        {selectedElement.palabrasClaves.length > 0 && (
           <>
             <p className="mb-4 mt-10 underline">Tags</p>
             <div className="my-6 flex flex-row flex-wrap">
-              {element.palabrasClaves.map((tag, index) => {
+              {selectedElement.palabrasClaves.map((tag, index) => {
                 return <Tag key={index} tag={tag} />;
               })}
             </div>

@@ -2,7 +2,7 @@ import React from "react";
 // import icons
 import SearchIcon from "../icons/SearchIcon";
 
-const reservedWords = ["autor", "tipo"];
+const reservedWords = ["autor", "tipo", "nombre"];
 
 export default function SearchBar(props) {
   const { setSearch } = props;
@@ -33,11 +33,10 @@ export default function SearchBar(props) {
 
   const handleSubmit = () => {
     const criterios = getCriterios(searchInput);
-    const busqueda = searchInput;
+    const busqueda = { nombre: searchInput }; // Lo convierto en un criterio de busqueda
+    criterios.push(busqueda); // Agrego el criterio de busqueda a la lista de criterios
 
-    console.log({ criterios, busqueda });
-
-    setSearch({ criterios, busqueda });
+    setSearch(criterios);
   };
 
   return (
