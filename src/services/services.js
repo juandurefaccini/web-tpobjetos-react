@@ -39,7 +39,7 @@ const postUser = async (user) => {
   const email = providerData[0].email;
   try {
     const res = await axiosClient.post("/usuarios", {
-      id: email,
+      idUsuario: email,
       nombre: displayName,
       puntaje: 0,
     }); // TODO : Cambiar por el nombre de la url
