@@ -1,7 +1,6 @@
 import React from "react";
 import Container from "./Container";
-import Preview from "./Preview";
-import Explorer from "./Explorer";
+import SideBar from "./SideBar";
 import Header from "./Header";
 import { FileContextProvider } from "../context/fileExplorerContext";
 import { axiosClient } from "../services/services";
@@ -21,7 +20,7 @@ export default function Home() {
       <Header />
       <div className="h-full flex">
         <Container />
-        <Preview />
+        <SideBar />
       </div>
     </FileContextProvider>
   );

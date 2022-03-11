@@ -10,7 +10,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 const App = () => {
   return (
     // Estilado que ya venia en el template
-    <div className=" font-sans h-screen flex flex-col">
+    <div className=" font-sans h-screen flex flex-col ">
       <AuthProvider>
         <Routes>
           <Route path="/register" element={<Register />} />

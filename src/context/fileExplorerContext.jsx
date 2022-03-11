@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
-import { axiosClient, getElementoByNombre } from "../services/services";
+import { getElementoByNombre } from "../services/services";
 
 export const FileExplorerContext = createContext({});
 

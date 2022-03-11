@@ -4,16 +4,23 @@ import TrashIcon from "../icons/TrashIcon";
 import ActionButton from "./ActionButton";
 import CommentIcon from "../icons/CommentIcon";
 
-export default function PanelAcciones() {
+export default function PanelAcciones({ switchMode }) {
   return (
     <div className="flex flex-row flex-wrap">
       <ActionButton>
-        <DownloadIcon />
+        {/*         <DownloadIcon />
+         */}{" "}
         <span>Download</span>
       </ActionButton>
       <ActionButton>
-        <TrashIcon />
+        {/*         <TrashIcon />
+         */}{" "}
         <span>Borrar</span>
+      </ActionButton>
+      <ActionButton onClick={() => switchMode("comments")}>
+        {/*         <CommentIcon />
+         */}{" "}
+        <span>Ver comentarios</span>
       </ActionButton>
     </div>
   );

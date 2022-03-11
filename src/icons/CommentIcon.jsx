@@ -8,8 +8,8 @@ const CommentIcon = (props) => (
       enableBackground: "new 0 0 458.139 458.139",
     }}
     xmlSpace="preserve"
-    width="2em"
-    height="2em"
+    width="1em"
+    height="1em"
     {...props}
   >
     <path d="M428.139 13.979H138.495c-16.569 0-30 13.431-30 30v80.993h211.149c33.084 0 60 26.916 60 60v72.4h48.495c16.568 0 30-13.431 30-30V43.979c0-16.568-13.431-30-30-30z" />

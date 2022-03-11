@@ -1,5 +1,4 @@
 import axios from "axios";
-import { identity } from "lodash";
 
 const axiosClient = axios.create({
   // baseURL: "http://localhost:3500",
@@ -51,7 +50,7 @@ const postUser = async (user) => {
 
 const getCommentsByElement = async (elementName) => {
   try {
-    const res = await axiosClient.post("/comentario", {
+    const res = await axiosClient.get("/comentario", {
       params: {
         idElemento: elementName,
       },
@@ -68,4 +67,5 @@ export {
   getElementoByNombre,
   postUser,
   getElementoByFilter,
+  getCommentsByElement,
 };
