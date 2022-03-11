@@ -1,15 +1,32 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
+import { axiosClient, getElementoByNombre } from "../services/services";
 
 export const FileExplorerContext = createContext({});
 
 export const FileContextProvider = ({ children }) => {
   const [selectedElement, setSelectedElement] = useState(null);
+  const [mode, setMode] = useState("explorer");
+  const [search, setSearch] = useState(null);
 
-  console.log("FileContextProvider | selectedElement :", selectedElement);
+  useEffect(() => {
+    const init = async () => {
+      const elem = await getElementoByNombre("root");
+      console.log("elem from context ", elem);
+      setSelectedElement(elem);
+    };
+    init();
+  }, []);
 
   return (
     <FileExplorerContext.Provider
-      value={{ selectedElement, setSelectedElement }}
+      value={{
+        selectedElement,
+        setSelectedElement,
+        search,
+        setSearch,
+        setMode,
+        mode,
+      }}
     >
       {children}
     </FileExplorerContext.Provider>

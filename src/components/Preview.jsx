@@ -5,10 +5,10 @@ import PanelAcciones from "./PanelAcciones";
 import { useFileExplorer } from "../context/fileExplorerContext";
 import Tag from "./Tag";
 
-export default function ElementPreview() {
+export default function Preview() {
   const { selectedElement } = useFileExplorer();
 
-  if (!selectedElement) return <></>;
+  if (!selectedElement || selectedElement.tipo == "carpeta") return <></>;
 
   return (
     <div className="border-l-2 p-10 border-slate-600">

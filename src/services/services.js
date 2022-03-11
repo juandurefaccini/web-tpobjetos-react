@@ -13,4 +13,13 @@ axiosClient.defaults.timeout = 10000;
 
 const getUsuarios = async () => await axios.get("/usuarios");
 
-export { axiosClient, getUsuarios };
+const getElementoByNombre = async (name) => {
+  try {
+    const res = await axiosClient.get(`/directorio?carpetaBase=${name}`);
+    return res.data;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export { axiosClient, getUsuarios, getElementoByNombre };

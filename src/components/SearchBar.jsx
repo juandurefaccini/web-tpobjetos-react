@@ -1,16 +1,17 @@
 import React from "react";
 // import icons
 import SearchIcon from "../icons/SearchIcon";
+import { useFileExplorer } from "../context/fileExplorerContext";
 
 const reservedWords = ["autor", "tipo", "nombre"];
 
-export default function SearchBar(props) {
-  const { setSearch } = props;
+export default function SearchBar() {
+  const { setSearch, setMode } = useFileExplorer();
 
   const [searchInput, setSearchInput] = React.useState("");
   const [searchCriteria, setSearchCriteria] = React.useState("");
 
-  const getCriterios = (input) => {
+  const getCriterios = () => {
     const criterios = searchCriteria.split(" "); // split by spaces
     const criteriaList = criterios.reduce((result, value) => {
       const criteriaType = value.split(":")[0]; // Obtengo el tipo de criterio de busqueda
@@ -32,11 +33,12 @@ export default function SearchBar(props) {
   };
 
   const handleSubmit = () => {
-    const criterios = getCriterios(searchInput);
-    const busqueda = { nombre: searchInput }; // Lo convierto en un criterio de busqueda
-    criterios.push(busqueda); // Agrego el criterio de busqueda a la lista de criterios
+    const criterios = getCriterios();
+
+    if (searchInput) criterios.push({ nombre: searchInput }); // Agrego el texto como criterio
 
     setSearch(criterios);
+    setMode("searcher");
   };
 
   return (

@@ -1,14 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/authContext";
+import { useFileExplorer } from "../context/fileExplorerContext";
 import SearchBar from "./SearchBar";
 
-export default function Header(props) {
+export default function Header() {
+  const { setMode } = useFileExplorer();
   const navigate = useNavigate();
 
   const { user, logout } = useAuth();
-
-  const { setSearch } = props;
 
   const handleLogout = async () => {
     try {
@@ -26,7 +26,13 @@ export default function Header(props) {
           <p className="flex-shrink-0 h-full  flex items-center justify-center">
             Gil Drive
           </p>
-          <SearchBar setSearch={setSearch} />
+          <button
+            className="bg-gray-500 text-white inline rounded h-full px-6 mx-3 btn font-medium "
+            onClick={() => setMode("explorer")}
+          >
+            Explorador{" "}
+          </button>
+          <SearchBar />
           <span className="inline mx-6 px-2 border border-gray-400 rounded h-full flex items-center justify-center">
             {user.displayName}
           </span>

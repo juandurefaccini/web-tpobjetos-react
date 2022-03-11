@@ -1,9 +1,7 @@
 import React from "react";
 import Folder from "./Folder";
 
-export default function FolderList(props) {
-  const { folders, handleClick } = props;
-
+export default function FolderList({ folders, onClickFolder }) {
   return (
     <div>
       <h1 className="py-6">Carpetas</h1>
@@ -14,7 +12,7 @@ export default function FolderList(props) {
               preview={true}
               key={index}
               folder={folder}
-              handleClick={handleClick}
+              onClickFolder={onClickFolder}
             />
           );
         })}

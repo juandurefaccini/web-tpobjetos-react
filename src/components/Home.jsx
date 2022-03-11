@@ -1,26 +1,27 @@
-import React, { useState } from "react";
-import ElementList from "./ElementList";
-import ElementPreview from "./ElementPreview";
+import React from "react";
+import Container from "./Container";
+import Preview from "./Preview";
+import Explorer from "./Explorer";
 import Header from "./Header";
 import { FileContextProvider } from "../context/fileExplorerContext";
-import { useFileExplorer } from "../context/fileExplorerContext";
+import { axiosClient } from "../services/services";
 
-function objectIsEmpty(obj) {
-  return Object.keys(obj).length === 0;
-}
+const loadElement = async (name) => {
+  try {
+    const res = await axiosClient.get(`/directorio?carpetaBase=${name}`);
+    return res.data;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
 export default function Home() {
-  const [search, setSearch] = useState(null);
-
   return (
-    <FileContextProvider>
-      <Header
-        setSearch={(criteria, search) => setSearch({ criteria, search })}
-      />
+    <FileContextProvider default={loadElement("root")}>
+      <Header />
       <div className="h-full flex">
-        <ElementList />
-
-        <ElementPreview />
+        <Container />
+        <Preview />
       </div>
     </FileContextProvider>
   );
