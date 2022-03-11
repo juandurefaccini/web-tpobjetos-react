@@ -1,23 +1,26 @@
 import React, { useEffect } from "react";
 import { useFileExplorer } from "../context/fileExplorerContext";
+import { getElementoByFilter } from "../services/services";
+import FileList from "./FileList";
 
 export default function Searcher() {
   const { search, selectedElement } = useFileExplorer();
+  const [searchOutput, setSearchOutput] = React.useState([]);
 
   useEffect(() => {
     loadElements(search, selectedElement);
   }, []);
 
-  const loadElements = (search, currentDirectory) => {
-    console.log(search);
-    console.log(currentDirectory);
+  const loadElements = async (search, currentDirectory) => {
+    const criteriaParam = search;
+    const currentDirectoryName = currentDirectory.nombre;
 
+    const res = await getElementoByFilter(criteriaParam, currentDirectoryName);
+    setSearchOutput(res);
     // Pedir a api los elementos que coincidan con el search
   };
 
-  return (
-    <div>
-      <h1>{selectedElement}</h1>
-    </div>
-  );
+  if (searchOutput.length === 0) return <></>;
+
+  return <FileList files={searchOutput} />;
 }

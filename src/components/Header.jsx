@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import { useFileExplorer } from "../context/fileExplorerContext";
 import SearchBar from "./SearchBar";
+import Button from "./ui/Button";
 
 export default function Header() {
   const { setMode } = useFileExplorer();
@@ -26,30 +27,14 @@ export default function Header() {
           <p className="flex-shrink-0 h-full  flex items-center justify-center">
             Gil Drive
           </p>
-          <button
-            className="bg-gray-500 text-white inline rounded h-full px-6 mx-3 btn font-medium "
-            onClick={() => setMode("explorer")}
-          >
-            Explorador{" "}
-          </button>
+          <Button onClick={() => setMode("explorer")}>Explorador </Button>
+
           <SearchBar />
           <span className="inline mx-6 px-2 border border-gray-400 rounded h-full flex items-center justify-center">
             {user.displayName}
           </span>
-
-          <button
-            className="bg-gray-500 text-white inline rounded h-full px-6 mx-1 btn font-medium "
-            onClick={() => navigate("/dashboard")}
-          >
-            Dashboard
-          </button>
-
-          <button
-            className="bg-gray-500 text-white inline rounded h-full px-6 mx-1 btn font-medium "
-            onClick={handleLogout}
-          >
-            Sign Out
-          </button>
+          <Button onClick={() => navigate("/dashboard")}>Dashboard </Button>
+          <Button onClick={handleLogout}> Sign Out</Button>
         </div>
       </nav>
     </>

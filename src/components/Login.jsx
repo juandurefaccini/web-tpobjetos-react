@@ -3,13 +3,16 @@ import { useState } from "react";
 import { useAuth } from "../context/authContext";
 import { Link, useNavigate } from "react-router-dom";
 import Alert from "./Alert";
+import { postUser } from "../services/services";
 
 export default function Login() {
+  const { user } = useAuth();
+
   // Manejar el estado del formulario
-  const [user, setUser] = useState({
+  /*   const [user, setUser] = useState({
     email: "",
     password: "",
-  });
+  }); */
 
   const [error, setError] = useState("");
 
@@ -18,10 +21,11 @@ export default function Login() {
 
   const handleGoogleSignIn = async () => {
     await signInWithGoogle();
+    await postUser(user);
     navigate("/home"); // Redireccionar a la pagina home
   };
 
-  const handleChange = ({ target: { name, value } }) => {
+  /*   const handleChange = ({ target: { name, value } }) => {
     // La notacion del parametro significa que yo ya extraigo el propiedad target y de su valor la propiedad name y value
     setUser({ ...user, [name]: value }); // Esto es para copiar los datos que tiene y despues actualizarlos
   };
@@ -36,7 +40,7 @@ export default function Login() {
       setError(e.message);
     }
   };
-
+ */
   return (
     <div className="bg-slate-300 h-full flex flex-col justify-center">
       <div className="container bg-white mx-auto w-auto space-y-2 p-6 rounded">

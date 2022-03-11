@@ -11,7 +11,6 @@ export const FileContextProvider = ({ children }) => {
   useEffect(() => {
     const init = async () => {
       const elem = await getElementoByNombre("root");
-      console.log("elem from context ", elem);
       setSelectedElement(elem);
     };
     init();

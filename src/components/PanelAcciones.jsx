@@ -15,14 +15,6 @@ export default function PanelAcciones() {
         <TrashIcon />
         <span>Borrar</span>
       </ActionButton>
-      {/*     <ActionButton>
-        <CommentIcon />
-        <span>Agregar Comentario</span>
-      </ActionButton>
-      <ActionButton>
-        <CommentIcon />
-        <span>Ver Comentarios</span>
-      </ActionButton> */}
     </div>
   );
 }

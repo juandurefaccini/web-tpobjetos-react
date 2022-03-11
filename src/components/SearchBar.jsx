@@ -25,17 +25,16 @@ export default function SearchBar() {
       )
         return result;
 
-      result.push({ [criteriaType]: criteriaValue }); // Agrega el criterio a la lista
-      return result;
-    }, []);
+      return result + `${criteriaType}&${criteriaValue}`;
+    }, "");
 
     return criteriaList;
   };
 
   const handleSubmit = () => {
-    const criterios = getCriterios();
-
-    if (searchInput) criterios.push({ nombre: searchInput }); // Agrego el texto como criterio
+    const criterios = searchInput.split(" ")
+      ? getCriterios()
+      : getCriterios() + `&nombre&${searchInput}`;
 
     setSearch(criterios);
     setMode("searcher");

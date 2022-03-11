@@ -32,7 +32,6 @@ export function AuthProvider({ children }) {
 
   const signInWithGoogle = () => {
     const googleProvider = new GoogleAuthProvider();
-    console.log("google");
     return signInWithPopup(auth, googleProvider);
   };
 
