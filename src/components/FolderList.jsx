@@ -2,6 +2,8 @@ import React from "react";
 import Folder from "./Folder";
 
 export default function FolderList({ folders, onClickFolder }) {
+  if (folders.length == 0) return <></>;
+
   return (
     <div>
       <h1 className="py-6">Carpetas</h1>

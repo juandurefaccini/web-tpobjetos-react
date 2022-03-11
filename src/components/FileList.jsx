@@ -2,8 +2,9 @@
 import React from "react";
 import File from "./File";
 
-export default function FileList(props) {
-  const { files } = props;
+export default function FileList({ files }) {
+  if (files.length == 0) return <></>;
+
   return (
     <div>
       <h1 className="py-6 ">Archivos</h1>
