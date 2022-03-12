@@ -33,7 +33,7 @@ export default function Header() {
           </Button>
 
           <SearchBar />
-          <span className="inline mx-6 px-2 border border-gray-400 rounded h-full flex items-center justify-center">
+          <span className="inline mx-6 px-2 border border-gray-400 rounded h-full items-center justify-center">
             {user.displayName}
           </span>
           <Button onClick={() => navigate("/dashboard")}>Dashboard </Button>
