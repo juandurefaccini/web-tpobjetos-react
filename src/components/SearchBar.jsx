@@ -6,7 +6,7 @@ import { useFileExplorer } from "../context/fileExplorerContext";
 const reservedWords = ["autor", "tipo", "nombre"];
 
 export default function SearchBar() {
-  const { setSearch, setMode } = useFileExplorer();
+  const { setSearch, setMode, setSelectedElement } = useFileExplorer();
 
   const [searchInput, setSearchInput] = React.useState("");
   const [searchCriteria, setSearchCriteria] = React.useState("");
@@ -35,7 +35,6 @@ export default function SearchBar() {
     const criterios = searchInput.split(" ")
       ? getCriterios()
       : getCriterios() + `&nombre&${searchInput}`;
-
     setSearch(criterios);
     setMode("searcher");
   };

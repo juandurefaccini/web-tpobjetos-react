@@ -27,7 +27,10 @@ export default function Header() {
           <p className="flex-shrink-0 h-full  flex items-center justify-center">
             Gil Drive
           </p>
-          <Button onClick={() => setMode("explorer")}>Explorador </Button>
+          {/* // TODO : Hacer que el explorador nos devuelva el elemento seleccionado */}
+          <Button onClick={() => setMode("explorer")}>
+            Volver al explorador{" "}
+          </Button>
 
           <SearchBar />
           <span className="inline mx-6 px-2 border border-gray-400 rounded h-full flex items-center justify-center">

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
 import { getCommentsByElement } from "../services/services";
 import Button from "./ui/Button";
@@ -9,13 +10,10 @@ export default function Comments({ element, switchMode }) {
   useEffect(() => {
     const loadComments = async () => {
       const comments = await getCommentsByElement(element.nombre);
-      console.log("Comments", comments);
       setComments(comments);
     };
     loadComments();
-  });
-
-  console.log("Comments selectedElement ", comments);
+  }, []);
 
   return (
     <div className="border-l-2 p-10 border-slate-600 h-full ">
