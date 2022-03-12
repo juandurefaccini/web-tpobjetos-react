@@ -93,7 +93,7 @@ export const getComentariosByElemento = async (elementName) => {
       params: {
         idElemento: elementName,
       },
-    }); // TODO : Cambiar por el nombre de la url
+    });
     return res.data;
   } catch (error) {
     console.log(error.message);
@@ -254,7 +254,7 @@ export const getElementoByFilter = async (criteriaParam, carpetaBase) => {
   try {
     const res = await axiosClient.get("/filtro", {
       params: { carpetaBase: carpetaBase, criterios: criteriaParam },
-    }); // TODO : Cambiar por el nombre de la url
+    });
     return res.data;
   } catch (error) {
     console.log(error.message);
@@ -284,7 +284,7 @@ export const postArchivo = async (
       tamanio: tamanio,
       catedra: catedra,
       padre: padre,
-      idUsuario: idUsuario, // TODO : Hace falta pasarlo?
+      idUsuario: idUsuario,
     });
     return res.data;
   } catch (error) {
