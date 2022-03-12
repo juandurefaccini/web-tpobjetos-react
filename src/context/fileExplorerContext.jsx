@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
-import { getElementoByNombre } from "../services/services";
+import { getDirectorioByNombre } from "../services/services";
 
 export const FileExplorerContext = createContext({});
 
@@ -10,7 +10,7 @@ export const FileContextProvider = ({ children }) => {
 
   useEffect(() => {
     const init = async () => {
-      const elem = await getElementoByNombre("root");
+      const elem = await getDirectorioByNombre("root");
       setSelectedElement(elem);
     };
     init();

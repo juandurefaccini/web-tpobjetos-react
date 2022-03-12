@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
-import { getCommentsByElement } from "../services/services";
+import { getComentariosByElemento } from "../services/services";
 import Button from "./ui/Button";
 import Comment from "./Comment";
 
@@ -9,7 +9,7 @@ export default function Comments({ element, switchMode }) {
 
   useEffect(() => {
     const loadComments = async () => {
-      const comments = await getCommentsByElement(element.nombre);
+      const comments = await getComentariosByElemento(element.nombre);
       setComments(comments);
     };
     loadComments();

@@ -1,6 +1,5 @@
 import React from "react";
 import FolderIcon from "../icons/FolderIcon";
-import { useFileExplorer } from "../context/fileExplorerContext";
 
 export default function Folder({ folder, onClickFolder }) {
   return (

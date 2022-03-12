@@ -6,8 +6,6 @@ import PanelAcciones from "./PanelAcciones";
 import Tag from "./Tag";
 
 export default function Detail({ element, switchMode }) {
-  console.log("Detail selectedElement ", element);
-
   if (!element) return <></>;
 
   return (

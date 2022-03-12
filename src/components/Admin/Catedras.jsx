@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { axiosClient } from "../../services/services";
+import { getCatedras } from "../../services/services";
 import Alert from "../Alert";
 import Loading from "../Loading";
 
@@ -9,23 +9,12 @@ export default function Catedras() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axiosClient.get("/catedra");
-        setCatedras(response.data);
-      } catch (err) {
-        if (err.response) {
-          // No esta en el rango 200, respondio algo
-          setError(
-            err.response.data + err.response.status + err.response.headers
-          );
-        } else {
-          setError(err.message);
-        }
-      }
+    const fetchCatedras = async () => {
+      await getCatedras();
     };
 
-    fetchUsers();
+    const res = fetchCatedras();
+    setCatedras(res);
     setLoading(false);
   }, []);
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ElementList from "./ElementList";
-import { getElementoByNombre } from "../services/services";
+import { getDirectorioByNombre } from "../services/services";
 
 function getParentDirectory(elementName) {
   return elementName.split(":").slice(-2)[0];
@@ -13,7 +13,7 @@ export default function Explorer() {
 
   useEffect(() => {
     const init = async () => {
-      const elem = await getElementoByNombre("root");
+      const elem = await getDirectorioByNombre("root");
       setFolder(elem);
     };
     init();
@@ -29,7 +29,7 @@ export default function Explorer() {
           className="border border-gray-400 px-6 py-1 rounded bg-gray-400 text-white"
           onClick={async () => {
             const parentName = getParentDirectory(folder.padre);
-            const parentElem = await getElementoByNombre(parentName);
+            const parentElem = await getDirectorioByNombre(parentName);
             setFolder(parentElem);
           }}
         >
@@ -39,7 +39,7 @@ export default function Explorer() {
       <ElementList
         elements={folder.listaElementos}
         onClickFolder={async (folder) => {
-          const folderElem = await getElementoByNombre(folder);
+          const folderElem = await getDirectorioByNombre(folder);
           setFolder(folderElem);
         }}
       />

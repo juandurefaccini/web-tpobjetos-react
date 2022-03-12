@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Alert from "./Alert";
 import { postUser } from "../services/services";
 
+// TODO : DEJAR BONITO ESTE COMPONENTE
 export default function Login() {
   const { user } = useAuth();
 

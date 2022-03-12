@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Users from "./Users.jsx";
 import Catedras from "./Catedras.jsx";
-import Comentarios from "./Comentarios.jsx";
 
+// TODO : USAR BOTONES COMPONENTES PARA EL DASHBOARD
 export default function DashBoard() {
   // Opcion de panel
   const [option, setOption] = useState(null);
@@ -26,17 +26,10 @@ export default function DashBoard() {
           >
             Catedras
           </button>
-          <button
-            className="px-6 py-2 shadow-sm border border-gray-400"
-            onClick={() => setOption("comentarios")}
-          >
-            Comentarios
-          </button>
         </div>
 
         {option === "usuarios" && <Users />}
         {option === "catedras" && <Catedras />}
-        {option === "comentarios" && <Comentarios />}
       </div>
     </div>
   );
