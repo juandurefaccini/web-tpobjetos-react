@@ -2,6 +2,7 @@ import React from "react";
 import Container from "./Container";
 import SideBar from "./SideBar";
 import Header from "./Header";
+import Footer from "./Footer";
 import { FileContextProvider } from "../context/fileExplorerContext";
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
         <Container />
         <SideBar />
       </div>
+      <Footer />
     </FileContextProvider>
   );
 }
