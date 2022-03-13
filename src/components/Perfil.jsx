@@ -19,33 +19,31 @@ export default function Perfil() {
 
   useEffect(() => {
     if (user) init();
-  }, [user]);
+  }, []);
 
   if (!usuario || !user) return <h1>loading...</h1>;
 
   return (
     <div className="container mx-auto h-screen">
-      <div className="flex flex-col items-center justify-center h-full ">
-        <div className="flex flex-row align-middle justify-center">
-          <div className="h-10 ">
-            <Button onClick={() => navigate("/home")}>
-              <span>Volver al home</span>
-            </Button>
-            <Button
-              onClick={async () => {
-                await deleteUsuario();
-                // TODO : VERIFICAR
-              }}
-            >
-              <span>Eliminar perfil</span>
-            </Button>
-          </div>
-        </div>
+      <div className="flex flex-col items-center justify-center h-full  space-y-1">
         <div className="p-6 border rounded border-gray-600 my-6">
           <p>Mail : {usuario.mail}</p>
           <p>Nombre : {usuario.nombre}</p>
           <p>Puntaje : {usuario.puntaje}</p>
           <p>Admin : {usuario.admin ? "si" : "no"}</p>
+        </div>
+        <div className="space-y-2">
+          <Button onClick={() => navigate("/home")}>
+            <span>Volver al home</span>
+          </Button>
+          <Button
+            onClick={async () => {
+              await deleteUsuario();
+              // TODO : VERIFICAR
+            }}
+          >
+            <span>Eliminar perfil</span>
+          </Button>
         </div>
       </div>
     </div>
