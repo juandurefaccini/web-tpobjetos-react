@@ -1,60 +1,54 @@
 import React, { useEffect, useState } from "react";
-import { getUsuarios } from "../../services/services";
-import Alert from "../Alert";
+import { useServices } from "../../context/servicesContext";
 import Loading from "../Loading";
 
 export default function Users() {
-  const [users, setUsers] = useState([]);
+  const { getUsuarios } = useServices();
+  const [users, setUsers] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchUsers = async () => {
-      await getUsuarios();
-      setLoading(false);
+      const res = await getUsuarios();
+      console.log("data", res);
+      setUsers(res);
     };
+    setLoading(true);
     fetchUsers();
+    setLoading(false);
   }, []);
 
-  if (loading && users.length == 0) {
+  if (!users || loading) {
     return <Loading />;
-  }
-
-  if (error) {
-    return <Alert message={error} />;
   }
 
   return (
     <div>
-      <table className="border border-gray-400">
+      <table className="border border-gray-400 w-full">
         <thead>
           <tr>
-            <th>#</th>
-            <th>Nombre</th>
-            <th>Mail</th>
-            <th>Puntaje</th>
-            <th>Admin</th>
-            <th>Acciones</th>
+            <th className="border border-gray-600">#</th>
+            <th className="border border-gray-600 ">Nombre</th>
+            <th className="border border-gray-600">Mail</th>
+            <th className="border border-gray-600">Puntaje</th>
+            <th className="border border-gray-600">Admin</th>
+            <th className="border border-gray-600">Acciones</th>
           </tr>
         </thead>
         <tbody>
           {users.map((user, index) => (
-            <tr key={index}>
-              <td>{index}</td>
-              <td>{user.nombre}</td>
-              <td>{user.puntaje}</td>
-              <td>{user.mail}</td>
-              <td>{user.admin && <>✅</>}</td>
-              <td>
-                {user.admin ? (
-                  <button className="border border-gray-400 bg-gray-600 text-white p-1 rounded">
-                    Hacer admin
-                  </button>
-                ) : (
-                  <button className="border border-gray-400 bg-gray-600 text-white p-1 rounded">
-                    Sacar admin
-                  </button>
-                )}
+            <tr className="border-t border-gray-600 w-1/12" key={index}>
+              <td className="border border-gray-600 text-center">{index}</td>
+              <td className="border border-gray-600 w-1/4">{user.nombre}</td>
+              <td className="border border-gray-600 w-1/4">{user.mail}</td>
+              <td className="border border-gray-600 text-center w-1/12">
+                {user.puntaje}
+              </td>
+              <td className="border border-gray-600 text-center w-1/12">
+                {user.admin ? <>✅</> : <>❌</>}
+              </td>
+              <td className="border border-gray-600 text-center w-1/6">
+                No hay acciones disponibles
               </td>
             </tr>
           ))}
