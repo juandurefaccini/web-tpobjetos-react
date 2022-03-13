@@ -131,6 +131,20 @@ export function ServicesProvider({ children }) {
     }
   };
 
+  // TODO : IMPLEMENTAR
+  const getComentarioId = async (elementName) => {
+    try {
+      const res = await axiosClient.get("/comentario/lastid", {
+        params: {
+          idElemento: elementName,
+        },
+      });
+      return res.data;
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   const postComentario = async (
     idElemento,
     idComentario,
@@ -427,6 +441,7 @@ export function ServicesProvider({ children }) {
         deleteUsuario,
         getDirectorio,
         getComentario,
+        getComentarioId,
         postComentario,
         putComentario,
         deleteComentario,

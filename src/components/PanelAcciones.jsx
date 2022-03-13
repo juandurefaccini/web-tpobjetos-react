@@ -10,6 +10,9 @@ export default function PanelAcciones({ switchMode }) {
       <ActionButton onClick={() => switchMode("comments")}>
         <span>Ver comentarios</span>
       </ActionButton>
+      <ActionButton onClick={() => switchMode("addComment")}>
+        <span>Agregar comentario</span>
+      </ActionButton>
     </div>
   );
 }
