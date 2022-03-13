@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useEffect } from "react";
 import { useAuth } from "./authContext";
 
 import axios from "axios";
@@ -19,9 +19,13 @@ export const ServicesContext = createContext({});
 export function ServicesProvider({ children }) {
   const { user } = useAuth();
 
-  const username = user ? user.email : "";
-  const password = user ? user.uid : "";
-  const displayName = user ? user.displayName : "";
+  const username = user ? user.email : null;
+  const password = user ? user.uid : null;
+  const displayName = user ? user.displayName : null;
+
+  useEffect(() => {
+    console.log("Refresh usuario");
+  }, [user]);
 
   //
   // Usuario
