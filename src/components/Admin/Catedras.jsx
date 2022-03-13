@@ -23,13 +23,12 @@ export default function Catedras() {
 
   return (
     <div className="space-y-2">
-      <div className="w-1/6 h-10 mx-auto">
-        <Button>Agregar catedra</Button>
+      <div className="flex py-2 space-x-4 border border-b-2 text-center justify-center w-full">
+        <p>Catedras</p>
       </div>
-
+      <Button>Agregar catedra</Button>
       <table className="border border-gray-400 w-full">
         <thead>
-          Catedras
           <tr>
             <th className="border border-gray-600">#</th>
             <th className="border border-gray-600">Nombre</th>
@@ -45,8 +44,9 @@ export default function Catedras() {
               <td className="border border-gray-600 text-center">
                 {catedra.urlPaginaWeb}
               </td>
-              <td>
+              <td className="flex">
                 <Button>✏️</Button>
+                <Button>🗑️</Button>
               </td>
             </tr>
           ))}

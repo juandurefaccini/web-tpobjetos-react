@@ -24,7 +24,7 @@ export default function Explorer() {
 
   return (
     <div className="space-y-1 flex flex-col h-full">
-      <div className="flex h-8 my-4 space-x-6">
+      <div className="flex h-12 my-4 space-x-6">
         <div className="w-48">
           <Button>Agregar carpeta</Button>
         </div>
