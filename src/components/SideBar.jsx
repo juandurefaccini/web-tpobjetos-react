@@ -10,7 +10,7 @@ export default function SideBar() {
   if (
     selectedElement == null ||
     !selectedElement ||
-    selectedElement.tipo === "carpeta"
+    selectedElement.nombre == "root"
   )
     return <></>;
 

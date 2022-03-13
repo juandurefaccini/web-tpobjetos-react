@@ -11,7 +11,7 @@ export default function Detail({ element, switchMode }) {
   return (
     <div className="border-l-2 p-10 border-slate-600 h-full">
       <div className="flex justify-center mb-10">
-        {element.tipo === "archivo" ? <FileIcon /> : <FolderIcon />}
+        {element.tipo === "carpeta" ? <FolderIcon /> : <FileIcon />}
       </div>
       <p className="mb-6 underline"> Descripcion </p>
       <div className="space-y-2">
@@ -33,7 +33,7 @@ export default function Detail({ element, switchMode }) {
             element.fechaModificacion.month +
             element.fechaModificacion.day}
         </p>
-        {element.palabrasClaves.length > 0 && (
+        {element.palabrasClaves != null && element.palabrasClaves.length > 0 && (
           <>
             <p className="mb-4 mt-10 underline">Tags</p>
             <div className="my-6 flex flex-row flex-wrap">
