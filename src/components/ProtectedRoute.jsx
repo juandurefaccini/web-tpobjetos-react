@@ -5,8 +5,6 @@ import React from "react";
 export function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
 
-  console.log(user);
-
   if (loading) return <h1>loading...</h1>; // Si el usuario esta cargando retorna cargando
 
   if (!user) return <Navigate to="/login" />; // Si no esta logueado retorna al login
