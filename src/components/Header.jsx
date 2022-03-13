@@ -6,7 +6,7 @@ import SearchBar from "./SearchBar";
 import Button from "./ui/Button";
 
 export default function Header() {
-  const { setMode } = useFileExplorer();
+  const { setMode, mode } = useFileExplorer();
   const navigate = useNavigate();
 
   const { user, logout } = useAuth();
@@ -27,10 +27,11 @@ export default function Header() {
           <p className="flex-shrink-0 h-full  flex items-center justify-center">
             Gil Drive
           </p>
-          {/* // TODO : Hacer que el explorador nos devuelva el elemento seleccionado */}
-          <Button onClick={() => setMode("explorer")}>
-            Volver al explorador{" "}
-          </Button>
+          {mode != "explorer" && (
+            <Button onClick={() => setMode("explorer")}>
+              Volver al explorador{" "}
+            </Button>
+          )}
 
           <SearchBar />
           <Button onClick={() => navigate("/perfil")}> Mi perfil </Button>
