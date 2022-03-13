@@ -4,9 +4,11 @@ import { useAuth } from "../context/authContext";
 import { Link, useNavigate } from "react-router-dom";
 import Alert from "./Alert";
 import { postUser } from "../services/services";
+import { useServices } from "../context/servicesContext";
 
 // TODO : DEJAR BONITO ESTE COMPONENTE
 export default function Login() {
+  const { postUsuario } = useServices();
   const { user } = useAuth();
 
   // Manejar el estado del formulario
@@ -22,7 +24,7 @@ export default function Login() {
 
   const handleGoogleSignIn = async () => {
     await signInWithGoogle();
-    await postUser(user);
+    await postUsuario();
     navigate("/home"); // Redireccionar a la pagina home
   };
 
