@@ -40,7 +40,7 @@ export function ServicesProvider({ children }) {
     try {
       const res = await axios.get("/usuarios", {
         params: {
-          id: email,
+          idUsuario: email,
         },
       });
       return res.data;
