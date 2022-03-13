@@ -23,7 +23,7 @@ export default function Header() {
   return (
     <>
       <nav className="py-4 border-b-2  border-slate-600">
-        <div className=" px-12 flex flex-row content-center justify-between mx-auto items-center h-10">
+        <div className="px-12 flex flex-row content-center justify-between mx-auto items-center h-10">
           <p className="flex-shrink-0 h-full  flex items-center justify-center">
             Gil Drive
           </p>
@@ -33,9 +33,7 @@ export default function Header() {
           </Button>
 
           <SearchBar />
-          <span className="inline mx-6 px-2 border border-gray-400 rounded h-full items-center justify-center">
-            {user.displayName}
-          </span>
+          <Button onClick={() => navigate("/perfil")}> Mi perfil </Button>
           <Button onClick={() => navigate("/dashboard")}>Dashboard </Button>
           <Button onClick={handleLogout}> Sign Out</Button>
         </div>

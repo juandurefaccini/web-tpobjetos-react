@@ -7,6 +7,7 @@ import DashBoard from "./components/Admin/DashBoard";
 import { AuthProvider } from "./context/authContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { ServicesProvider } from "./context/servicesContext";
+import Perfil from "./components/Perfil";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <ServicesProvider>
           <Routes>
             <Route path="/register" element={<Register />} />
+            <Route path="/perfil" element={<Perfil />} />
             <Route path="/login" element={<Login />} />
             <Route path="*" element={<Navigate to="/login" replace />} />
             <Route
