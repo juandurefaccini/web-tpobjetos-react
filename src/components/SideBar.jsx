@@ -16,7 +16,7 @@ export default function SideBar() {
     return <></>;
 
   return (
-    <div className="w-full">
+    <div className=" shrink-0 w-1/4 h-full secondary">
       {mode === "detail" && (
         <Detail
           element={selectedElement}

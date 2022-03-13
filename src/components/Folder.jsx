@@ -6,12 +6,14 @@ export default function Folder({ folder, onClickFolder }) {
   const { setSelectedElement } = useFileExplorer();
 
   return (
-    <div
-      className="flex flex-row m-6"
-      onDoubleClick={() => onClickFolder(folder.nombre)}
-      onClick={() => setSelectedElement(folder)}
-    >
-      <FolderIcon />
+    <div className="flex flex-row m-6">
+      <div
+        className="cursor-pointer"
+        onDoubleClick={() => onClickFolder(folder.nombre)}
+        onClick={() => setSelectedElement(folder)}
+      >
+        <FolderIcon />
+      </div>
       <p className="h-auto self-center	ml-2 ">{folder.nombre}</p>
     </div>
   );

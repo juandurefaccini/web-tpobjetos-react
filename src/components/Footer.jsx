@@ -19,13 +19,18 @@ export default function Footer() {
     setLoading(false);
   }, []);
 
-  if (!top10 || loading) return <Loading />;
+  if (!top10 || loading)
+    return (
+      <div className="py-1 border-t-2 border-slate-600">
+        <Loading />
+      </div>
+    );
 
   console.log(top10);
 
   return (
     <>
-      <div className="py-1 border-t-2 border-slate-600">
+      <div className="py-1 border-t-2 border-secondary">
         <div className="flex flex-row ml-6 uppercase">
           Top 10 contribuciones ➡️
           <div className="ml-6 space-x-6 flex flex-row justify-around">

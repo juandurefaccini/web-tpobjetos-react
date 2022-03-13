@@ -9,13 +9,15 @@ export default function File(props) {
   const { setSelectedElement } = useFileExplorer();
 
   return (
-    <div
-      className="p-6 m-6"
-      onClick={() => {
-        setSelectedElement(file);
-      }}
-    >
-      <FileIcon />
+    <div className="p-3 m-3 ">
+      <div
+        className="cursor-pointer"
+        onClick={() => {
+          setSelectedElement(file);
+        }}
+      >
+        <FileIcon />
+      </div>
       <p className="my-6">{file.nombre}</p>
     </div>
   );

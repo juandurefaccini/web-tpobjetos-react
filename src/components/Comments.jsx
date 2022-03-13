@@ -16,7 +16,7 @@ export default function Comments({ element, switchMode }) {
   }, []);
 
   return (
-    <div className="border-l-2 p-10 border-slate-600 h-full ">
+    <div className="border-l-2 p-10 w-full  border-secondary h-full ">
       <div className="flex justify-end">
         <Button onClick={() => switchMode("detail")}>X</Button>
       </div>

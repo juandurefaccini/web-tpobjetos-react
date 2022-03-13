@@ -20,10 +20,8 @@ export default function Searcher() {
   const loadElements = async (search, currentDirectoryName) => {
     const criteriaParam = search;
 
-    console.log(criteriaParam, currentDirectoryName);
-
     const res = await getElementoByFilter(criteriaParam, currentDirectoryName);
-    console.log("res :", res);
+
     setSearchOutput(res);
     // Pedir a api los elementos que coincidan con el search
   };

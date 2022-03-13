@@ -22,15 +22,13 @@ export default function Header() {
 
   return (
     <>
-      <nav className="py-4 border-b-2  border-slate-600">
+      <nav className="py-4 border-b-2  border-secondary shrink-0">
         <div className="px-12 flex space-x-5 flex-row content-center justify-between mx-auto items-center h-10">
           <p className="flex-shrink-0 h-full  flex items-center justify-center">
             Gil Drive
           </p>
           {mode != "explorer" && (
-            <Button onClick={() => setMode("explorer")}>
-              Volver al explorador{" "}
-            </Button>
+            <Button onClick={() => setMode("explorer")}>Volver</Button>
           )}
 
           <SearchBar />

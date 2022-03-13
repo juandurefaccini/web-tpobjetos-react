@@ -19,9 +19,11 @@ export default function ElementList({ elements, onClickFolder }) {
   const [files, folders] = elementosClasificados(elements);
 
   return (
-    <div className="space-y-6">
-      <FolderList folders={folders} onClickFolder={onClickFolder} />
-      <FileList files={files} />
+    <div className="w-full h-full ">
+      <div className="space-y-6 grow-0 overflow-auto h-full">
+        <FolderList folders={folders} onClickFolder={onClickFolder} />
+        <FileList files={files} />
+      </div>
     </div>
   );
 }

@@ -9,11 +9,11 @@ export default function Detail({ element, switchMode }) {
   if (!element) return <></>;
 
   return (
-    <div className="border-l-2 p-10 border-slate-600 h-full">
+    <div className="border-l-2 p-10 border-secondary w-full h-full">
       <div className="flex justify-center mb-10">
         {element.tipo === "carpeta" ? <FolderIcon /> : <FileIcon />}
       </div>
-      <p className="mb-6 underline"> Descripcion </p>
+      <p className="mb-6 underline font-bold"> Descripcion </p>
       <div className="space-y-2">
         <p>Nombre : {element.nombre}</p>
         <p>Propietario : {element.propietario.nombre}</p>
@@ -35,7 +35,7 @@ export default function Detail({ element, switchMode }) {
         </p>
         {element.palabrasClaves != null && element.palabrasClaves.length > 0 && (
           <>
-            <p className="mb-4 mt-10 underline">Tags</p>
+            <p className="mb-4 mt-10 underline font-bold">Tags</p>
             <div className="my-6 flex flex-row flex-wrap">
               {element.palabrasClaves.map((tag, index) => {
                 return <Tag key={index} tag={tag} />;
@@ -44,7 +44,7 @@ export default function Detail({ element, switchMode }) {
           </>
         )}
       </div>
-      <p className="mt-10 mb-6 underline">Acciones</p>
+      <p className="mt-10 mb-6 underline font-bold">Acciones</p>
       <PanelAcciones switchMode={switchMode} />
     </div>
   );
