@@ -59,7 +59,7 @@ export function ServicesProvider({ children }) {
       const res = await axiosClient.post(
         "/usuarios",
         {
-          nombre: username,
+          nombre: displayName,
           puntaje: 0,
         },
         {
