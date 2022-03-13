@@ -19,7 +19,7 @@ export default function Footer() {
     setLoading(false);
   }, []);
 
-  if (!top10) return <Loading />;
+  if (!top10 || loading) return <Loading />;
 
   console.log(top10);
 
