@@ -33,7 +33,7 @@ export function ServicesProvider({ children }) {
 
   const getUsuarios = async () => {
     try {
-      const res = await axios.get("/usuarios");
+      const res = await axiosClient.get("/usuarios");
       return res.data;
     } catch (error) {
       console.log(error.message);
@@ -42,7 +42,7 @@ export function ServicesProvider({ children }) {
 
   const getUsuario = async (email) => {
     try {
-      const res = await axios.get("/usuarios", {
+      const res = await axiosClient.get("/usuarios", {
         params: {
           idUsuario: email,
         },
@@ -94,7 +94,7 @@ export function ServicesProvider({ children }) {
 
   const getUsuariosTop10 = async () => {
     try {
-      const res = await axios.get("/usuarios/top");
+      const res = await axiosClient.get("/usuarios/top");
       return res.data;
     } catch (error) {
       console.log(error.message);
@@ -198,7 +198,7 @@ export function ServicesProvider({ children }) {
 
   const getCatedras = async () => {
     try {
-      const res = await axios.get("/catedra");
+      const res = await axiosClient.get("/catedra");
       return res.data;
     } catch (error) {
       console.log(error.message);
@@ -207,7 +207,7 @@ export function ServicesProvider({ children }) {
 
   const getCatedra = async (idCatedra) => {
     try {
-      const res = await axios.get("/catedra", {
+      const res = await axiosClient.get("/catedra", {
         params: {
           idCatedra: idCatedra,
         },
@@ -220,7 +220,7 @@ export function ServicesProvider({ children }) {
 
   const postCatedra = async (idCatedra, url) => {
     try {
-      const res = await axios.post(
+      const res = await axiosClient.post(
         "/catedra",
         {
           idCatedra: idCatedra,
@@ -241,7 +241,7 @@ export function ServicesProvider({ children }) {
 
   const putCatedra = async (idCatedra, url) => {
     try {
-      const res = await axios.put(
+      const res = await axiosClient.put(
         "/catedra",
         {
           idCatedra: idCatedra,
@@ -263,7 +263,7 @@ export function ServicesProvider({ children }) {
   // TODO : REVISAR
   const deleteCatedra = async (idCatedra) => {
     try {
-      const res = await axios.delete("/catedra", {
+      const res = await axiosClient.delete("/catedra", {
         params: {
           idCatedra: idCatedra,
         },
@@ -292,7 +292,7 @@ export function ServicesProvider({ children }) {
     padre
   ) => {
     try {
-      const res = await axios.post(
+      const res = await axiosClient.post(
         "/carpeta",
         {
           nombre: nombre,
@@ -318,7 +318,7 @@ export function ServicesProvider({ children }) {
   // TODO : REVISAR
   const deleteCarpeta = async (nombre) => {
     try {
-      const res = await axios.delete(
+      const res = await axiosClient.delete(
         "/carpeta",
         {
           params: {
@@ -369,7 +369,7 @@ export function ServicesProvider({ children }) {
     idUsuario
   ) => {
     try {
-      const res = await axios.post(
+      const res = await axiosClient.post(
         "/archivo",
         {
           nombre: nombre,
@@ -397,7 +397,7 @@ export function ServicesProvider({ children }) {
   // TODO : REVISAR
   const deleteArchivo = async (nombre) => {
     try {
-      const res = await axios.delete(
+      const res = await axiosClient.delete(
         "/archivo",
         {
           params: {
