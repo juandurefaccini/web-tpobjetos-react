@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Detail from "./Detail";
 import Comments from "./Comments";
+import AddComment from "./AddComment";
 import { useFileExplorer } from "../context/fileExplorerContext";
 
 export default function SideBar() {
@@ -24,6 +25,12 @@ export default function SideBar() {
       )}
       {mode === "comments" && (
         <Comments
+          element={selectedElement}
+          switchMode={(mode) => SetMode(mode)}
+        />
+      )}
+      {mode === "addComment" && (
+        <AddComment
           element={selectedElement}
           switchMode={(mode) => SetMode(mode)}
         />
