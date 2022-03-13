@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import Users from "./Users.jsx";
 import Catedras from "./Catedras.jsx";
-import Ranking from "./Ranking.jsx";
 import { useNavigate } from "react-router-dom";
 import Button from "../ui/Button.jsx";
 

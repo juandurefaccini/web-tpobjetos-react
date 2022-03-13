@@ -9,7 +9,7 @@ export default function Header() {
   const { setMode, mode } = useFileExplorer();
   const navigate = useNavigate();
 
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
 
   const handleLogout = async () => {
     try {
