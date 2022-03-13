@@ -28,7 +28,8 @@ export default function Searcher() {
     // Pedir a api los elementos que coincidan con el search
   };
 
-  if (searchOutput == undefined || searchOutput.length === 0) return <></>;
+  if (searchOutput == undefined || searchOutput.length === 0)
+    return <>No hay resultados</>;
 
   return <FileList files={searchOutput} />;
 }

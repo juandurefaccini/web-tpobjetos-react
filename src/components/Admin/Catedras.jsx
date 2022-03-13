@@ -29,6 +29,7 @@ export default function Catedras() {
 
       <table className="border border-gray-400 w-full">
         <thead>
+          Catedras
           <tr>
             <th className="border border-gray-600">#</th>
             <th className="border border-gray-600">Nombre</th>

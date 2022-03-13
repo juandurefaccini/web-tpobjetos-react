@@ -11,16 +11,16 @@ export default function DashBoard() {
 
   return (
     <div className="container mx-auto h-screen ">
-      <div className="flex flex-col items-center justify-center h-full  w-full mx-auto space-y-5 bg-red-500">
+      <div className="flex flex-col items-center justify-center h-full  w-full mx-auto space-y-5 ">
         <div className="h-10 w-auto">
           <Button onClick={() => navigate("/home")}> Volver al home</Button>
         </div>
 
-        <div className="bg-green-500 w-full flex ">
-          <div className="w-1/2 bg-blue-500">
+        <div className="space-x-4 w-full flex ">
+          <div className="w-1/2 ">
             <Users />
           </div>
-          <div className="w-1/2 bg-purple-500">
+          <div className="w-1/2 border border-gray-500">
             <Catedras />
           </div>
         </div>

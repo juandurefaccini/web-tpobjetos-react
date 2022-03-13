@@ -26,6 +26,7 @@ export default function Users() {
     <div>
       <table className="border border-gray-400 w-full">
         <thead>
+          Usuarios
           <tr>
             <th className="border border-gray-600">#</th>
             <th className="border border-gray-600 ">Nombre</th>
