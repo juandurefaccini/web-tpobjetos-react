@@ -15,7 +15,7 @@ export default function Searcher() {
     const elem = selectedElement;
     const parentElem = getParentDirectory(elem.padre);
     loadElements(search, parentElem);
-  }, []);
+  }, [search]);
 
   const loadElements = async (search, currentDirectoryName) => {
     const criteriaParam = search;
