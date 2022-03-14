@@ -33,7 +33,6 @@ export default function Users() {
             <th className="border border-gray-600">Mail</th>
             <th className="border border-gray-600">Puntaje</th>
             <th className="border border-gray-600">Admin</th>
-            <th className="border border-gray-600">Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -47,9 +46,6 @@ export default function Users() {
               </td>
               <td className="border border-gray-600 text-center w-1/12">
                 {user.admin ? <>✅</> : <>❌</>}
-              </td>
-              <td className="border border-gray-600 text-center w-1/6">
-                No hay acciones disponibles
               </td>
             </tr>
           ))}

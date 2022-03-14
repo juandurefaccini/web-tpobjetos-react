@@ -21,6 +21,8 @@ export default function Perfil() {
     if (user) init();
   }, []);
 
+  console.log("usuario", usuario);
+
   if (!usuario || !user) return <h1>loading...</h1>;
 
   return (

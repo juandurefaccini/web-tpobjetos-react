@@ -47,6 +47,7 @@ export function ServicesProvider({ children }) {
           idUsuario: email,
         },
       });
+      console.log("usuario api", res.data);
       return res.data;
     } catch (error) {
       console.log(error.message);
@@ -158,6 +159,7 @@ export function ServicesProvider({ children }) {
         contenido: contenido,
         idUsuario: idUsuario,
       });
+      console.log(res);
       return res.data;
     } catch (error) {
       console.log(error.message);
