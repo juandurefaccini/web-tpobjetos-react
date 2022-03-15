@@ -228,19 +228,19 @@ export function ServicesProvider({ children }) {
           idCatedra: idCatedra,
         },
       });
-      return res.data;
+      return res.data[0];
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  const postCatedra = async (idCatedra, url) => {
+  const postCatedra = async (catedra) => {
     try {
       const res = await axiosClient.post(
         "/catedra",
         {
-          idCatedra: idCatedra,
-          url: url,
+          idCatedra: catedra.idCatedra,
+          url: catedra.url,
         },
         {
           auth: {

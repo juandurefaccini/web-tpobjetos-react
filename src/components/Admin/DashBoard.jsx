@@ -1,7 +1,5 @@
 import React from "react";
-import Users from "./Users.jsx";
-import Catedras from "./Catedras.jsx";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 import Button from "../ui/Button.jsx";
 
 // TODO : USAR BOTONES COMPONENTES PARA EL DASHBOARD
@@ -10,19 +8,15 @@ export default function DashBoard() {
 
   return (
     <div className="container mx-auto h-screen ">
-      <div className="flex flex-col items-center justify-center h-full  w-full mx-auto space-y-5 ">
-        <div className="h-10 w-auto">
-          <Button onClick={() => navigate("/home")}> Volver al home</Button>
-        </div>
-
-        <div className="space-x-4 w-full flex ">
-          <div className="w-1/2 ">
-            <Users />
-          </div>
-          <div className="w-1/2 border border-gray-500">
-            <Catedras />
-          </div>
-        </div>
+      <div>
+        <Button onClick={() => navigate("/home")}> Volver al home</Button>
+        <Button onClick={() => navigate("/dashboard/catedras")}>
+          Catedras
+        </Button>
+        <Button onClick={() => navigate("catedras")}> Usuarios</Button>
+      </div>
+      <div className="flex flex-col items-center justify-center h-full w-full">
+        <Outlet />
       </div>
     </div>
   );
