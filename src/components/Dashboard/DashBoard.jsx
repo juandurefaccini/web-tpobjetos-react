@@ -10,10 +10,8 @@ export default function DashBoard() {
     <div className="container mx-auto h-screen ">
       <div>
         <Button onClick={() => navigate("/home")}> Volver al home</Button>
-        <Button onClick={() => navigate("/dashboard/catedras")}>
-          Catedras
-        </Button>
-        <Button onClick={() => navigate("catedras")}> Usuarios</Button>
+        <Button onClick={() => navigate("catedras")}>Catedras</Button>
+        <Button onClick={() => navigate("usuarios")}> Usuarios</Button>
       </div>
       <div className="flex flex-col items-center justify-center h-full w-full">
         <Outlet />

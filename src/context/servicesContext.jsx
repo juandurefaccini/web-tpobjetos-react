@@ -34,6 +34,7 @@ export function ServicesProvider({ children }) {
   const getUsuarios = async () => {
     try {
       const res = await axiosClient.get("/usuarios");
+      console.log("res : ", res);
       return res.data;
     } catch (error) {
       console.log(error.message);
