@@ -31,13 +31,12 @@ export default function Index() {
   return (
     <div className="container mx-auto p-6 border">
       <div className="space-y-2">
-        <div className="flex py-2 space-x-4 border border-b-2 text-center justify-center w-full">
-          <p>Catedras</p>
-        </div>
-        <div className="flex px-64 mx-6">
+        <p>Acciones </p>
+        <div className="flex ">
           <Button onClick={() => navigate("new")}>Agregar catedra</Button>
           <Button onClick={() => navigate("/home")}>Volver al home</Button>
         </div>
+        <p>Tabla</p>
         <table className="border border-gray-400 w-full">
           <thead>
             <tr>
