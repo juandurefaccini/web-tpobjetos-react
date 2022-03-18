@@ -17,7 +17,7 @@ export default function AddComment({ switchMode, element }) {
   };
 
   return (
-    <div className="border-l-2 p-10 border-secondary h-full w-full space-y-6 ">
+    <div>
       <div className="flex w-1/6 ">
         <Button onClick={() => switchMode("detail")}>X</Button>
       </div>

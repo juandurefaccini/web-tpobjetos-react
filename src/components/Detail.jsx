@@ -9,7 +9,7 @@ export default function Detail({ element, switchMode }) {
   if (!element) return <></>;
 
   return (
-    <div className="border-l-2 p-10 border-secondary w-full h-full">
+    <div>
       <div className="flex justify-center mb-10">
         {element.tipo === "carpeta" ? <FolderIcon /> : <FileIcon />}
       </div>
