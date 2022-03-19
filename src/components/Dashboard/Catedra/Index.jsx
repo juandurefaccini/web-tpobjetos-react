@@ -12,7 +12,7 @@ export default function Index() {
 
   const handleDelete = (id) => {
     deleteCatedra(id);
-    setCatedras(catedras.filter((catedra) => catedra.idCatedra !== id));
+    setCatedras(catedras.filter((catedra) => catedra.nombre != id));
   };
 
   useEffect(() => {

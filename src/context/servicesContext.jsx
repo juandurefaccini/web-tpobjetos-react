@@ -57,6 +57,7 @@ export function ServicesProvider({ children }) {
 
   // TODO : REVISAR
   const postUsuario = async () => {
+    console.log("postUsuario : ", displayName, username, password);
     try {
       const res = await axiosClient.post(
         "/usuarios",
@@ -107,9 +108,19 @@ export function ServicesProvider({ children }) {
   // DIRECTORIO
   //
 
+  const getDirectorioBase = async () => {
+    const name = ":root";
+    try {
+      const res = await axiosClient.get(`/directorio?pathCarpetaBase=${name}`);
+      return res.data;
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   const getDirectorio = async (name) => {
     try {
-      const res = await axiosClient.get(`/directorio?carpetaBase=${name}`);
+      const res = await axiosClient.get(`/directorio?pathCarpetaBase=${name}`);
       return res.data;
     } catch (error) {
       console.log(error.message);
@@ -257,6 +268,7 @@ export function ServicesProvider({ children }) {
   };
 
   const putCatedra = async (idCatedra, url) => {
+    console.log("putCatedra :", idCatedra, url);
     try {
       const res = await axiosClient.put(
         "/catedra",
@@ -279,6 +291,7 @@ export function ServicesProvider({ children }) {
 
   // TODO : REVISAR
   const deleteCatedra = async (idCatedra) => {
+    console.log("deleteCatedra :", idCatedra);
     try {
       const res = await axiosClient.delete("/catedra", {
         params: {
@@ -443,6 +456,7 @@ export function ServicesProvider({ children }) {
         postUsuario,
         deleteUsuario,
         getDirectorio,
+        getDirectorioBase,
         getComentario,
         getComentarioId,
         postComentario,
