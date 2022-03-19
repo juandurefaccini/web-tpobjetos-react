@@ -5,7 +5,7 @@ import FileList from "./FileList";
 function elementosClasificados(elements) {
   const [carpetas, archivos] = elements.reduce(
     (result, e) => {
-      result[e.tipo === "carpeta" ? 0 : 1].push(e); // 0: archivos, 1: carpetas - Si el tipo es carpeta lo agrega a la lista de carpetas, sino a la lista de archivos
+      result[e.listaElementos != null ? 0 : 1].push(e); // 0: archivos, 1: carpetas - Si el tipo es carpeta lo agrega a la lista de carpetas, sino a la lista de archivos
       return result;
     },
     [[], []] // Inicializamos el resultado

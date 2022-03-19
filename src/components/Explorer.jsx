@@ -43,7 +43,9 @@ export default function Explorer() {
 
       <div className="w-full h-6 flex">
         Ruta actual:
-        <p className="ml-6"> {folder.path.trim()}</p>
+        <p className="ml-6">
+          {folder.path.trim() + ":" + folder.nombre.trim()}
+        </p>
       </div>
 
       <div className="w-48 h-6">

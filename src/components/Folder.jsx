@@ -9,7 +9,7 @@ export default function Folder({ folder, onClickFolder }) {
     <div className="flex flex-row m-6">
       <div
         className="cursor-pointer"
-        onDoubleClick={() => onClickFolder(folder.nombre)}
+        onDoubleClick={() => onClickFolder(folder.path + ":" + folder.nombre)}
         onClick={() => setSelectedElement(folder)}
       >
         <FolderIcon />
