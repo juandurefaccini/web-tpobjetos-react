@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useAuth } from "../context/authContext";
 import { Link, useNavigate } from "react-router-dom";
 import Alert from "./Alert";
-import { postUser } from "../services/services";
 import { useServices } from "../context/servicesContext";
 
 // TODO : DEJAR BONITO ESTE COMPONENTE

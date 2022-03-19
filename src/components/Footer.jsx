@@ -26,8 +26,6 @@ export default function Footer() {
       </div>
     );
 
-  console.log(top10);
-
   return (
     <>
       <div className="py-1 border-t-2 border-secondary">

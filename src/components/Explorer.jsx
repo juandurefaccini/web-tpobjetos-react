@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ElementList from "./ElementList";
 import Button from "./ui/Button";
-import { getDirectorioByNombre } from "../services/services";
+
+import { useServices } from "../context/servicesContext";
 
 function getParentDirectory(elementName) {
   return elementName.split(":").slice(-2)[0];
@@ -9,16 +10,23 @@ function getParentDirectory(elementName) {
 
 // COMPONENTE PRINCIPAL
 export default function Explorer() {
-  // HOOKS
+  const { getDirectorioBase, getDirectorio } = useServices();
+
   const [folder, setFolder] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const init = async () => {
-      const elem = await getDirectorioByNombre("root");
+      setLoading(true);
+      const elem = await getDirectorioBase();
       setFolder(elem);
+      setLoading(false);
     };
     init();
   }, []);
+
+  if (loading)
+    return <div className="w-full h-full justify-center">Loading</div>;
 
   if (!folder) return <></>;
 
@@ -35,7 +43,7 @@ export default function Explorer() {
 
       <div className="w-full h-6 flex">
         Ruta actual:
-        <p className="ml-6"> {folder.padre.trim()}</p>
+        <p className="ml-6"> {folder.path.trim()}</p>
       </div>
 
       <div className="w-48 h-6">
@@ -43,7 +51,7 @@ export default function Explorer() {
           <Button
             onClick={async () => {
               const parentName = getParentDirectory(folder.padre);
-              const parentElem = await getDirectorioByNombre(parentName);
+              const parentElem = await getDirectorio(parentName);
               setFolder(parentElem);
             }}
           >
@@ -56,7 +64,7 @@ export default function Explorer() {
         <ElementList
           elements={folder.listaElementos}
           onClickFolder={async (folder) => {
-            const folderElem = await getDirectorioByNombre(folder);
+            const folderElem = await getDirectorio(folder);
             setFolder(folderElem);
           }}
         />

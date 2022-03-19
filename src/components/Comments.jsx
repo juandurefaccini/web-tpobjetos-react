@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
-import { getComentariosByElemento } from "../services/services";
 import Button from "./ui/Button";
 import Comment from "./Comment";
+import { useServices } from "../context/servicesContext";
 
 export default function Comments({ element, switchMode }) {
+  const getComentariosByElemento = useServices();
   const [comments, setComments] = React.useState([]);
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useFileExplorer } from "../context/fileExplorerContext";
-import { getElementoByFilter } from "../services/services";
+import { useServices } from "../context/servicesContext";
 import FileList from "./FileList";
 
 function getParentDirectory(elementName) {
@@ -8,6 +8,7 @@ function getParentDirectory(elementName) {
 }
 
 export default function Searcher() {
+  const getArchivoFiltro = useServices();
   const { search, selectedElement } = useFileExplorer();
   const [searchOutput, setSearchOutput] = React.useState([]);
 
@@ -20,7 +21,7 @@ export default function Searcher() {
   const loadElements = async (search, currentDirectoryName) => {
     const criteriaParam = search;
 
-    const res = await getElementoByFilter(criteriaParam, currentDirectoryName);
+    const res = await getArchivoFiltro(criteriaParam, currentDirectoryName);
 
     setSearchOutput(res);
     // Pedir a api los elementos que coincidan con el search
