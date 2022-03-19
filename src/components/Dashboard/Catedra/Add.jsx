@@ -26,8 +26,7 @@ export default function Add() {
         idCatedra: values.nombre,
         url: values.web,
       };
-      postCatedra(catedra);
-      navigate(-1);
+      postCatedra(catedra).then(() => navigate(-1));
     },
   });
 

@@ -36,8 +36,7 @@ export default function Edit() {
         idCatedra: values.nombre,
         url: values.web,
       };
-      putCatedra(catedra);
-      navigate(-1);
+      putCatedra(catedra).then(() => navigate(-1));
     },
   });
 

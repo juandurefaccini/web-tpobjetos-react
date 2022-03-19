@@ -11,8 +11,9 @@ export default function Index() {
   const [loading, setLoading] = useState(false);
 
   const handleDelete = (id) => {
-    deleteCatedra(id);
-    setCatedras(catedras.filter((catedra) => catedra.nombre != id));
+    deleteCatedra(id).then(() =>
+      setCatedras(catedras.filter((catedra) => catedra.nombre != id))
+    );
   };
 
   useEffect(() => {
@@ -27,6 +28,8 @@ export default function Index() {
   }, []);
 
   if (!catedras || loading) return <Loading />;
+
+  console.log(catedras);
 
   return (
     <div className="container mx-auto p-6 border">

@@ -267,14 +267,13 @@ export function ServicesProvider({ children }) {
     }
   };
 
-  const putCatedra = async (idCatedra, url) => {
-    console.log("putCatedra :", idCatedra, url);
+  const putCatedra = async (catedra) => {
     try {
       const res = await axiosClient.put(
         "/catedra",
         {
-          idCatedra: idCatedra,
-          url: url,
+          idCatedra: catedra.idCatedra,
+          url: catedra.url,
         },
         {
           auth: {
