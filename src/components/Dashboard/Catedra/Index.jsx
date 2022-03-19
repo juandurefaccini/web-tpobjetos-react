@@ -37,7 +37,6 @@ export default function Index() {
         <p>Acciones </p>
         <div className="flex ">
           <Button onClick={() => navigate("new")}>Agregar catedra</Button>
-          <Button onClick={() => navigate("/home")}>Volver al home</Button>
         </div>
         <p>Tabla</p>
         <table className="border border-gray-400 w-full">
