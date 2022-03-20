@@ -23,10 +23,10 @@ export default function FileUploadForm({ path, setShowContent }) {
     },
     onSubmit: (values) => {
       const requestObject = {
-        nombre: values.nombre,
-        path: values.path,
+        nombre: values.nombre.trim(),
+        path: values.path.trim(),
         palabraclave: values.palabrasClave,
-        catedra: values.catedra,
+        catedra: values.catedra.trim(),
       };
       const stringifuedRequest = JSON.stringify(requestObject);
       postArchivo(values.data, stringifuedRequest);

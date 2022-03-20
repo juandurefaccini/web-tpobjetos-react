@@ -4,6 +4,7 @@ import Button from "../ui/Button";
 
 import { useServices } from "../../context/servicesContext";
 import ExplorerActions from "./ExplorerActions";
+import ElementHierarchy from "./ElementHierarchy";
 
 function breadthFirstSearch(tree) {
   const result = [];
@@ -48,46 +49,35 @@ export default function Explorer() {
 
   if (!fileHierarchy) return <></>;
 
-  console.log("Explorer", currentDirectory);
-
   return (
-    <div className="space-y-1 flex flex-col h-full w-full overflow-y-auto">
-      <div className="w-full">
-        <ExplorerActions
-          path={currentDirectory.path + ":" + currentDirectory.nombre}
+    <div className="flex flex-row w-full space-x-6">
+      <div className="w-1/4 h-full">
+        <ElementHierarchy
+          hierarchy={fileHierarchy}
+          setCurrentDirectory={setCurrentDirectory}
         />
       </div>
+      <div className="space-y-1 flex flex-col h-full w-full overflow-y-auto">
+        <div className="w-full">
+          <ExplorerActions
+            path={currentDirectory.path + ":" + currentDirectory.nombre}
+          />
+        </div>
+        <div className="w-full h-6 flex ">
+          Ruta actual:
+          <p className="ml-6">
+            {currentDirectory.path + ":" + currentDirectory.nombre}
+          </p>
+        </div>
 
-      <div className="w-full h-6 flex ">
-        Ruta actual:
-        <p className="ml-6">
-          {currentDirectory.path + ":" + currentDirectory.nombre}
-        </p>
-      </div>
-
-      <div className="w-48 h-6">
-        {fileHierarchy != currentDirectory && (
-          <Button
-            onClick={async () => {
-              const parentDirectory = getParentDirectory(
-                fileHierarchy,
-                currentDirectory.path
-              );
-              setCurrentDirectory(parentDirectory);
+        <div className="h-full">
+          <ElementList
+            elements={currentDirectory.listaElementos}
+            onClickFolder={async (folder) => {
+              setCurrentDirectory(folder);
             }}
-          >
-            Volver
-          </Button>
-        )}
-      </div>
-
-      <div className="h-full">
-        <ElementList
-          elements={currentDirectory.listaElementos}
-          onClickFolder={async (folder) => {
-            setCurrentDirectory(folder);
-          }}
-        />
+          />
+        </div>
       </div>
     </div>
   );
