@@ -1,10 +1,10 @@
 import React from "react";
 
-export default function ElementHierarchy({ hierarchy, setCurrentDirectory }) {
-  const getTreeShift = (path) => {
-    return path.split(":").length;
-  };
-
+export default function ElementHierarchy({
+  hierarchy,
+  setCurrentDirectory,
+  currentDirectory,
+}) {
   const handleClick = (element) => {
     if (element.listaElementos) setCurrentDirectory(element);
   };
@@ -17,6 +17,7 @@ export default function ElementHierarchy({ hierarchy, setCurrentDirectory }) {
           onClick={() => handleClick(element)}
         >
           {element.nombre}
+          {currentDirectory.nombre == element.nombre && <>◄</>}
         </div>
         {element.listaElementos &&
           element.listaElementos.map((element) => renderElement(element))}

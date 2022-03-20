@@ -55,6 +55,7 @@ export default function Explorer() {
         <ElementHierarchy
           hierarchy={fileHierarchy}
           setCurrentDirectory={setCurrentDirectory}
+          currentDirectory={currentDirectory}
         />
       </div>
       <div className="space-y-1 flex flex-col h-full w-full overflow-y-auto">
