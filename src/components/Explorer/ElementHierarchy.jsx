@@ -20,7 +20,9 @@ export default function ElementHierarchy({
           {currentDirectory.nombre == element.nombre && <>◄</>}
         </div>
         {element.listaElementos &&
-          element.listaElementos.map((element) => renderElement(element))}
+          element.listaElementos.map((element) => (
+            <div key={element.nombre}>{renderElement(element)}</div>
+          ))}
       </div>
     );
   };

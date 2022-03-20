@@ -1,19 +1,13 @@
 import React, { useState } from "react";
 import { useServices } from "../context/servicesContext";
-import { useAuth } from "../context/authContext";
 import Button from "./ui/Button";
 
 export default function AddComment({ switchMode, element }) {
-  const { user } = useAuth();
-  const { postComentario, getComentarioId } = useServices();
+  const { postComentario } = useServices();
   const [value, SetValue] = useState(null);
   const handleSubmit = () => {
-    const handlePostComentario = async () => {
-      const comentarioId = await getComentarioId();
-      await postComentario(element.nombre, comentarioId, value, user.email);
-      switchMode("detail");
-    };
-    handlePostComentario();
+    const elementPath = element.path + ":" + element.nombre;
+    postComentario(elementPath, value).then(switchMode("detail"));
   };
 
   return (

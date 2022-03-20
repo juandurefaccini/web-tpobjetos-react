@@ -1,32 +1,37 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./ui/Button";
 import Comment from "./Comment";
 import { useServices } from "../context/servicesContext";
 
 export default function Comments({ element, switchMode }) {
-  const getComentariosByElemento = useServices();
-  const [comments, setComments] = React.useState([]);
+  const { getComentario } = useServices();
+  const [comments, setComments] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadComments = async () => {
-      const comments = await getComentariosByElemento(element.nombre);
-      setComments(comments);
-    };
-    loadComments();
+    setLoading(true);
+    getComentario(element).then((res) => {
+      setComments(res);
+      setLoading(false);
+    });
   }, []);
+
+  if (loading) return <h1>Loading..</h1>;
 
   return (
     <div>
       <div className="flex justify-end">
         <Button onClick={() => switchMode("detail")}>X</Button>
       </div>
-      {comments.length === 0 && <h1>No hay comentarios</h1>}
       <div className="space-y-4 mt-3">
-        {comments.length > 0 &&
+        {comments.length == 0 ? (
+          <h1>No hay comentarios</h1>
+        ) : (
           comments.map((comment) => (
             <Comment key={comment.id} comment={comment} />
-          ))}
+          ))
+        )}
       </div>
     </div>
   );

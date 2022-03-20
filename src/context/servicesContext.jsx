@@ -23,9 +23,7 @@ export function ServicesProvider({ children }) {
   const password = user ? user.uid : null;
   const displayName = user ? user.displayName : null;
 
-  useEffect(() => {
-    console.log("Refresh usuario");
-  }, [user]);
+  useEffect(() => {}, [user]);
 
   //
   // Usuario
@@ -131,11 +129,13 @@ export function ServicesProvider({ children }) {
   // COMENTARIO
   //
 
-  const getComentario = async (elementName) => {
+  const getComentario = async (element) => {
+    const pathElemento = element.path + ":" + element.nombre;
+    console.log(pathElemento);
     try {
       const res = await axiosClient.get("/comentario", {
         params: {
-          idElemento: elementName,
+          pathElemento: pathElemento,
         },
       });
       return res.data;
@@ -144,33 +144,21 @@ export function ServicesProvider({ children }) {
     }
   };
 
-  // TODO : IMPLEMENTAR
-  const getComentarioId = async (elementName) => {
+  const postComentario = async (elementPath, contenido) => {
     try {
-      const res = await axiosClient.get("/comentario/lastid", {
-        params: {
-          idElemento: elementName,
+      const res = await axiosClient.post(
+        "/comentario",
+        {
+          pathElemento: elementPath,
+          contenido: contenido,
         },
-      });
-      return res.data;
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  const postComentario = async (
-    idElemento,
-    idComentario,
-    contenido,
-    idUsuario
-  ) => {
-    try {
-      const res = await axiosClient.post("/comentario", {
-        idElemento: idElemento,
-        idComentario: idComentario,
-        contenido: contenido,
-        idUsuario: idUsuario,
-      });
+        {
+          auth: {
+            username: username,
+            password: password,
+          },
+        }
+      );
       console.log(res);
       return res.data;
     } catch (error) {
@@ -432,7 +420,6 @@ export function ServicesProvider({ children }) {
         getDirectorio,
         getDirectorioBase,
         getComentario,
-        getComentarioId,
         postComentario,
         putComentario,
         deleteComentario,

@@ -25,7 +25,7 @@ export default function FileUploadForm({ path, setShowContent }) {
       const requestObject = {
         nombre: values.nombre.trim(),
         path: values.path.trim(),
-        palabraclave: values.palabrasClave,
+        palabrasclave: values.palabrasClave,
         catedra: values.catedra.trim(),
       };
       const stringifuedRequest = JSON.stringify(requestObject);
