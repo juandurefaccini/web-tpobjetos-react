@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import FileIcon from "../icons/FileIcon";
-import { useFileExplorer } from "../context/fileExplorerContext";
+import FileIcon from "../../icons/FileIcon";
+import { useFileExplorer } from "../../context/fileExplorerContext";
 
 export default function File(props) {
   const { file } = props;

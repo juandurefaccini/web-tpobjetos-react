@@ -1,6 +1,6 @@
 import React from "react";
 import { useFileExplorer } from "../context/fileExplorerContext";
-import Explorer from "./Explorer";
+import Explorer from "./Explorer/Explorer";
 import Searcher from "./Searcher";
 
 export default function Container() {

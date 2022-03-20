@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useFileExplorer } from "../context/fileExplorerContext";
 import { useServices } from "../context/servicesContext";
-import FileList from "./FileList";
+import FileList from "./Explorer/FileList";
 
 function getParentDirectory(elementName) {
   return elementName.split(":").slice(-2)[0];

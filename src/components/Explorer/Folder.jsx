@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
-import FolderIcon from "../icons/FolderIcon";
-import { useFileExplorer } from "../context/fileExplorerContext";
+import React from "react";
+import FolderIcon from "../../icons/FolderIcon";
+import { useFileExplorer } from "../../context/fileExplorerContext";
 
 export default function Folder({ folder, onClickFolder }) {
   const { setSelectedElement } = useFileExplorer();
@@ -9,7 +9,7 @@ export default function Folder({ folder, onClickFolder }) {
     <div className="flex flex-row m-6">
       <div
         className="cursor-pointer"
-        onDoubleClick={() => onClickFolder(folder.path + ":" + folder.nombre)}
+        onDoubleClick={() => onClickFolder(folder)}
         onClick={() => setSelectedElement(folder)}
       >
         <FolderIcon />
