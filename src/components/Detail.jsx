@@ -8,19 +8,24 @@ import Tag from "./Tag";
 export default function Detail({ element, switchMode }) {
   if (!element) return <></>;
 
+  const isFolder = element.listaElementos != null;
+
   return (
     <div>
       <div className="flex justify-center mb-10">
-        {element.tipo === "carpeta" ? <FolderIcon /> : <FileIcon />}
+        {isFolder ? <FolderIcon /> : <FileIcon />}
       </div>
       <p className="mb-6 underline font-bold"> Descripcion </p>
       <div className="space-y-2">
         <p>Nombre : {element.nombre}</p>
+        <p>Descripcion : {element.descripcion}</p>
         <p>Propietario : {element.propietario.nombre}</p>
-        <p>Ruta : {element.padre}</p>
-        <p>Tipo : {element.tipo}</p>
+        {!isFolder && <p>Extension : {element.extension}</p>}
+        {!isFolder && <p>Catedra : {element.catedra.nombre}</p>}
+        <p>Ruta : {element.path}</p>
         <p>Tamaño : {element.tamanio}</p>
         <p>Nombre : {element.nombre}</p>
+        <p>Tamanio : {element.tamanio ? element.tamanio + "kb" : 0} </p>
         <p>
           Fecha de creacion :{" "}
           {element.fechaCreacion.year +
