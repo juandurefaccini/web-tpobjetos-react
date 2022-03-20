@@ -25,7 +25,7 @@ export default function FileUploadForm({ path, setShowContent }) {
       const requestObject = {
         nombre: values.nombre,
         path: values.path,
-        palabrasClave: values.palabrasClave,
+        palabraclave: values.palabrasClave,
         catedra: values.catedra,
       };
       const stringifuedRequest = JSON.stringify(requestObject);
@@ -36,86 +36,98 @@ export default function FileUploadForm({ path, setShowContent }) {
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className="flex space-x-4 w-full flex-wrap justify-items-start"
+      className="flex  w-full flex-wrap flex-col space-y-6 mb-6"
     >
-      <label>Archivo</label>
-      <input
-        name="data"
-        type="file"
-        className="border rounded"
-        onChange={(event) => {
-          formik.setFieldValue("data", event.currentTarget.files[0]);
-        }}
-      />
       <div>
-        {formik.errors.data ? (
-          <div className="text-[red]">{formik.errors.data}</div>
-        ) : (
-          <></>
-        )}
+        <label className="inline-block w-56">Archivo</label>
+        <input
+          name="data"
+          type="file"
+          className="border rounded w-56"
+          onChange={(event) => {
+            formik.setFieldValue("data", event.currentTarget.files[0]);
+          }}
+        />
+        <div>
+          {formik.errors.data ? (
+            <div className="text-[red]">{formik.errors.data}</div>
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
-      <label>Nombre</label>
-      <input
-        name="nombre"
-        type="text"
-        className="border rounded"
-        onChange={formik.handleChange}
-        value={formik.values.nombre}
-      />
       <div>
-        {formik.errors.nombre ? (
-          <div className="text-[red]">{formik.errors.nombre}</div>
-        ) : (
-          <></>
-        )}
+        <label className="inline-block w-56">Nombre</label>
+        <input
+          name="nombre"
+          type="text"
+          className="border rounded w-56"
+          onChange={formik.handleChange}
+          value={formik.values.nombre}
+        />
+        <div>
+          {formik.errors.nombre ? (
+            <div className="text-[red]">{formik.errors.nombre}</div>
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
-      <label>Catedra</label>
-      <input
-        name="catedra"
-        type="text"
-        className="border rounded"
-        onChange={formik.handleChange}
-        value={formik.values.catedra}
-      />
       <div>
-        {formik.errors.catedra ? (
-          <div className="text-[red]">{formik.errors.catedra}</div>
-        ) : (
-          <></>
-        )}
+        <label className="inline-block w-56">Catedra</label>
+        <input
+          name="catedra"
+          type="text"
+          className="border rounded w-56"
+          onChange={formik.handleChange}
+          value={formik.values.catedra}
+        />
+        <div>
+          {formik.errors.catedra ? (
+            <div className="text-[red]">{formik.errors.catedra}</div>
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
-      <label>Palabras clave (p1,p2,p3,...)</label>
-      <input
-        name="palabrasClave"
-        type="text"
-        className="border rounded"
-        onChange={(event) =>
-          formik.setFieldValue("palabrasClave", event.target.value.split(","))
-        }
-        value={formik.values.palabrasClave}
-      />
       <div>
-        {formik.errors.palabrasClave ? (
-          <div className="text-[red]">{formik.errors.palabrasClave}</div>
-        ) : (
-          <></>
-        )}
+        <label className="inline-block w-56">
+          Palabras clave (p1,p2,p3,...)
+        </label>
+        <input
+          name="palabrasClave"
+          type="text"
+          className="border rounded w-56"
+          onChange={(event) =>
+            formik.setFieldValue("palabrasClave", event.target.value.split(","))
+          }
+          value={formik.values.palabrasClave}
+        />
+        <div>
+          {formik.errors.palabrasClave ? (
+            <div className="text-[red]">{formik.errors.palabrasClave}</div>
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
 
-      <button
-        type="submit"
-        className="border rounded bg-secondary text-primary px-4"
-      >
-        Subir archivo
-      </button>
-      <button
-        onClick={() => {
-          setShowContent(null);
-        }}
-        className="border rounded bg-secondary text-primary px-4"
-      >
-        Cancelar
-      </button>
+      <div className="flex w-full">
+        <button
+          type="submit"
+          className="border rounded bg-secondary text-primary px-4"
+        >
+          Subir archivo
+        </button>
+        <button
+          onClick={() => {
+            setShowContent(null);
+          }}
+          className="border rounded bg-secondary text-primary px-4"
+        >
+          Cancelar
+        </button>
+      </div>
     </form>
   );
 }

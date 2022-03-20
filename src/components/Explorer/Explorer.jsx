@@ -51,7 +51,7 @@ export default function Explorer() {
   console.log("Explorer", currentDirectory);
 
   return (
-    <div className="space-y-1 flex flex-col h-full w-full">
+    <div className="space-y-1 flex flex-col h-full w-full overflow-y-auto">
       <div className="w-full">
         <ExplorerActions
           path={currentDirectory.path + ":" + currentDirectory.nombre}

@@ -20,7 +20,7 @@ export default function ElementList({ elements, onClickFolder }) {
 
   return (
     <div className="w-full h-full ">
-      <div className="space-y-6 grow-0 overflow-auto h-full">
+      <div className="space-y-6 grow-0 h-full">
         <FolderList folders={folders} onClickFolder={onClickFolder} />
         <FileList files={files} />
       </div>

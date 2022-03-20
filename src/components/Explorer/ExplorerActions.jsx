@@ -14,13 +14,14 @@ export default function ExplorerActions({ path }) {
 
   return (
     <div>
-      <div className="w-3/4">Acciones disponibles</div>
-      <Button onClick={() => setShowContent("createFolder")}>
-        Crear Carpeta
-      </Button>
-      <Button onClick={() => setShowContent("uploadFile")}>
-        Subir Archivo
-      </Button>
+      <div className=" flex w-96 space-x-6">
+        <Button onClick={() => setShowContent("createFolder")}>
+          Crear Carpeta
+        </Button>
+        <Button onClick={() => setShowContent("uploadFile")}>
+          Subir Archivo
+        </Button>
+      </div>
     </div>
   );
 }
