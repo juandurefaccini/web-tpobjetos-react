@@ -3,6 +3,7 @@ import ElementList from "./ElementList";
 import Button from "../ui/Button";
 
 import { useServices } from "../../context/servicesContext";
+import ExplorerActions from "./ExplorerActions";
 
 function breadthFirstSearch(tree) {
   const result = [];
@@ -47,18 +48,17 @@ export default function Explorer() {
 
   if (!fileHierarchy) return <></>;
 
+  console.log("Explorer", currentDirectory);
+
   return (
-    <div className="space-y-1 flex flex-col h-full">
-      <div className="flex h-12 my-4 space-x-6">
-        <div className="w-48">
-          <Button>Agregar carpeta</Button>
-        </div>
-        <div className="w-48">
-          <Button>Agregar archivo</Button>
-        </div>
+    <div className="space-y-1 flex flex-col h-full w-full">
+      <div className="w-full">
+        <ExplorerActions
+          path={currentDirectory.path + ":" + currentDirectory.nombre}
+        />
       </div>
 
-      <div className="w-full h-6 flex">
+      <div className="w-full h-6 flex ">
         Ruta actual:
         <p className="ml-6">
           {currentDirectory.path + ":" + currentDirectory.nombre}

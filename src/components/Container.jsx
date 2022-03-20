@@ -7,8 +7,8 @@ export default function Container() {
   const { mode } = useFileExplorer(); // Guardo el modo en el cual debe estar el contenedor
 
   return (
-    <div className="shrink-0 grow ">
-      <div className="p-4 overflow-clip flex flex-grow h-full w-3/4 ">
+    <div className="shrink w-full">
+      <div className="p-4 flex h-full w-full">
         {mode === "explorer" ? <Explorer default={"root"} /> : <Searcher />}
       </div>
     </div>

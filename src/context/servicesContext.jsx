@@ -312,24 +312,14 @@ export function ServicesProvider({ children }) {
   //
 
   // TODO : REVISAR
-  const postCarpeta = async (
-    nombre,
-    tipo,
-    fechaModificacion,
-    fechaCreacion,
-    catedra,
-    padre
-  ) => {
+  const postCarpeta = async (carpeta) => {
     try {
       const res = await axiosClient.post(
         "/carpeta",
         {
-          nombre: nombre,
-          tipo: tipo,
-          fechaModificacion: fechaModificacion,
-          fechaCreacion: fechaCreacion,
-          catedra: catedra,
-          padre: padre,
+          nombre: carpeta.nombre,
+          path: carpeta.path,
+          descripcion: carpeta.descripcion,
         },
         {
           auth: {
@@ -387,36 +377,21 @@ export function ServicesProvider({ children }) {
   //
 
   // TODO : REVISAR
-  const postArchivo = async (
-    nombre,
-    tipo,
-    tamanio,
-    fechaModificacion,
-    fechaCreacion,
-    catedra,
-    padre,
-    idUsuario
-  ) => {
+  const postArchivo = async (file, request) => {
+    const formData = new FormData();
+    formData.append("data", file); // Guardo el archivo en el campo data del form
+    formData.append("request", request);
     try {
-      const res = await axiosClient.post(
-        "/archivo",
-        {
-          nombre: nombre,
-          tipo: tipo,
-          fechaModificacion: fechaModificacion,
-          fechaCreacion: fechaCreacion,
-          tamanio: tamanio,
-          catedra: catedra,
-          padre: padre,
-          idUsuario: idUsuario,
+      const res = await axiosClient.post("/archivo", formData, {
+        auth: {
+          username: username,
+          password: password,
         },
-        {
-          auth: {
-            username: username,
-            password: password,
-          },
-        }
-      );
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log("res : ", res);
       return res.data;
     } catch (error) {
       console.log(error.message);

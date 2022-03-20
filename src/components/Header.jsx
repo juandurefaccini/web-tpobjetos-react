@@ -28,7 +28,7 @@ export default function Header() {
             Gil Drive
           </p>
           {mode != "explorer" && (
-            <Button onClick={() => setMode("explorer")}>Volver</Button>
+            <Button onClick={() => setMode("explorer")}></Button>
           )}
 
           <SearchBar />
