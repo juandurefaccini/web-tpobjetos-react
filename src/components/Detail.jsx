@@ -23,19 +23,22 @@ export default function Detail({ element, switchMode }) {
         {!isFolder && <p>Extension : {element.extension}</p>}
         {!isFolder && <p>Catedra : {element.catedra.nombre}</p>}
         <p>Ruta : {element.path}</p>
-        <p>Tamaño : {element.tamanio}</p>
         <p>Nombre : {element.nombre}</p>
         <p>Tamanio : {element.tamanio ? element.tamanio + "kb" : 0} </p>
         <p>
           Fecha de creacion :{" "}
           {element.fechaCreacion.year +
+            "/" +
             element.fechaCreacion.month +
+            "/" +
             element.fechaCreacion.day}
         </p>
         <p>
           Fecha de modificacion :{" "}
           {element.fechaModificacion.year +
+            "/" +
             element.fechaModificacion.month +
+            "/" +
             element.fechaModificacion.day}
         </p>
         {element.palabrasClaves != null && element.palabrasClaves.length > 0 && (
