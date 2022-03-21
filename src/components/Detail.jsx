@@ -18,7 +18,7 @@ export default function Detail({ element, switchMode }) {
       <p className="mb-6 underline font-bold"> Descripcion </p>
       <div className="space-y-2">
         <p>Nombre : {element.nombre}</p>
-        <p>Descripcion : {element.descripcion}</p>
+        {!isFolder && <p>Descripcion : {element.descripcion}</p>}
         <p>Propietario : {element.propietario.nombre}</p>
         {!isFolder && <p>Extension : {element.extension}</p>}
         {!isFolder && <p>Catedra : {element.catedra.nombre}</p>}
@@ -53,7 +53,7 @@ export default function Detail({ element, switchMode }) {
         )}
       </div>
       <p className="mt-10 mb-6 underline font-bold">Acciones</p>
-      <PanelAcciones switchMode={switchMode} />
+      <PanelAcciones switchMode={switchMode} element={element} />
     </div>
   );
 }

@@ -190,18 +190,16 @@ export function ServicesProvider({ children }) {
 
   const deleteComentario = async (idComentario) => {
     try {
-      const res = await axiosClient.delete(
-        "/comentario",
-        {
+      const res = await axiosClient.delete("/comentario", {
+        params: {
           idComentario: idComentario,
         },
-        {
-          auth: {
-            username: username,
-            password: password,
-          },
-        }
-      );
+        auth: {
+          username: username,
+          password: password,
+        },
+      });
+      console.log(res);
       return res.data;
     } catch (error) {
       console.log(error.message);
@@ -211,7 +209,6 @@ export function ServicesProvider({ children }) {
   //
   // CATEDRA
   //
-
   const getCatedras = async () => {
     try {
       const res = await axiosClient.get("/catedra");
@@ -409,6 +406,23 @@ export function ServicesProvider({ children }) {
     }
   };
 
+  const descargarArchivo = async (path) => {
+    try {
+      const res = await axiosClient.get("/archivo/fuente", {
+        params: {
+          path: path,
+        },
+        auth: {
+          username: username,
+          password: password,
+        },
+      });
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <ServicesContext.Provider
       value={{
@@ -432,6 +446,7 @@ export function ServicesProvider({ children }) {
         deleteCarpeta,
         getArchivoFiltro,
         postArchivo,
+        descargarArchivo,
         deleteArchivo,
       }}
     >
