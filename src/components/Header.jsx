@@ -31,12 +31,18 @@ export default function Header() {
           <p className="flex-shrink-0 h-full  flex items-center justify-center">
             Gil Drive
           </p>
-          {mode != "explorer" && (
-            <Button onClick={() => setMode("explorer")}></Button>
-          )}
 
           <SearchBar />
           <div className="flex justify-end h-full space-x-4 grow">
+            {mode != "explorer" && (
+              <div className="w-24 h-full">
+                <Button onClick={() => setMode("explorer")}>
+                  <div className="w-full h-full flex justify-center items-center ">
+                    <HomeIcon size={24} />
+                  </div>
+                </Button>
+              </div>
+            )}
             <div className="w-24 h-full">
               <Button onClick={() => navigate("/perfil")}>
                 <div className="w-full h-full flex justify-center items-center ">

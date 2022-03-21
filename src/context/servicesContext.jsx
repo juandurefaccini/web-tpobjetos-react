@@ -337,7 +337,7 @@ export function ServicesProvider({ children }) {
   const getArchivoFiltro = async (criteriaParam, carpetaBase) => {
     try {
       const res = await axiosClient.get("/filtro", {
-        params: { carpetaBase: carpetaBase, criterios: criteriaParam },
+        params: { pathCarpetaBase: carpetaBase, criterios: criteriaParam },
       });
       console.log(res);
       return res.data;
