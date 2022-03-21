@@ -1,6 +1,5 @@
 import React from "react";
-// import icons
-import SearchIcon from "../icons/SearchIcon";
+import { FaSearch as SearchIcon } from "react-icons/fa";
 import { useFileExplorer } from "../context/fileExplorerContext";
 
 const reservedWords = ["autor", "tipo", "nombre"];
@@ -50,12 +49,12 @@ export default function SearchBar() {
         />
 
         <button
-          className="mx-1 btn inline-block px-6 bg-primary border border-secondary text-white font-medium text-xs leading-tight uppercase rounded "
+          className="mx-1 btn inline-block px-4 bg-primary border border-secondary text-white font-medium text-xs leading-tight uppercase rounded "
           type="button"
           id="button-addon2"
           onClick={() => handleSubmit()}
         >
-          <SearchIcon />
+          <SearchIcon size={24} />
         </button>
       </div>
     </div>

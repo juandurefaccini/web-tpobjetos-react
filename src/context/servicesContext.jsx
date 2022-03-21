@@ -22,8 +22,6 @@ export function ServicesProvider({ children }) {
   const password = user ? user.uid : null;
   const displayName = user ? user.displayName : null;
 
-  useEffect(() => {}, [user]);
-
   //
   // Usuario
   //
@@ -56,20 +54,17 @@ export function ServicesProvider({ children }) {
   const postUsuario = async () => {
     console.log("postUsuario : ", displayName, username, password);
     try {
-      const res = await axiosClient.post(
-        "/usuarios",
-        {
+      const res = await axiosClient.post("/usuarios", {
+        data: {
           nombre: displayName,
           puntaje: 0,
         },
-        {
-          auth: {
-            username: username,
-            password: password,
-          },
-        }
-      );
-      console.log(res);
+        auth: {
+          username: username,
+          password: password,
+        },
+      });
+      console.log("res :", res);
       return res.data;
     } catch (error) {
       console.log("error ", error);

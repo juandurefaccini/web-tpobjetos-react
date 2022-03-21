@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
-import Button from "./ui/Button";
 import Comment from "./Comment";
 import { useServices } from "../context/servicesContext";
+import { AiFillCloseCircle as CloseIcon } from "react-icons/ai";
 
 export default function Comments({ element, switchMode }) {
   const { getComentario } = useServices();
@@ -22,7 +22,11 @@ export default function Comments({ element, switchMode }) {
   return (
     <div>
       <div className="flex justify-end">
-        <Button onClick={() => switchMode("detail")}>X</Button>
+        <CloseIcon
+          className="cursor-pointer"
+          onClick={() => switchMode("detail")}
+          size={32}
+        />
       </div>
       <div className="space-y-4 mt-3">
         {comments.length == 0 ? (

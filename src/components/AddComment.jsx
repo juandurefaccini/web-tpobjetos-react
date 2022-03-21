@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useServices } from "../context/servicesContext";
 import Button from "./ui/Button";
+import { AiFillCloseCircle as CloseIcon } from "react-icons/ai";
 
 export default function AddComment({ switchMode, element }) {
   const { postComentario } = useServices();
@@ -12,8 +13,12 @@ export default function AddComment({ switchMode, element }) {
 
   return (
     <div>
-      <div className="flex w-1/6 ">
-        <Button onClick={() => switchMode("detail")}>X</Button>
+      <div className="flex justify-end">
+        <CloseIcon
+          className="cursor-pointer"
+          onClick={() => switchMode("detail")}
+          size={32}
+        />
       </div>
       <p>Ingrese su comentario aqui :</p>
       <div className="flex flex-col justify-center items-center h-1/2 w-full ">

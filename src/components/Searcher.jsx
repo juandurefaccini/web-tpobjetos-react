@@ -9,20 +9,10 @@ export default function Searcher() {
   const [searchOutput, setSearchOutput] = React.useState([]);
 
   useEffect(() => {
-    /*     loadElements(search, ":root"); // TODO : SACAR CONSTANTE
-     */ getArchivoFiltro(search, ":root").then((res) => {
+    getArchivoFiltro(search, ":root").then((res) => {
       setSearchOutput(res);
     });
   }, [search]);
-
-  /* const loadElements = async (search, currentDirectoryName) => {
-    const criteriaParam = search;
-
-    const res = await getArchivoFiltro(criteriaParam, currentDirectoryName);
-
-    setSearchOutput(res);
-    // Pedir a api los elementos que coincidan con el search
-  }; */
 
   if (searchOutput == undefined || searchOutput.length === 0)
     return <>No hay resultados</>;

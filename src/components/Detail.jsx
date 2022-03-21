@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import FileIcon from "../icons/FileIcon";
-import FolderIcon from "../icons/FolderIcon";
+import { AiFillFolder as FileIcon } from "react-icons/ai";
+import { AiFillCloseCircle as CloseIcon } from "react-icons/ai";
+import { AiFillFile as FolderIcon } from "react-icons/ai";
+
 import PanelAcciones from "./PanelAcciones";
 import Tag from "./Tag";
 
@@ -13,7 +15,7 @@ export default function Detail({ element, switchMode }) {
   return (
     <div>
       <div className="flex justify-center mb-10">
-        {isFolder ? <FolderIcon /> : <FileIcon />}
+        {isFolder ? <FolderIcon size={80} /> : <FileIcon size={80} />}
       </div>
       <p className="mb-6 underline font-bold"> Descripcion </p>
       <div className="space-y-2">

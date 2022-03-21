@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import FileIcon from "../../icons/FileIcon";
 import { useFileExplorer } from "../../context/fileExplorerContext";
+import { AiFillFile as FileIcon } from "react-icons/ai";
 
 export default function File(props) {
   const { file } = props;
@@ -16,7 +16,7 @@ export default function File(props) {
           setSelectedElement(file);
         }}
       >
-        <FileIcon />
+        <FileIcon size={64} />
       </div>
       <p className="my-6">{file.nombre}</p>
     </div>

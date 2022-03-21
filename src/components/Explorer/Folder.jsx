@@ -1,6 +1,6 @@
 import React from "react";
-import FolderIcon from "../../icons/FolderIcon";
 import { useFileExplorer } from "../../context/fileExplorerContext";
+import { AiFillFolder as FolderIcon } from "react-icons/ai";
 
 export default function Folder({ folder, onClickFolder }) {
   const { setSelectedElement } = useFileExplorer();
@@ -12,7 +12,7 @@ export default function Folder({ folder, onClickFolder }) {
         onDoubleClick={() => onClickFolder(folder)}
         onClick={() => setSelectedElement(folder)}
       >
-        <FolderIcon />
+        <FolderIcon size={64} />
       </div>
       <p className="h-auto self-center	ml-2 ">{folder.nombre}</p>
     </div>
