@@ -6,7 +6,11 @@ import Button from "./ui/Button";
 export default function Comment({ comment }) {
   const { deleteComentario } = useServices();
 
-  console.log("Comment", comment);
+  const handleDelete = () => {
+    deleteComentario(comment.id)
+      .then(() => console.log("success"))
+      .catch((error) => console.log(error));
+  };
 
   return (
     <div className="border border-gray-400 rounded p-2 ">
@@ -14,9 +18,7 @@ export default function Comment({ comment }) {
       <p>
         Autor : {comment.autor.mail} {comment.autor.nombre}
       </p>
-      <Button onClick={() => deleteComentario(comment.id)}>
-        Resolver Comentario
-      </Button>
+      <Button onClick={() => handleDelete()}>Resolver Comentario</Button>
     </div>
   );
 }

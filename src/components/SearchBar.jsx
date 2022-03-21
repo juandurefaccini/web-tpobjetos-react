@@ -8,7 +8,6 @@ const reservedWords = ["autor", "tipo", "nombre"];
 export default function SearchBar() {
   const { setSearch, setMode } = useFileExplorer();
 
-  const [searchInput, setSearchInput] = React.useState("");
   const [searchCriteria, setSearchCriteria] = React.useState("");
 
   const getCriterios = () => {
@@ -33,9 +32,7 @@ export default function SearchBar() {
 
   // TODO : USAR CRITERIO DE BUSQUEDA POR CONTIENE NOMBRE
   const handleSubmit = () => {
-    const criterios = searchInput.split(" ")
-      ? getCriterios()
-      : getCriterios() + `&nombre&${searchInput}`;
+    const criterios = getCriterios();
     setSearch(criterios);
     setMode("searcher");
   };
@@ -51,14 +48,7 @@ export default function SearchBar() {
           aria-describedby="button-addon2"
           onChange={(e) => setSearchCriteria(e.target.value)}
         />
-        <input
-          type="search"
-          className="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-black focus:outline-none"
-          placeholder="Search"
-          aria-label="Search"
-          aria-describedby="button-addon2"
-          onChange={(e) => setSearchInput(e.target.value)}
-        />
+
         <button
           className="mx-1 btn inline-block px-6 bg-primary border border-secondary text-white font-medium text-xs leading-tight uppercase rounded "
           type="button"

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useServices } from "../../../context/servicesContext";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Loading from "../../Loading";
 import Button from "../../ui/Button";
 
@@ -28,8 +28,6 @@ export default function Index() {
   }, []);
 
   if (!catedras || loading) return <Loading />;
-
-  console.log(catedras);
 
   return (
     <div className="container mx-auto p-6 border">

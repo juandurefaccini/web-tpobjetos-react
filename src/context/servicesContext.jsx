@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { createContext, useContext, useEffect } from "react";
 import { useAuth } from "./authContext";
-
 import axios from "axios";
 
 const axiosClient = axios.create({
@@ -131,7 +130,6 @@ export function ServicesProvider({ children }) {
 
   const getComentario = async (element) => {
     const pathElemento = element.path + ":" + element.nombre;
-    console.log(pathElemento);
     try {
       const res = await axiosClient.get("/comentario", {
         params: {
@@ -322,20 +320,15 @@ export function ServicesProvider({ children }) {
   // TODO : REVISAR
   const deleteCarpeta = async (nombre) => {
     try {
-      const res = await axiosClient.delete(
-        "/carpeta",
-        {
-          params: {
-            nombre: nombre,
-          },
+      const res = await axiosClient.delete("/carpeta", {
+        params: {
+          pathCarpeta: nombre,
         },
-        {
-          auth: {
-            username: username,
-            password: password,
-          },
-        }
-      );
+        auth: {
+          username: username,
+          password: password,
+        },
+      });
       return res.data;
     } catch (error) {
       console.log(error.message);
@@ -351,6 +344,7 @@ export function ServicesProvider({ children }) {
       const res = await axiosClient.get("/filtro", {
         params: { carpetaBase: carpetaBase, criterios: criteriaParam },
       });
+      console.log(res);
       return res.data;
     } catch (error) {
       console.log(error.message);
@@ -386,20 +380,15 @@ export function ServicesProvider({ children }) {
   // TODO : REVISAR
   const deleteArchivo = async (nombre) => {
     try {
-      const res = await axiosClient.delete(
-        "/archivo",
-        {
-          params: {
-            nombre: nombre,
-          },
+      const res = await axiosClient.delete("/archivo", {
+        params: {
+          pathArchivo: nombre,
         },
-        {
-          auth: {
-            username: username,
-            password: password,
-          },
-        }
-      );
+        auth: {
+          username: username,
+          password: password,
+        },
+      });
       return res.data;
     } catch (error) {
       console.log(error.message);
@@ -407,6 +396,7 @@ export function ServicesProvider({ children }) {
   };
 
   const descargarArchivo = async (path) => {
+    console.log(path);
     try {
       const res = await axiosClient.get("/archivo/fuente", {
         params: {
@@ -417,6 +407,7 @@ export function ServicesProvider({ children }) {
           password: password,
         },
       });
+      console.log(res);
       return res.data;
     } catch (error) {
       console.log(error);

@@ -3,10 +3,20 @@ import ActionButton from "./ActionButton";
 import { useServices } from "../context/servicesContext";
 
 export default function PanelAcciones({ switchMode, element }) {
-  const { descargarArchivo } = useServices();
+  const { descargarArchivo, deleteCarpeta, deleteArchivo } = useServices();
   return (
     <div className="flex flex-row flex-wrap">
-      <ActionButton>
+      <ActionButton
+        onClick={() => {
+          const isFolder = element.listaElementos != null;
+          const pathElemento = element.path + ":" + element.nombre;
+          if (isFolder) {
+            deleteCarpeta(pathElemento);
+          } else {
+            deleteArchivo(pathElemento);
+          }
+        }}
+      >
         <span>Borrar</span>
       </ActionButton>
       <ActionButton

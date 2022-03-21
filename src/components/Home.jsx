@@ -8,7 +8,7 @@ import { FileContextProvider } from "../context/fileExplorerContext";
 export default function Home() {
   return (
     <FileContextProvider>
-      <div className="font-sans h-screen flex flex-col">
+      <div className="font-sans h-screen flex flex-col bg-primary">
         <Header />
         <div className="flex grow h-1/2 ">
           <div className="flex flex-row w-full">
