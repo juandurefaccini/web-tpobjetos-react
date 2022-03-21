@@ -29,7 +29,7 @@ export default function Header() {
       <nav className="py-4 border-b-2  border-secondary shrink-0">
         <div className="px-12 flex space-x-5 flex-row content-center mx-auto items-center h-10">
           <p className="flex-shrink-0 h-full  flex items-center justify-center">
-            Gil Drive
+            Entrega final POO
           </p>
 
           <SearchBar />
