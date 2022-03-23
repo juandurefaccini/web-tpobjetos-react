@@ -3,15 +3,17 @@ import React, { createContext, useContext } from "react";
 import { useAuth } from "./authContext";
 import axios from "axios";
 
+const url = "https://trabajo-objetos.herokuapp.com";
+
 const axiosClient = axios.create({
-  baseURL: "https://trabajo-objetos.herokuapp.com",
+  baseURL: url,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
   },
 });
 
-axiosClient.defaults.timeout = 10000;
+axiosClient.defaults.timeout = 9999999990;
 
 export const ServicesContext = createContext({});
 
@@ -50,7 +52,6 @@ export function ServicesProvider({ children }) {
     }
   };
 
-  // TODO : REVISAR
   const postUsuario = async () => {
     console.log("postUsuario : ", displayName, username, password);
     try {
@@ -72,7 +73,6 @@ export function ServicesProvider({ children }) {
     }
   };
 
-  // TODO : REVISAR
   const deleteUsuario = async () => {
     try {
       const res = await axiosClient.delete("/usuarios", {
@@ -266,7 +266,6 @@ export function ServicesProvider({ children }) {
     }
   };
 
-  // TODO : REVISAR
   const deleteCatedra = async (idCatedra) => {
     console.log("deleteCatedra :", idCatedra);
     try {
@@ -289,7 +288,6 @@ export function ServicesProvider({ children }) {
   // CARPETA
   //
 
-  // TODO : REVISAR
   const postCarpeta = async (carpeta) => {
     try {
       const res = await axiosClient.post(
@@ -312,7 +310,6 @@ export function ServicesProvider({ children }) {
     }
   };
 
-  // TODO : REVISAR
   const deleteCarpeta = async (nombre) => {
     try {
       const res = await axiosClient.delete("/carpeta", {
@@ -350,7 +347,6 @@ export function ServicesProvider({ children }) {
   // ARCHIVO
   //
 
-  // TODO : REVISAR
   const postArchivo = async (file, request) => {
     const formData = new FormData();
     formData.append("data", file); // Guardo el archivo en el campo data del form
@@ -372,7 +368,6 @@ export function ServicesProvider({ children }) {
     }
   };
 
-  // TODO : REVISAR
   const deleteArchivo = async (nombre) => {
     try {
       const res = await axiosClient.delete("/archivo", {
@@ -401,9 +396,32 @@ export function ServicesProvider({ children }) {
           username: username,
           password: password,
         },
+        responseType: "blob",
       });
-      console.log(res);
-      return res.data;
+
+      // I WANT TO DOWNLOAD A FILE FROM AXIOS RESPONSE
+
+      const url = window.URL.createObjectURL(
+        new Blob([res.data], { type: res.data.type })
+      );
+      const link = document.createElement("a");
+      link.href = url;
+      console.log(res.data);
+      link.setAttribute("download", url);
+      document.body.appendChild(link);
+      link.click();
+
+      /* 
+      const url = window.URL.createObjectURL(new Blob([res.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", url);
+      document.body.appendChild(link);
+      link.click();
+      window.URL.revokeObjectURL(url);
+      link.remove();
+      console.log("pt");
+ */
     } catch (error) {
       console.log(error);
     }

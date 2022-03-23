@@ -29,7 +29,6 @@ export default function SearchBar() {
     return criteriaList;
   };
 
-  // TODO : USAR CRITERIO DE BUSQUEDA POR CONTIENE NOMBRE
   const handleSubmit = () => {
     const criterios = getCriterios();
     setSearch(criterios);

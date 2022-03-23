@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import Button from "../ui/Button.jsx";
 
-// TODO : USAR BOTONES COMPONENTES PARA EL DASHBOARD
 export default function DashBoard() {
   const navigate = useNavigate();
 

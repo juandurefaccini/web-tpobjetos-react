@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { useServices } from "../../../context/servicesContext";
 import { useNavigate } from "react-router-dom";
 
-// TODO : REFACTORIZAR EN UN MISMO COMPONENTE
 export default function Edit() {
   const navigate = useNavigate();
   const { putCatedra, getCatedra } = useServices();

@@ -11,7 +11,7 @@ export const FileContextProvider = ({ children }) => {
 
   useEffect(() => {
     const init = async () => {
-      const elem = await getDirectorioBase(); // TODO : REVISAR SI ES NECESARIO
+      const elem = await getDirectorioBase();
       setSelectedElement(elem);
     };
     init();

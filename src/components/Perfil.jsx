@@ -4,17 +4,15 @@ import { useAuth } from "../context/authContext";
 import { useNavigate } from "react-router-dom";
 import { useServices } from "../context/servicesContext";
 
-// TODO : Revisar por que se renderiza el componente mas de una vez
 export default function Perfil() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { getUsuario, deleteUsuario } = useServices();
   const [usuario, setUsuario] = useState(null);
 
-  // TODO : TERMINAR DE FETCHEAR EL USUARIO PARA MOSTARTLO EN EL PERFIL
   const init = async () => {
     const usuarioApi = await getUsuario(user.email);
-    setUsuario(usuarioApi[0]); // TODO : CAMBIAR
+    setUsuario(usuarioApi[0]);
   };
 
   useEffect(() => {
@@ -41,7 +39,6 @@ export default function Perfil() {
           <Button
             onClick={async () => {
               await deleteUsuario();
-              // TODO : VERIFICAR
             }}
           >
             <span>Eliminar perfil</span>

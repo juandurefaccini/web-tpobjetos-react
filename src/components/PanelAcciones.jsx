@@ -21,8 +21,17 @@ export default function PanelAcciones({ switchMode, element }) {
       </ActionButton>
       <ActionButton
         onClick={() => {
-          if (element.listaElementos == null)
-            descargarArchivo(element.path + ":" + element.nombre);
+          if (element.listaElementos == null) {
+            descargarArchivo(element.path + ":" + element.nombre).then(
+              (res) => {
+                const file = new Blob([res], { type: "application/pdf" });
+                const fileURL = URL.createObjectURL(file);
+                console.log(fileURL);
+                console.log(file);
+                window.open(fileURL);
+              }
+            );
+          }
         }}
       >
         <span>Descargar</span>

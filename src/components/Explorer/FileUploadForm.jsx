@@ -29,7 +29,9 @@ export default function FileUploadForm({ path, setShowContent }) {
         catedra: values.catedra.trim(),
       };
       const stringifuedRequest = JSON.stringify(requestObject);
-      postArchivo(values.data, stringifuedRequest);
+      postArchivo(values.data, stringifuedRequest).then(() => {
+        setShowContent(null);
+      });
     },
   });
 

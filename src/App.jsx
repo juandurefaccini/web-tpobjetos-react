@@ -23,7 +23,7 @@ const App = () => {
           <Route path="register" element={<Register />} />
           <Route path="perfil" element={<Perfil />} />
           <Route path="login" element={<Login />} />
-          <Route path="*" element={<Navigate to="login" replace />} />
+          {/* <Route path="*" element={<Navigate to="login" replace />} /> */}
           <Route
             path="home"
             element={
