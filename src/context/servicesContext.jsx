@@ -12,7 +12,7 @@ const axiosClient = axios.create({
   },
 });
 
-axiosClient.defaults.timeout = 8000; // TODO : REVISAR
+axiosClient.defaults.timeout = 80000; // TODO : REVISAR
 
 export const ServicesContext = createContext({});
 
@@ -48,7 +48,7 @@ export function ServicesProvider({ children }) {
   };
 
   const postUsuario = async (user) => {
-    console.log("postUsuario invocado con user : ", user);
+    console.log("postUsuario invocado con user : ", user.displayName);
 
     try {
       const res = await axiosClient.post(
@@ -56,7 +56,7 @@ export function ServicesProvider({ children }) {
         {
           nombre: user.displayName,
         },
-        { auth: { username: user.email, password: user.uid } }
+        { auth: getAuth(user) }
       );
       console.log("res post usuario :", res);
       return res.data;
@@ -71,7 +71,7 @@ export function ServicesProvider({ children }) {
   const deleteUsuario = async (user) => {
     try {
       const res = await axiosClient.delete("/usuarios", {
-        auth: { username: user.email, password: user.uid },
+        auth: getAuth(user),
       });
       return res.data;
     } catch (error) {
@@ -320,6 +320,7 @@ export function ServicesProvider({ children }) {
     const formData = new FormData();
     formData.append("data", file); // Guardo el archivo en el campo data del form
     formData.append("request", request);
+
     try {
       const res = await axiosClient.post("/archivo", formData, {
         auth: getAuth(user),
@@ -327,6 +328,9 @@ export function ServicesProvider({ children }) {
           "Content-Type": "multipart/form-data",
         },
       });
+
+      console.log(res);
+
       return res.data;
     } catch (error) {
       console.log(error.message);
@@ -360,27 +364,14 @@ export function ServicesProvider({ children }) {
 
       // I WANT TO DOWNLOAD A FILE FROM AXIOS RESPONSE
 
-      const url = window.URL.createObjectURL(
-        new Blob([res.data], { type: res.data.type })
-      );
+      const blob = new Blob([res.data], { type: res.data.type });
+      const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      console.log(res.data);
+      console.log("res.data: ", res.data);
       link.setAttribute("download", url);
       document.body.appendChild(link);
       link.click();
-
-      /* 
-      const url = window.URL.createObjectURL(new Blob([res.data]));
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", url);
-      document.body.appendChild(link);
-      link.click();
-      window.URL.revokeObjectURL(url);
-      link.remove();
-      console.log("pt");
- */
     } catch (error) {
       console.log(error);
     }

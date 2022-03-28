@@ -6,7 +6,7 @@ import { useServices } from "../context/servicesContext";
 
 export default function Perfil() {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const { getUsuario, deleteUsuario } = useServices();
   const [usuario, setUsuario] = useState(null);
 
@@ -39,6 +39,7 @@ export default function Perfil() {
           <Button
             onClick={async () => {
               await deleteUsuario(user);
+              logout();
               navigate("/login");
             }}
           >

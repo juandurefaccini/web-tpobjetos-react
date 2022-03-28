@@ -16,7 +16,9 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null); // Cuando iniciamos la aplicacion nadie esta logueado
   const [loading, setLoading] = useState(true); // Cuando iniciamos la aplicacion esta cargando
 
-  const logout = () => signOut(auth);
+  const logout = () => {
+    signOut(auth);
+  };
 
   const signInWithGoogle = () => {
     const googleProvider = new GoogleAuthProvider();
@@ -32,7 +34,9 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     // Ejecuta algo ni bien carga el componente
     onAuthStateChanged(auth, (user) => {
+      console.log("onAuthStateChanged", user);
       setUser(user);
+      if (user) postUser();
       setLoading(false);
     });
   }, []); // No es sensible a nada por lo tanto esto va cacio

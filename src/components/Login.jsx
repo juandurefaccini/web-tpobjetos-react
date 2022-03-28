@@ -7,12 +7,11 @@ import Alert from "./Alert";
 export default function Login() {
   const [error, setError] = useState("");
 
-  const { loading, signInWithGoogle, postUser } = useAuth();
+  const { loading, signInWithGoogle } = useAuth();
   const navigate = useNavigate();
 
   const handleGoogleSignIn = async () => {
     await signInWithGoogle();
-    await postUser();
     navigate("/home"); // Redireccionar a la pagina home
   };
 

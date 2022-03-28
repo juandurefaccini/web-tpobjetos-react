@@ -17,6 +17,7 @@ export default function PanelAcciones({ switchMode, element }) {
           } else {
             deleteArchivo(pathElemento, user);
           }
+          window.location.reload(false);
         }}
       >
         <span>Borrar</span>
