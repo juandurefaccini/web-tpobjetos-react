@@ -13,11 +13,14 @@ export default function PanelAcciones({ switchMode, element }) {
           const isFolder = element.listaElementos != null;
           const pathElemento = element.path + ":" + element.nombre;
           if (isFolder) {
-            deleteCarpeta(pathElemento, user);
+            deleteCarpeta(pathElemento, user).then(() =>
+              window.location.reload(false)
+            );
           } else {
-            deleteArchivo(pathElemento, user);
+            deleteArchivo(pathElemento, user).then(() =>
+              window.location.reload(false)
+            );
           }
-          window.location.reload(false);
         }}
       >
         <span>Borrar</span>
