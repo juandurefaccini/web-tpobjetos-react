@@ -30,8 +30,10 @@ export default function SearchBar() {
   };
 
   const handleSubmit = () => {
-    const criterios = getCriterios();
-    console.log(criterios);
+    let criterios = getCriterios();
+    if (criterios.length == 0 && searchCriteria) {
+      criterios = `contienenombre&${searchCriteria}`;
+    }
     setSearch(criterios);
     setMode("searcher");
   };
