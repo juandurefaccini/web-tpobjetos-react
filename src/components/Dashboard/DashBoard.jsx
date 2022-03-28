@@ -1,19 +1,26 @@
 import React from "react";
 import { useNavigate, Outlet } from "react-router-dom";
-import Button from "../ui/Button.jsx";
 
 export default function DashBoard() {
   const navigate = useNavigate();
 
   return (
-    <div className="container mx-auto h-screen ">
-      <div>
-        <Button onClick={() => navigate("/home")}> Volver al home</Button>
-        <Button onClick={() => navigate("catedras")}>Catedras</Button>
-        <Button onClick={() => navigate("usuarios")}> Usuarios</Button>
+    <div className="w-full">
+      <div className="flex h-16 w-full bg-secondary justify-around items-center text-primary text-lg">
+        <div className="cursor-pointer" onClick={() => navigate("/home")}>
+          Volver al home
+        </div>
+        <div className="cursor-pointer" onClick={() => navigate("catedras")}>
+          Catedras
+        </div>
+        <div className="cursor-pointer" onClick={() => navigate("usuarios")}>
+          Usuarios
+        </div>
       </div>
-      <div className="flex flex-col items-center justify-center h-full w-full">
-        <Outlet />
+      <div className="container mx-auto h-screen ">
+        <div className="flex flex-col items-center justify-center h-full w-full">
+          <Outlet />
+        </div>
       </div>
     </div>
   );

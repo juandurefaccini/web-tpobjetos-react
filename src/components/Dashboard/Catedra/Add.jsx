@@ -56,12 +56,22 @@ export default function Add() {
           value={formik.values.web}
         />
         {formik.errors.web ? <div>{formik.errors.web}</div> : <></>}
-        <button
-          type="submit"
-          className="bg-primary border border-secondary text-white font-bold py-2 px-4 rounded"
-        >
-          Guardar
-        </button>
+        <div className="flex w-full justify-around">
+          <button
+            type="submit"
+            className="bg-primary border border-secondary text-white font-bold py-2 px-16 rounded"
+          >
+            Guardar
+          </button>
+          <button
+            onClick={() => {
+              navigate(-1);
+            }}
+            className="bg-primary border border-secondary text-white font-bold py-2 px-16 rounded"
+          >
+            Cancelar
+          </button>
+        </div>
       </form>
     </div>
   );
