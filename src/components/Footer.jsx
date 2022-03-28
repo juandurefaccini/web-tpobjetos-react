@@ -10,13 +10,15 @@ export default function Footer() {
   const { user } = useAuth();
 
   useEffect(() => {
-    const init = async () => {
-      const res = await getUsuariosTop10();
-      setTop10(res);
-    };
     setLoading(true);
-    init();
-    setLoading(false);
+    getUsuariosTop10()
+      .then((res) => {
+        setTop10(res);
+        setLoading(false);
+      })
+      .catch((err) => {
+        throw err;
+      });
   }, []);
 
   if (!top10 || loading)

@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { useServices } from "../context/servicesContext";
 import Button from "./ui/Button";
+import { useAuth } from "../context/authContext";
 import { AiFillCloseCircle as CloseIcon } from "react-icons/ai";
 
 export default function AddComment({ switchMode, element }) {
+  const { user } = useAuth();
   const { postComentario } = useServices();
   const [value, SetValue] = useState(null);
   const handleSubmit = () => {
     const elementPath = element.path + ":" + element.nombre;
-    postComentario(elementPath, value).then(switchMode("detail"));
+    postComentario(elementPath, value, user).then(switchMode("detail"));
   };
 
   return (

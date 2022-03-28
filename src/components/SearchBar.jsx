@@ -2,7 +2,7 @@ import React from "react";
 import { FaSearch as SearchIcon } from "react-icons/fa";
 import { useFileExplorer } from "../context/fileExplorerContext";
 
-const reservedWords = ["autor", "tipo", "nombre"];
+const reservedWords = ["autor", "tipo", "contienenombre"];
 
 export default function SearchBar() {
   const { setSearch, setMode } = useFileExplorer();
@@ -23,7 +23,7 @@ export default function SearchBar() {
       )
         return result;
 
-      return result + `${criteriaType}&${criteriaValue}`;
+      return result + `${criteriaType}&${criteriaValue}&`;
     }, "");
 
     return criteriaList;
@@ -31,6 +31,7 @@ export default function SearchBar() {
 
   const handleSubmit = () => {
     const criterios = getCriterios();
+    console.log(criterios);
     setSearch(criterios);
     setMode("searcher");
   };

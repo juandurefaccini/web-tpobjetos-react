@@ -2,8 +2,10 @@ import React from "react";
 import { useFormik } from "formik";
 import { useServices } from "../../../context/servicesContext";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../context/authContext";
 
 export default function Add() {
+  const { user } = useAuth();
   const navigate = useNavigate();
   const { postCatedra } = useServices();
 
@@ -26,7 +28,7 @@ export default function Add() {
         idCatedra: values.nombre,
         url: values.web,
       };
-      postCatedra(catedra).then(() => navigate(-1));
+      postCatedra(catedra, user).then(() => navigate(-1));
     },
   });
 

@@ -14,6 +14,8 @@ export default function ExplorerActions({ path }) {
   if (showContent === "uploadFile")
     return <FileUploadForm setShowContent={setShowContent} path={path} />;
 
+
+    
   return (
     <div className="h-12">
       <div className=" flex w-96 space-x-6 items-center">

@@ -1,13 +1,15 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import { useServices } from "../context/servicesContext";
+import { useAuth } from "../context/authContext";
 import Button from "./ui/Button";
 
 export default function Comment({ comment }) {
+  const { user } = useAuth();
   const { deleteComentario } = useServices();
 
   const handleDelete = () => {
-    deleteComentario(comment.id)
+    deleteComentario(comment.id, user)
       .then(() => console.log("success"))
       .catch((error) => console.log(error));
   };

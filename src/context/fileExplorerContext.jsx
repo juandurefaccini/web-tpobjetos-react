@@ -10,11 +10,7 @@ export const FileContextProvider = ({ children }) => {
   const [search, setSearch] = useState(null);
 
   useEffect(() => {
-    const init = async () => {
-      const elem = await getDirectorioBase();
-      setSelectedElement(elem);
-    };
-    init();
+    getDirectorioBase().then((elem) => setSelectedElement(elem));
   }, []);
 
   return (

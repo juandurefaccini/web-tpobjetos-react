@@ -1,8 +1,10 @@
 import React from "react";
 import { useFormik } from "formik";
 import { useServices } from "../../context/servicesContext";
+import { useAuth } from "../../context/authContext";
 
 export default function FolderCreationForm({ path, setShowContent }) {
+  const { user } = useAuth();
   const { postCarpeta } = useServices();
 
   const formik = useFormik({
@@ -19,7 +21,7 @@ export default function FolderCreationForm({ path, setShowContent }) {
       return errors;
     },
     onSubmit: (values) => {
-      postCarpeta(values);
+      postCarpeta(values, user);
     },
   });
 

@@ -3,8 +3,10 @@ import { useFormik } from "formik";
 import { useParams } from "react-router-dom";
 import { useServices } from "../../../context/servicesContext";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../context/authContext";
 
 export default function Edit() {
+  const { user } = useAuth();
   const navigate = useNavigate();
   const { putCatedra, getCatedra } = useServices();
   const { id } = useParams();
@@ -35,7 +37,7 @@ export default function Edit() {
         idCatedra: values.nombre,
         url: values.web,
       };
-      putCatedra(catedra).then(() => navigate(-1));
+      putCatedra(catedra, user).then(() => navigate(-1));
     },
   });
 
@@ -49,6 +51,7 @@ export default function Edit() {
         <input
           className="border border-gray-600 rounded"
           name="nombre"
+          disabled
           type="text"
           onChange={formik.handleChange}
           value={formik.values.nombre}

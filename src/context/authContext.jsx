@@ -1,38 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { createContext, useContext } from "react";
 import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
   signInWithPopup,
   GoogleAuthProvider,
 } from "firebase/auth";
-import { auth, db } from "../firebase-config";
+import { auth } from "../firebase-config";
+import { useServices } from "./servicesContext";
 
 export const authContext = createContext(); // Contiene la informacion
 
 export function AuthProvider({ children }) {
+  const { postUsuario, getUsuario } = useServices();
   const [user, setUser] = useState(null); // Cuando iniciamos la aplicacion nadie esta logueado
   const [loading, setLoading] = useState(true); // Cuando iniciamos la aplicacion esta cargando
-
-  const signup = (email, password, nombre) => {
-    createUserWithEmailAndPassword(auth, email, password).then(() => {
-      console.log(db);
-      db.collection("users").document(user.uid).setData({
-        nombre: nombre,
-      });
-    });
-  };
-
-  const login = (email, password) =>
-    signInWithEmailAndPassword(auth, email, password);
 
   const logout = () => signOut(auth);
 
   const signInWithGoogle = () => {
     const googleProvider = new GoogleAuthProvider();
     return signInWithPopup(auth, googleProvider);
+  };
+
+  const postUser = () => {
+    if (user) {
+      postUsuario(user);
+    }
   };
 
   useEffect(() => {
@@ -45,7 +39,7 @@ export function AuthProvider({ children }) {
 
   return (
     <authContext.Provider
-      value={{ signup, login, user, logout, loading, signInWithGoogle }}
+      value={{ user, logout, loading, signInWithGoogle, postUser }}
     >
       {children}
     </authContext.Provider>

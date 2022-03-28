@@ -1,8 +1,10 @@
 import React from "react";
 import ActionButton from "./ActionButton";
 import { useServices } from "../context/servicesContext";
+import { useAuth } from "../context/authContext";
 
 export default function PanelAcciones({ switchMode, element }) {
+  const { user } = useAuth();
   const { descargarArchivo, deleteCarpeta, deleteArchivo } = useServices();
   return (
     <div className="flex flex-row flex-wrap">
@@ -11,9 +13,9 @@ export default function PanelAcciones({ switchMode, element }) {
           const isFolder = element.listaElementos != null;
           const pathElemento = element.path + ":" + element.nombre;
           if (isFolder) {
-            deleteCarpeta(pathElemento);
+            deleteCarpeta(pathElemento, user);
           } else {
-            deleteArchivo(pathElemento);
+            deleteArchivo(pathElemento, user);
           }
         }}
       >
@@ -22,7 +24,7 @@ export default function PanelAcciones({ switchMode, element }) {
       <ActionButton
         onClick={() => {
           if (element.listaElementos == null) {
-            descargarArchivo(element.path + ":" + element.nombre).then(
+            descargarArchivo(element.path + ":" + element.nombre, user).then(
               (res) => {
                 const file = new Blob([res], { type: "application/pdf" });
                 const fileURL = URL.createObjectURL(file);

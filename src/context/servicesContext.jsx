@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { createContext, useContext } from "react";
-import { useAuth } from "./authContext";
+import React, { createContext, useContext, useRef } from "react";
 import axios from "axios";
 
 const url = "https://trabajo-objetos.herokuapp.com";
@@ -13,16 +12,14 @@ const axiosClient = axios.create({
   },
 });
 
-axiosClient.defaults.timeout = 9999999990;
+axiosClient.defaults.timeout = 8000; // TODO : REVISAR
 
 export const ServicesContext = createContext({});
 
 export function ServicesProvider({ children }) {
-  const { user } = useAuth();
-
-  const username = user ? user.email : null;
-  const password = user ? user.uid : null;
-  const displayName = user ? user.displayName : null;
+  function getAuth(user) {
+    return { username: user.email, password: user.uid };
+  }
 
   //
   // Usuario
@@ -31,7 +28,6 @@ export function ServicesProvider({ children }) {
   const getUsuarios = async () => {
     try {
       const res = await axiosClient.get("/usuarios");
-      console.log("res : ", res);
       return res.data;
     } catch (error) {
       console.log(error.message);
@@ -45,41 +41,37 @@ export function ServicesProvider({ children }) {
           idUsuario: email,
         },
       });
-      console.log("usuario api", res.data);
       return res.data;
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  const postUsuario = async () => {
-    console.log("postUsuario : ", displayName, username, password);
+  const postUsuario = async (user) => {
+    console.log("postUsuario invocado con user : ", user);
+
     try {
-      const res = await axiosClient.post("/usuarios", {
-        data: {
-          nombre: displayName,
-          puntaje: 0,
+      const res = await axiosClient.post(
+        "/usuarios",
+        {
+          nombre: user.displayName,
         },
-        auth: {
-          username: username,
-          password: password,
-        },
-      });
-      console.log("res :", res);
+        { auth: { username: user.email, password: user.uid } }
+      );
+      console.log("res post usuario :", res);
       return res.data;
     } catch (error) {
-      console.log("error ", error);
-      console.log(error.message);
+      // IF ERROR IS NOT 422
+      if (error.response.status !== 422) {
+        console.log(error.message);
+      }
     }
   };
 
-  const deleteUsuario = async () => {
+  const deleteUsuario = async (user) => {
     try {
       const res = await axiosClient.delete("/usuarios", {
-        auth: {
-          username: username,
-          password: password,
-        },
+        auth: { username: user.email, password: user.uid },
       });
       return res.data;
     } catch (error) {
@@ -137,7 +129,7 @@ export function ServicesProvider({ children }) {
     }
   };
 
-  const postComentario = async (elementPath, contenido) => {
+  const postComentario = async (elementPath, contenido, user) => {
     try {
       const res = await axiosClient.post(
         "/comentario",
@@ -146,10 +138,7 @@ export function ServicesProvider({ children }) {
           contenido: contenido,
         },
         {
-          auth: {
-            username: username,
-            password: password,
-          },
+          auth: getAuth(user),
         }
       );
       console.log(res);
@@ -159,7 +148,7 @@ export function ServicesProvider({ children }) {
     }
   };
 
-  const putComentario = async (idElemento, idComentario, contenido) => {
+  const putComentario = async (idElemento, idComentario, contenido, user) => {
     try {
       const res = await axiosClient.put(
         "/comentario",
@@ -169,10 +158,7 @@ export function ServicesProvider({ children }) {
           contenido: contenido,
         },
         {
-          auth: {
-            username: username,
-            password: password,
-          },
+          auth: getAuth(user),
         }
       );
       return res.data;
@@ -181,16 +167,13 @@ export function ServicesProvider({ children }) {
     }
   };
 
-  const deleteComentario = async (idComentario) => {
+  const deleteComentario = async (idComentario, user) => {
     try {
       const res = await axiosClient.delete("/comentario", {
         params: {
           idComentario: idComentario,
         },
-        auth: {
-          username: username,
-          password: password,
-        },
+        auth: getAuth(user),
       });
       console.log(res);
       return res.data;
@@ -224,7 +207,7 @@ export function ServicesProvider({ children }) {
     }
   };
 
-  const postCatedra = async (catedra) => {
+  const postCatedra = async (catedra, user) => {
     try {
       const res = await axiosClient.post(
         "/catedra",
@@ -233,10 +216,7 @@ export function ServicesProvider({ children }) {
           url: catedra.url,
         },
         {
-          auth: {
-            username: username,
-            password: password,
-          },
+          auth: getAuth(user),
         }
       );
       return res.data;
@@ -245,7 +225,8 @@ export function ServicesProvider({ children }) {
     }
   };
 
-  const putCatedra = async (catedra) => {
+  const putCatedra = async (catedra, user) => {
+    console.log(catedra, user);
     try {
       const res = await axiosClient.put(
         "/catedra",
@@ -254,10 +235,7 @@ export function ServicesProvider({ children }) {
           url: catedra.url,
         },
         {
-          auth: {
-            username: username,
-            password: password,
-          },
+          auth: getAuth(user),
         }
       );
       return res.data;
@@ -266,17 +244,14 @@ export function ServicesProvider({ children }) {
     }
   };
 
-  const deleteCatedra = async (idCatedra) => {
+  const deleteCatedra = async (idCatedra, user) => {
     console.log("deleteCatedra :", idCatedra);
     try {
       const res = await axiosClient.delete("/catedra", {
         params: {
           idCatedra: idCatedra,
         },
-        auth: {
-          username: username,
-          password: password,
-        },
+        auth: getAuth(user),
       });
       return res.data;
     } catch (error) {
@@ -288,7 +263,7 @@ export function ServicesProvider({ children }) {
   // CARPETA
   //
 
-  const postCarpeta = async (carpeta) => {
+  const postCarpeta = async (carpeta, user) => {
     try {
       const res = await axiosClient.post(
         "/carpeta",
@@ -298,10 +273,7 @@ export function ServicesProvider({ children }) {
           descripcion: carpeta.descripcion,
         },
         {
-          auth: {
-            username: username,
-            password: password,
-          },
+          auth: getAuth(user),
         }
       );
       return res.data;
@@ -310,16 +282,13 @@ export function ServicesProvider({ children }) {
     }
   };
 
-  const deleteCarpeta = async (nombre) => {
+  const deleteCarpeta = async (nombre, user) => {
     try {
       const res = await axiosClient.delete("/carpeta", {
         params: {
           pathCarpeta: nombre,
         },
-        auth: {
-          username: username,
-          password: password,
-        },
+        auth: getAuth(user),
       });
       return res.data;
     } catch (error) {
@@ -332,11 +301,11 @@ export function ServicesProvider({ children }) {
   //
 
   const getArchivoFiltro = async (criteriaParam, carpetaBase) => {
+    console.log("getArchivoFiltro :", criteriaParam);
     try {
       const res = await axiosClient.get("/filtro", {
         params: { pathCarpetaBase: carpetaBase, criterios: criteriaParam },
       });
-      console.log(res);
       return res.data;
     } catch (error) {
       console.log(error.message);
@@ -347,37 +316,31 @@ export function ServicesProvider({ children }) {
   // ARCHIVO
   //
 
-  const postArchivo = async (file, request) => {
+  const postArchivo = async (file, request, user) => {
     const formData = new FormData();
     formData.append("data", file); // Guardo el archivo en el campo data del form
     formData.append("request", request);
     try {
       const res = await axiosClient.post("/archivo", formData, {
-        auth: {
-          username: username,
-          password: password,
-        },
+        auth: getAuth(user),
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log("res : ", res);
       return res.data;
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  const deleteArchivo = async (nombre) => {
+  const deleteArchivo = async (nombre, user) => {
+    console.log("deleteArchivo :", nombre, user);
     try {
       const res = await axiosClient.delete("/archivo", {
         params: {
           pathArchivo: nombre,
         },
-        auth: {
-          username: username,
-          password: password,
-        },
+        auth: getAuth(user),
       });
       return res.data;
     } catch (error) {
@@ -385,17 +348,13 @@ export function ServicesProvider({ children }) {
     }
   };
 
-  const descargarArchivo = async (path) => {
-    console.log(path);
+  const descargarArchivo = async (path, user) => {
     try {
       const res = await axiosClient.get("/archivo/fuente", {
         params: {
           path: path,
         },
-        auth: {
-          username: username,
-          password: password,
-        },
+        auth: getAuth(user),
         responseType: "blob",
       });
 

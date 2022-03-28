@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useServices } from "../../../context/servicesContext";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../context/authContext";
 import Loading from "../../Loading";
 import Button from "../../ui/Button";
 
 export default function Index() {
+  const { user } = useAuth();
   const navigate = useNavigate();
   const { getCatedras, deleteCatedra } = useServices();
   const [catedras, setCatedras] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const handleDelete = (id) => {
-    deleteCatedra(id).then(() =>
+    deleteCatedra(id, user).then(() =>
       setCatedras(catedras.filter((catedra) => catedra.nombre != id))
     );
   };

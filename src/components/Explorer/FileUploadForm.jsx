@@ -1,8 +1,10 @@
 import React from "react";
 import { useFormik } from "formik";
 import { useServices } from "../../context/servicesContext";
+import { useAuth } from "../../context/authContext";
 
 export default function FileUploadForm({ path, setShowContent }) {
+  const { user } = useAuth();
   const { postArchivo } = useServices();
   const formik = useFormik({
     initialValues: {
@@ -29,7 +31,7 @@ export default function FileUploadForm({ path, setShowContent }) {
         catedra: values.catedra.trim(),
       };
       const stringifuedRequest = JSON.stringify(requestObject);
-      postArchivo(values.data, stringifuedRequest).then(() => {
+      postArchivo(values.data, stringifuedRequest, user).then(() => {
         setShowContent(null);
       });
     },

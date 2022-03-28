@@ -10,16 +10,16 @@ export default function Perfil() {
   const { getUsuario, deleteUsuario } = useServices();
   const [usuario, setUsuario] = useState(null);
 
-  const init = async () => {
-    const usuarioApi = await getUsuario(user.email);
-    setUsuario(usuarioApi[0]);
-  };
-
   useEffect(() => {
-    if (user) init();
+    if (!user) return;
+    getUsuario(user.email)
+      .then((data) => {
+        setUsuario(data[0]);
+      })
+      .catch((error) => {
+        throw error;
+      });
   }, []);
-
-  console.log("usuario", usuario);
 
   if (!usuario || !user) return <h1>loading...</h1>;
 
@@ -38,7 +38,8 @@ export default function Perfil() {
           </Button>
           <Button
             onClick={async () => {
-              await deleteUsuario();
+              await deleteUsuario(user);
+              navigate("/login");
             }}
           >
             <span>Eliminar perfil</span>

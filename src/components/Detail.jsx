@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { AiFillFolder as FileIcon } from "react-icons/ai";
+import { AiFillFolder as FolderIcon } from "react-icons/ai";
 import { AiFillCloseCircle as CloseIcon } from "react-icons/ai";
-import { AiFillFile as FolderIcon } from "react-icons/ai";
+import { AiFillFile as FileIcon } from "react-icons/ai";
 
 import PanelAcciones from "./PanelAcciones";
 import Tag from "./Tag";

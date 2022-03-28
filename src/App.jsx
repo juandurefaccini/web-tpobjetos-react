@@ -1,4 +1,4 @@
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import React from "react";
 import Register from "./components/Register";
@@ -17,13 +17,12 @@ import Users from "./components/Dashboard/Usuarios/Users";
 const App = () => {
   return (
     // Estilado que ya venia en el template
-    <AuthProvider>
-      <ServicesProvider>
+    <ServicesProvider>
+      <AuthProvider>
         <Routes>
           <Route path="register" element={<Register />} />
           <Route path="perfil" element={<Perfil />} />
           <Route path="login" element={<Login />} />
-          {/* <Route path="*" element={<Navigate to="login" replace />} /> */}
           <Route
             path="home"
             element={
@@ -48,8 +47,8 @@ const App = () => {
             <Route path="usuarios" element={<Users />} />
           </Route>
         </Routes>
-      </ServicesProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </ServicesProvider>
   );
 };
 
