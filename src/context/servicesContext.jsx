@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { createContext, useContext, useRef } from "react";
+import React, { createContext, useContext } from "react";
 import axios from "axios";
 
 const url = "https://trabajo-objetos.herokuapp.com";
@@ -301,7 +301,6 @@ export function ServicesProvider({ children }) {
   //
 
   const getArchivoFiltro = async (criteriaParam, carpetaBase) => {
-    console.log("getArchivoFiltro :", criteriaParam);
     try {
       const res = await axiosClient.get("/filtro", {
         params: { pathCarpetaBase: carpetaBase, criterios: criteriaParam },

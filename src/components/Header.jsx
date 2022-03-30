@@ -4,6 +4,7 @@ import { useAuth } from "../context/authContext";
 import { useFileExplorer } from "../context/fileExplorerContext";
 import SearchBar from "./SearchBar";
 import Button from "./ui/Button";
+
 import { IoIosPerson as ProfileIcon } from "react-icons/io";
 import { RiLogoutBoxRLine as LogoutIcon } from "react-icons/ri";
 import { FiHome as HomeIcon } from "react-icons/fi";
