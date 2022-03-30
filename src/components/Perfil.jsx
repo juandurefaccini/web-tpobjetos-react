@@ -9,6 +9,7 @@ export default function Perfil() {
   const { user, logout } = useAuth();
   const { getUsuario, deleteUsuario } = useServices();
   const [usuario, setUsuario] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (!user) return;
@@ -17,10 +18,11 @@ export default function Perfil() {
         setUsuario(data[0]);
       })
       .catch((error) => {
-        throw error;
+        setError(error.message);
       });
   }, []);
 
+  if (error) return <h1>{error}</h1>;
   if (!usuario || !user) return <h1>loading...</h1>;
 
   return (

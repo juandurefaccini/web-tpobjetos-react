@@ -2,10 +2,12 @@ import React from "react";
 import { useFormik } from "formik";
 import { useServices } from "../../context/servicesContext";
 import { useAuth } from "../../context/authContext";
+import Alert from "../Alert";
 
 export default function FolderCreationForm({ path, setShowContent }) {
   const { user } = useAuth();
   const { postCarpeta } = useServices();
+  const [error, setError] = React.useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -21,7 +23,13 @@ export default function FolderCreationForm({ path, setShowContent }) {
       return errors;
     },
     onSubmit: (values) => {
-      postCarpeta(values, user);
+      postCarpeta(values, user)
+        .then(() => {
+          window.location.reload(false);
+        })
+        .catch((error) => {
+          setError(error.message);
+        });
     },
   });
 
@@ -64,6 +72,9 @@ export default function FolderCreationForm({ path, setShowContent }) {
       >
         Cancelar
       </button>
+      <div className="flex w-full">
+        <Alert message={error} />
+      </div>
     </form>
   );
 }

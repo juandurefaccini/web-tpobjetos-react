@@ -8,7 +8,7 @@ export default function Container() {
 
   return (
     <div className="shrink w-full">
-      <div className="p-4 flex h-full w-full">
+      <div className="flex h-full w-full">
         {mode === "explorer" ? <Explorer default={"root"} /> : <Searcher />}
       </div>
     </div>

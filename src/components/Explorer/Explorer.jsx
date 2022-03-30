@@ -5,6 +5,7 @@ import Button from "../ui/Button";
 import { useServices } from "../../context/servicesContext";
 import ExplorerActions from "./ExplorerActions";
 import ElementHierarchy from "./ElementHierarchy";
+import Alert from "../Alert";
 
 function breadthFirstSearch(tree) {
   const result = [];
@@ -32,17 +33,27 @@ export default function Explorer() {
   const [fileHierarchy, setFileHierarchy] = useState(null); // Guardo el arbol de directorios
   const [currentDirectory, setCurrentDirectory] = useState(null); // Guardo el directorio actual para ir modificandolo a medida que voy avanzando en el arbol de directorios
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    const init = async () => {
-      setLoading(true);
-      const elem = await getDirectorioBase();
-      setFileHierarchy(elem);
-      setCurrentDirectory(elem);
-      setLoading(false);
-    };
-    init();
+    setLoading(true);
+    getDirectorioBase()
+      .then((res) => {
+        setFileHierarchy(res);
+        setCurrentDirectory(res);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+      });
   }, []);
+
+  if (error)
+    return (
+      <div className="w-full h-full justify-center">
+        <Alert message={error} />
+      </div>
+    );
 
   if (loading)
     return <div className="w-full h-full justify-center">Loading</div>;
@@ -50,15 +61,16 @@ export default function Explorer() {
   if (!fileHierarchy) return <></>;
 
   return (
-    <div className="flex flex-row w-full space-x-6">
-      <div className="w-1/4 h-full">
+    <div className="flex flex-row w-full space-x-6 ">
+      <div className="w-1/5 h-full shrink-0 ">
+        {/* TODO : RESOLVER QUE SE APRIETE EL ARBOL DE ARCHIVOS */}
         <ElementHierarchy
           hierarchy={fileHierarchy}
           setCurrentDirectory={setCurrentDirectory}
           currentDirectory={currentDirectory}
         />
       </div>
-      <div className="space-y-1 flex flex-col h-full w-full overflow-y-auto">
+      <div className="space-y-1 flex flex-col p-4 h-full w-full overflow-y-auto">
         <div className="w-full">
           <ExplorerActions
             path={currentDirectory.path + ":" + currentDirectory.nombre}

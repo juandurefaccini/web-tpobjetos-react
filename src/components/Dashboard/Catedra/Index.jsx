@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/authContext";
 import Loading from "../../Loading";
 import Button from "../../ui/Button";
+import Alert from "../../Alert";
 
 export default function Index() {
   const { user } = useAuth();
@@ -11,6 +12,7 @@ export default function Index() {
   const { getCatedras, deleteCatedra } = useServices();
   const [catedras, setCatedras] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleDelete = (id) => {
     deleteCatedra(id, user).then(() =>
@@ -25,9 +27,13 @@ export default function Index() {
     };
 
     setLoading(true);
-    fetchCatedras();
+    fetchCatedras().catch((error) => {
+      setError(error.message);
+    });
     setLoading(false);
   }, []);
+
+  if (error) return <Alert message={error} />;
 
   if (!catedras || loading) return <Loading />;
 

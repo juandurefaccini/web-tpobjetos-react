@@ -3,19 +3,20 @@ import { useFormik } from "formik";
 import { useServices } from "../../../context/servicesContext";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/authContext";
+import Alert from "../../Alert";
 
 export default function Add() {
-  const { user } = useAuth();
-  const navigate = useNavigate();
-  const { postCatedra } = useServices();
-
-  const catedra = {
-    nombre: "",
-    web: "",
-  };
+  const { user } = useAuth(); // Obtenemos el usuario actual
+  const navigate = useNavigate(); // Obtenemos el navigate para redireccionar
+  const { postCatedra } = useServices(); // Obtenemos el servicio de postCatedra
+  const [error, setError] = React.useState(false); // Estado de error
 
   const formik = useFormik({
-    initialValues: catedra,
+    // Definimos el formik
+    initialValues: {
+      nombre: "",
+      web: "",
+    },
     validate: (values) => {
       const errors = {};
       if (!values.nombre) errors.nombre = "Campo requerido";
@@ -28,7 +29,11 @@ export default function Add() {
         idCatedra: values.nombre,
         url: values.web,
       };
-      postCatedra(catedra, user).then(() => navigate(-1));
+      postCatedra(catedra, user)
+        .then(() => navigate(-1))
+        .catch((error) => {
+          setError(error.message);
+        });
     },
   });
 
@@ -72,6 +77,7 @@ export default function Add() {
             Cancelar
           </button>
         </div>
+        <Alert className="w-full" message={error} />
       </form>
     </div>
   );

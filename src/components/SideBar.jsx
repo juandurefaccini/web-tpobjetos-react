@@ -16,7 +16,7 @@ export default function SideBar() {
     return <></>;
 
   return (
-    <div className="border-l-2 p-10 border-secondary overflow-y-auto shrink-0 w-1/4 h-full secondary">
+    <div className="border-l-2 p-4 border-secondary overflow-y-auto shrink-0 w-1/4 h-full secondary">
       {mode === "detail" && (
         <Detail
           element={selectedElement}

@@ -14,23 +14,23 @@ export default function ExplorerActions({ path }) {
   if (showContent === "uploadFile")
     return <FileUploadForm setShowContent={setShowContent} path={path} />;
 
-
-    
   return (
     <div className="h-12">
       <div className=" flex w-96 space-x-6 items-center">
-        <CreateFolderIcon
-          className="cursor-pointer"
-          size={40}
+        <div
           onClick={() => setShowContent("createFolder")}
-        />
-        Crear carpeta
-        <CreateFileIcon
-          className="cursor-pointer ml-6"
-          size={30}
+          className="flex items-center cursor-pointer"
+        >
+          <CreateFolderIcon className="cursor-pointer" size={40} />
+          Crear carpeta
+        </div>
+        <div
           onClick={() => setShowContent("uploadFile")}
-        />
-        Subir archivo
+          className="flex items-center cursor-pointer"
+        >
+          <CreateFileIcon className="cursor-pointer ml-6" size={30} />
+          Subir archivo
+        </div>
       </div>
     </div>
   );

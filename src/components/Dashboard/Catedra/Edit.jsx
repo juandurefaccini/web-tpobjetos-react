@@ -4,12 +4,14 @@ import { useParams } from "react-router-dom";
 import { useServices } from "../../../context/servicesContext";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/authContext";
+import Alert from "../../Alert";
 
 export default function Edit() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const { putCatedra, getCatedra } = useServices();
   const { id } = useParams();
+  const [error, setError] = React.useState(false);
 
   React.useEffect(() => {
     const init = async () => {
@@ -37,7 +39,11 @@ export default function Edit() {
         idCatedra: values.nombre,
         url: values.web,
       };
-      putCatedra(catedra, user).then(() => navigate(-1));
+      putCatedra(catedra, user)
+        .then(() => navigate(-1))
+        .catch((error) => {
+          setError(error.message);
+        });
     },
   });
 
@@ -72,6 +78,7 @@ export default function Edit() {
         >
           Guardar
         </button>
+        <Alert message={error} />
       </form>
     </div>
   );

@@ -31,8 +31,8 @@ export default function ElementHierarchy({
     return <div className="border-r h-full">Loading...</div>;
 
   return (
-    <div className="flex flex-col w-full border-r h-full">
-      {renderElement(hierarchy)}
+    <div className="border-r h-full text-sm ">
+      <div className="p-4">{renderElement(hierarchy)}</div>
     </div>
   );
 }

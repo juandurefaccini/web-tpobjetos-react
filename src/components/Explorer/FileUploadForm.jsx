@@ -2,20 +2,25 @@ import React from "react";
 import { useFormik } from "formik";
 import { useServices } from "../../context/servicesContext";
 import { useAuth } from "../../context/authContext";
+import Alert from "../Alert";
 
 export default function FileUploadForm({ path, setShowContent }) {
   const { user } = useAuth();
   const { postArchivo } = useServices();
+  const [error, setError] = React.useState(false);
+
   const formik = useFormik({
     initialValues: {
       data: "",
-      nombre: " ",
+      nombre: "",
       path: path,
       palabrasClave: "",
       catedra: "",
     },
     validate: (values) => {
       const errors = {};
+
+      console.log("values", values);
 
       if (!values.nombre) errors.nombre = "El nombre es requerido";
       if (!values.data) errors.data = "El archivo es requerido";
@@ -31,9 +36,14 @@ export default function FileUploadForm({ path, setShowContent }) {
         catedra: values.catedra.trim(),
       };
       const stringifuedRequest = JSON.stringify(requestObject);
-      postArchivo(values.data, stringifuedRequest, user).then(() => {
-        setShowContent(null);
-      });
+      postArchivo(values.data, stringifuedRequest, user)
+        .then(() => {
+          setShowContent(null);
+          window.location.reload(false);
+        })
+        .catch((error) => {
+          setError(error.message);
+        });
     },
   });
 
@@ -47,9 +57,16 @@ export default function FileUploadForm({ path, setShowContent }) {
         <input
           name="data"
           type="file"
-          className="border rounded w-56"
+          className="border rounded w-80"
           onChange={(event) => {
-            formik.setFieldValue("data", event.currentTarget.files[0]);
+            formik
+              .setFieldValue("data", event.currentTarget.files[0])
+              .then(() =>
+                formik.setFieldValue(
+                  "nombre",
+                  event.currentTarget.files[0].name
+                )
+              );
           }}
         />
         <div>
@@ -65,7 +82,7 @@ export default function FileUploadForm({ path, setShowContent }) {
         <input
           name="nombre"
           type="text"
-          className="border rounded w-56"
+          className="border rounded w-80"
           onChange={formik.handleChange}
           value={formik.values.nombre}
         />
@@ -82,7 +99,7 @@ export default function FileUploadForm({ path, setShowContent }) {
         <input
           name="catedra"
           type="text"
-          className="border rounded w-56"
+          className="border rounded w-80"
           onChange={formik.handleChange}
           value={formik.values.catedra}
         />
@@ -101,7 +118,7 @@ export default function FileUploadForm({ path, setShowContent }) {
         <input
           name="palabrasClave"
           type="text"
-          className="border rounded w-56"
+          className="border rounded w-80"
           onChange={(event) =>
             formik.setFieldValue("palabrasClave", event.target.value.split(","))
           }
@@ -131,6 +148,10 @@ export default function FileUploadForm({ path, setShowContent }) {
         >
           Cancelar
         </button>
+      </div>
+
+      <div className="flex w-full">
+        <Alert message={error} />
       </div>
     </form>
   );

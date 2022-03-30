@@ -30,7 +30,7 @@ export function ServicesProvider({ children }) {
       const res = await axiosClient.get("/usuarios");
       return res.data;
     } catch (error) {
-      console.log(error.message);
+      throw new Error(error.message);
     }
   };
 
@@ -43,7 +43,7 @@ export function ServicesProvider({ children }) {
       });
       return res.data;
     } catch (error) {
-      console.log(error.message);
+      throw new Error(error.message);
     }
   };
 
@@ -63,7 +63,7 @@ export function ServicesProvider({ children }) {
     } catch (error) {
       // IF ERROR IS NOT 422
       if (error.response.status !== 422) {
-        console.log(error.message);
+        throw new Error(error.message);
       }
     }
   };
@@ -75,7 +75,7 @@ export function ServicesProvider({ children }) {
       });
       return res.data;
     } catch (error) {
-      console.log(error.message);
+      throw new Error(error.message);
     }
   };
 
@@ -84,7 +84,7 @@ export function ServicesProvider({ children }) {
       const res = await axiosClient.get("/usuarios/top");
       return res.data;
     } catch (error) {
-      console.log(error.message);
+      throw new Error(error.message);
     }
   };
 
@@ -98,7 +98,7 @@ export function ServicesProvider({ children }) {
       const res = await axiosClient.get(`/directorio?pathCarpetaBase=${name}`);
       return res.data;
     } catch (error) {
-      console.log(error.message);
+      throw new Error(error.message);
     }
   };
 
@@ -107,7 +107,7 @@ export function ServicesProvider({ children }) {
       const res = await axiosClient.get(`/directorio?pathCarpetaBase=${name}`);
       return res.data;
     } catch (error) {
-      console.log(error.message);
+      throw new Error(error.message);
     }
   };
 
@@ -125,7 +125,7 @@ export function ServicesProvider({ children }) {
       });
       return res.data;
     } catch (error) {
-      console.log(error.message);
+      throw new Error(error.message);
     }
   };
 
@@ -144,7 +144,7 @@ export function ServicesProvider({ children }) {
       console.log(res);
       return res.data;
     } catch (error) {
-      console.log(error.message);
+      throw new Error(error.message);
     }
   };
 
@@ -163,7 +163,7 @@ export function ServicesProvider({ children }) {
       );
       return res.data;
     } catch (error) {
-      console.log(error.message);
+      throw new Error(error.message);
     }
   };
 
@@ -178,7 +178,7 @@ export function ServicesProvider({ children }) {
       console.log(res);
       return res.data;
     } catch (error) {
-      console.log(error.message);
+      throw new Error(error.message);
     }
   };
 
@@ -190,7 +190,7 @@ export function ServicesProvider({ children }) {
       const res = await axiosClient.get("/catedra");
       return res.data;
     } catch (error) {
-      console.log(error.message);
+      throw new Error(error.message);
     }
   };
 
@@ -203,7 +203,7 @@ export function ServicesProvider({ children }) {
       });
       return res.data[0];
     } catch (error) {
-      console.log(error.message);
+      throw new Error(error.message);
     }
   };
 
@@ -221,7 +221,7 @@ export function ServicesProvider({ children }) {
       );
       return res.data;
     } catch (error) {
-      console.log(error.message);
+      throw new Error(error.message);
     }
   };
 
@@ -240,7 +240,7 @@ export function ServicesProvider({ children }) {
       );
       return res.data;
     } catch (error) {
-      console.log(error.message);
+      throw new Error(error.message);
     }
   };
 
@@ -255,7 +255,7 @@ export function ServicesProvider({ children }) {
       });
       return res.data;
     } catch (error) {
-      console.log(error.message);
+      throw new Error(error.message);
     }
   };
 
@@ -278,7 +278,7 @@ export function ServicesProvider({ children }) {
       );
       return res.data;
     } catch (error) {
-      console.log(error.message);
+      throw new Error(error.message);
     }
   };
 
@@ -292,7 +292,7 @@ export function ServicesProvider({ children }) {
       });
       return res.data;
     } catch (error) {
-      console.log(error.message);
+      throw new Error(error.message);
     }
   };
 
@@ -308,7 +308,7 @@ export function ServicesProvider({ children }) {
       });
       return res.data;
     } catch (error) {
-      console.log(error.message);
+      throw new Error(error.message);
     }
   };
 
@@ -333,7 +333,7 @@ export function ServicesProvider({ children }) {
 
       return res.data;
     } catch (error) {
-      console.log(error.message);
+      throw new Error(error.message);
     }
   };
 
@@ -348,7 +348,7 @@ export function ServicesProvider({ children }) {
       });
       return res.data;
     } catch (error) {
-      console.log(error.message);
+      throw new Error(error.message);
     }
   };
 

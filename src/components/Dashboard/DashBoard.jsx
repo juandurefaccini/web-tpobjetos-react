@@ -4,6 +4,10 @@ import { useNavigate, Outlet } from "react-router-dom";
 export default function DashBoard() {
   const navigate = useNavigate();
 
+  React.useEffect(() => {
+    navigate("catedras");
+  }, []);
+
   return (
     <div className="w-full">
       <div className="flex h-16 w-full bg-secondary justify-around items-center text-primary text-lg">

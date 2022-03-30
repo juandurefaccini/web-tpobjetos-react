@@ -1,8 +1,9 @@
 import React from "react";
 
 export default function Alert({ message }) {
+  if (!message) return null;
   return (
-    <p className="text-red-500 p-2 border border-red-300 bg-red-200 rounded">
+    <p className="text-primary p-2 border-4 border-accent bg-secondary rounded">
       {message}
     </p>
   );
