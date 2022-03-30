@@ -6,7 +6,6 @@ export default function FolderList({ folders, onClickFolder }) {
 
   return (
     <div>
-      <h1 className="py-2">Carpetas</h1>
       <div className="flex flex-row flex-wrap">
         {folders.map((folder, index) => {
           return (
