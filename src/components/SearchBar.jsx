@@ -10,7 +10,7 @@ export default function SearchBar() {
   const [searchCriteria, setSearchCriteria] = React.useState("");
 
   const getCriterios = () => {
-    const criterios = searchCriteria.split(" "); // split by spaces
+    const criterios = searchCriteria.split(" "); // Separar los criterios de la busqueda, identificandolos por los espacios
     const criteriaList = criterios.reduce((result, value) => {
       const criteriaType = value.split(":")[0]; // Obtengo el tipo de criterio de busqueda
       const criteriaValue = value.split(":")[1]; // Obtengo el valor del criterio de busqueda
@@ -31,11 +31,14 @@ export default function SearchBar() {
 
   const handleSubmit = () => {
     let criterios = getCriterios();
-    if (criterios.length == 0 && searchCriteria) {
+    if (criterios.length == 0 && searchCriteria)
       criterios = `contienenombre&${searchCriteria}`;
-    }
     setSearch(criterios);
     setMode("searcher");
+  };
+
+  const handleKeypress = (e) => {
+    if (e.key === "Enter") handleSubmit();
   };
 
   return (
@@ -48,6 +51,7 @@ export default function SearchBar() {
           aria-label="Search"
           aria-describedby="button-addon2"
           onChange={(e) => setSearchCriteria(e.target.value)}
+          onKeyPress={(e) => handleKeypress(e)}
         />
 
         <button
