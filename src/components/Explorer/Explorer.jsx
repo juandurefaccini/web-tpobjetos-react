@@ -1,32 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ElementList from "./ElementList";
-import Button from "../ui/Button";
 
 import { useServices } from "../../context/servicesContext";
 import ExplorerActions from "./ExplorerActions";
 import ElementHierarchy from "./ElementHierarchy";
 import Alert from "../Alert";
 
-function breadthFirstSearch(tree) {
-  const result = [];
-  const queue = [tree];
-  while (queue.length > 0) {
-    const node = queue.shift();
-    result.push(node);
-    if (node.children) {
-      queue.push(...node.children);
-    }
-  }
-  return result;
-}
-
-function getParentDirectory(fileHierarchy, parentPath) {
-  console.log("getParentDirectory", fileHierarchy);
-  const parentDirectory = breadthFirstSearch(parentPath).pop();
-  return parentDirectory;
-}
-
-// COMPONENTE PRINCIPAL
 export default function Explorer() {
   const { getDirectorioBase } = useServices();
 
@@ -63,7 +42,6 @@ export default function Explorer() {
   return (
     <div className="flex flex-row w-full space-x-6 ">
       <div className="w-1/5 h-full shrink-0 ">
-        {/* TODO : RESOLVER QUE SE APRIETE EL ARBOL DE ARCHIVOS */}
         <ElementHierarchy
           hierarchy={fileHierarchy}
           setCurrentDirectory={setCurrentDirectory}
