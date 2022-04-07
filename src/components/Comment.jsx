@@ -10,7 +10,7 @@ export default function Comment({ comment }) {
 
   const handleDelete = () => {
     deleteComentario(comment.id, user)
-      .then(() => console.log("success"))
+      .then(() => window.location.reload(false))
       .catch((error) => console.log(error));
   };
 
