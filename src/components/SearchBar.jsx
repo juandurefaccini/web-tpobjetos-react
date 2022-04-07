@@ -2,7 +2,7 @@ import React from "react";
 import { FaSearch as SearchIcon } from "react-icons/fa";
 import { useFileExplorer } from "../context/fileExplorerContext";
 
-const reservedWords = ["autor", "tipo", "contienenombre"];
+const reservedWords = ["autor", "tipo", "contienenombre", "contienepalabra"];
 
 export default function SearchBar() {
   const { setSearch, setMode } = useFileExplorer();

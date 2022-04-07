@@ -48,7 +48,10 @@ export default function Detail({ element, switchMode }) {
       <div className="space-y-2">
         <p>Nombre : {element.nombre}</p>
         {!isFolder && <p>Descripcion : {element.descripcion}</p>}
-        <p>Propietario : {element.propietario.nombre}</p>
+        <p>
+          Propietario : {element.propietario.nombre} ({element.propietario.mail}
+          )
+        </p>
         {!isFolder && <p>Extension : {element.extension}</p>}
         {!isFolder && <p>Catedra : {element.catedra.nombre}</p>}
         <p>Ruta : {element.path}</p>

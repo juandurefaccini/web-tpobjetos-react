@@ -23,7 +23,7 @@ export default function Login() {
         {error && <Alert message={error} />}
 
         <button
-          className="border-gray-400 rounded border p-2 w-full h-full "
+          className="border-gray-400 rounded border bg-[white] p-2 w-full h-full "
           onClick={handleGoogleSignIn}
         >
           Iniciar sesion con Google
