@@ -31,6 +31,7 @@ export default function SearchBar() {
 
   const handleSubmit = () => {
     let criterios = getCriterios();
+    if (!searchCriteria) return;
     if (criterios.length == 0 && searchCriteria)
       criterios = `contienenombre&${searchCriteria}`;
     setSearch(criterios);
