@@ -15,7 +15,12 @@ export default function Login() {
     navigate("/home"); // Redireccionar a la pagina home
   };
 
-  if (loading) return <h1>Cargando...</h1>;
+  if (loading)
+    return (
+      <div className="w-full h-screen flex justify-center items-center">
+        <h1>Cargando...</h1>
+      </div>
+    );
 
   return (
     <div className="bg-primary h-screen flex flex-col justify-center items-center">
