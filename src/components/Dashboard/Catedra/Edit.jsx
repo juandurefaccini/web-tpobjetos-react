@@ -7,19 +7,19 @@ import { useAuth } from "../../../context/authContext";
 import Alert from "../../Alert";
 
 export default function Edit() {
-  const { user } = useAuth();
-  const navigate = useNavigate();
-  const { putCatedra, getCatedra } = useServices();
-  const { id } = useParams();
   const [error, setError] = React.useState(false);
 
+  const { id } = useParams(); // Obtenemos el id de la catedra a partir de la url de la ruta
+  const { user } = useAuth(); // Obtenemos el usuario actual
+  const navigate = useNavigate(); // Obtenemos el navigate para redireccionar, a partir del hook provisto por react router dom
+  const { putCatedra, getCatedra } = useServices(); // Obtenemos el servicio de putCatedra y getCatedra
+
   React.useEffect(() => {
-    const init = async () => {
-      const res = await getCatedra(id);
+    getCatedra(id).then((res) => {
+      // A partir de los datos obtenidos, seteamos los valores del formulario
       formik.setFieldValue("nombre", res.nombre);
       formik.setFieldValue("web", res.urlPaginaWeb);
-    };
-    init();
+    });
   }, []);
 
   const formik = useFormik({
@@ -28,6 +28,7 @@ export default function Edit() {
       web: "",
     },
     validate: (values) => {
+      // Validaciones el nombre y la web son obligatorias
       const errors = {};
       if (!values.nombre) errors.nombre = "Campo requerido";
       if (!values.web) errors.web = "Campo requerido";
@@ -40,9 +41,9 @@ export default function Edit() {
         url: values.web,
       };
       putCatedra(catedra, user)
-        .then(() => navigate(-1))
+        .then(() => navigate(-1)) // Redireccionamos a la pagina anterior
         .catch((error) => {
-          setError(error.message);
+          setError(error.message); // Guardamos el error
         });
     },
   });

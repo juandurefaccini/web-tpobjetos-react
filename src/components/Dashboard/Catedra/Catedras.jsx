@@ -5,7 +5,8 @@ export default function Catedras() {
   return (
     <div className="container mx-auto border p-6 ">
       <p className="text-center">Dashboard de catedras</p>
-      <Outlet />
+      <Outlet />{" "}
+      {/* Outlet es el componente encargado de renderizar la subruta */}
     </div>
   );
 }

@@ -412,7 +412,7 @@ export const useServices = () => {
   const context = useContext(ServicesContext);
   if (!context)
     throw new Error(
-      "useServices must be used within a ServicesContext.Provider"
+      "useServices debe estar encerrado por ServicesContext.Provider"
     );
   return context;
 };

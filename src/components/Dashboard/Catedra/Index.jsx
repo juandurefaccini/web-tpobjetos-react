@@ -7,12 +7,13 @@ import Button from "../../ui/Button";
 import Alert from "../../Alert";
 
 export default function Index() {
-  const { user } = useAuth();
-  const navigate = useNavigate();
-  const { getCatedras, deleteCatedra } = useServices();
   const [catedras, setCatedras] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const { getCatedras, deleteCatedra } = useServices();
 
   const handleDelete = (id) => {
     deleteCatedra(id, user).then(() =>

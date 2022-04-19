@@ -12,12 +12,14 @@ export default function Add() {
   const [error, setError] = React.useState(false); // Estado de error
 
   const formik = useFormik({
-    // Definimos el formik
+    // Utilizamos el hook de formik
     initialValues: {
+      // Valores iniciales
       nombre: "",
       web: "",
     },
     validate: (values) => {
+      // Validaciones el nombre y la web son obligatorias
       const errors = {};
       if (!values.nombre) errors.nombre = "Campo requerido";
       if (!values.web) errors.web = "Campo requerido";
@@ -25,14 +27,15 @@ export default function Add() {
       return errors;
     },
     onSubmit: (values) => {
+      // Instancio la catedra con los valores del formulario
       const catedra = {
         idCatedra: values.nombre,
         url: values.web,
       };
       postCatedra(catedra, user)
-        .then(() => navigate(-1))
+        .then(() => navigate(-1)) // Redireccionamos a la pagina anterior
         .catch((error) => {
-          setError(error.message);
+          setError(error.message); // Guardamos el error
         });
     },
   });
@@ -70,14 +73,14 @@ export default function Add() {
           </button>
           <button
             onClick={() => {
-              navigate(-1);
+              navigate(-1); // Redireccionamos a la pagina anterior
             }}
             className="bg-primary border border-secondary text-white font-bold py-2 px-16 rounded"
           >
             Cancelar
           </button>
         </div>
-        <Alert className="w-full" message={error} />
+        <Alert className="w-full" message={error} /> {/* Mostramos el error */}
       </form>
     </div>
   );
